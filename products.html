@@ -12,11 +12,15 @@
   <link rel="stylesheet" href="style.css">
 
   <style>
-    /* Page-specific: 3-column product grid & filter chips */
+    /* Page-specific: 4-column product grid & filter chips */
     .product-grid-3 {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(4, 1fr);
       gap: 24px;
+    }
+
+    .product-card {
+      aspect-ratio: 3 / 4;
     }
 
     .filter-chips {
@@ -65,98 +69,51 @@
 </head>
 <body>
 
-  <div class="grid-background">
-    <header class="navbar container">
-      <div class="logo">
-        <img src="logo.jpeg" alt="Grin Living Logo" class="logo-img">
-        <span class="logo-text">Grin Living</span>
-      </div>
-      <nav class="nav-links">
-        <a href="index.html">Home</a>
-        <a href="about-us.html">About us</a>
-        <a href="our-teams.html">Our Teams</a>
-        <a href="products.html" class="active">Products</a>
-        <a href="our-process.html">Our Process</a>
-        <a href="blog.html">BLOG</a>
-        <a href="faqs.html">FAQs</a>
-        <a href="contact-us.html">Contact Us</a>
-      </nav>
-    </header>
+    <!-- Navbar -->
+  <header class="navbar container">
+    <div class="logo">
+      <img src="Images/logo.png" alt="Grin Living Logo" class="logo-img">
+      <span class="logo-text">Grin Living</span>
+    </div>
+    <nav class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="about-us.html">About us</a>
+      <a href="our-teams.html">Our Teams</a>
+      <a href="products.html" class="active">Products</a>
+      <a href="our-process.html">Our Process</a>
+      <a href="blog.html">BLOG</a>
+      <a href="faqs.html">FAQs</a>
+      <a href="contact-us.html">Contact Us</a>
+    </nav>
+  </header>
 
-    <!-- Page Header -->
-    <section class="container" style="padding-top: 64px;">
-      <div class="text-center max-w-700 mx-auto">
-        <h1 class="display-lg">Once you choose hope, anything is possible...</h1>
-        <div class="filter-chips" style="justify-content: center;">
-          <span class="filter-chip">Yarns</span>
-          <span class="filter-chip">Fabrics</span>
-          <span class="filter-chip">Garments</span>
-          <span class="filter-chip">Furnishings</span>
-        </div>
+  <!-- Page Header -->
+  <section class="page-hero" style="background-image: url(\'Images/hero_products.jpg\'); margin-bottom: 0; padding-top: 0; padding-bottom: 120px;">
+    <div class="container inner-hero">
+      <div class="text-center">
+        <h1 class="display-lg text-pure-white mt-16">Once you choose hope, anything is possible...</h1>
       </div>
-    </section>
-  </div> <!-- end grid-background -->
+    </div>
+  </section>
 
-  <main>
+    <main>
     <!-- Products Grid -->
     <section class="section-padding">
       <div class="container">
+        <div class="filter-chips" style="justify-content: center; margin-bottom: 40px;">
+          <span class="filter-chip active" data-filter="All">All</span>
+          <span class="filter-chip" data-filter="Cotton Fabrics">Cotton Fabrics</span>
+          <span class="filter-chip" data-filter="Polyester Fabrics">Polyester Fabrics</span>
+          <span class="filter-chip" data-filter="Poly Spandex Fabrics">Poly Spandex Fabrics</span>
+          <span class="filter-chip" data-filter="Rayon Fabrics">Rayon Fabrics</span>
+          <span class="filter-chip" data-filter="Viscose Fabrics">Viscose Fabrics</span>
+          <span class="filter-chip" data-filter="Mesh Fabrics">Mesh Fabrics</span>
+          <span class="filter-chip" data-filter="Knit Fabrics">Knit Fabrics</span>
+          <span class="filter-chip" data-filter="Velvet Fabrics">Velvet Fabrics</span>
+          <span class="filter-chip" data-filter="Embroidered Fabrics">Embroidered Fabrics</span>
+          <span class="filter-chip" data-filter="Fancy / Fashion Fabrics">Fancy / Fashion Fabrics</span>
+        </div>
         <div class="product-grid-3">
-
-          <!-- Product Card 1 -->
-          <div class="product-card card">
-            <img src="hero_bedsheets.png" alt="Web Design" class="product-img">
-            <div class="product-info">
-              <h4 class="headline-sm">Web Design</h4>
-              <p class="body-sm text-charcoal mt-8">Focus on how you can help and benefit your user. Use simple words to avoid confusion.</p>
-            </div>
-          </div>
-
-          <!-- Product Card 2 -->
-          <div class="product-card card">
-            <img src="hero_bedsheets.png" alt="Graphic Design" class="product-img">
-            <div class="product-info">
-              <h4 class="headline-sm">Graphic Design</h4>
-              <p class="body-sm text-charcoal mt-8">Focus on how you can help and benefit your user. Use simple words to avoid confusion.</p>
-            </div>
-          </div>
-
-          <!-- Product Card 3 -->
-          <div class="product-card card">
-            <img src="hero_bedsheets.png" alt="Content Creation" class="product-img">
-            <div class="product-info">
-              <h4 class="headline-sm">Content Creation</h4>
-              <p class="body-sm text-charcoal mt-8">Focus on how you can help and benefit your user. Use simple words to avoid confusion.</p>
-            </div>
-          </div>
-
-          <!-- Product Card 4 -->
-          <div class="product-card card">
-            <img src="hero_bedsheets.png" alt="Web Design" class="product-img">
-            <div class="product-info">
-              <h4 class="headline-sm">Web Design</h4>
-              <p class="body-sm text-charcoal mt-8">Focus on how you can help and benefit your user. Use simple words to avoid confusion.</p>
-            </div>
-          </div>
-
-          <!-- Product Card 5 -->
-          <div class="product-card card">
-            <img src="hero_bedsheets.png" alt="Graphic Design" class="product-img">
-            <div class="product-info">
-              <h4 class="headline-sm">Graphic Design</h4>
-              <p class="body-sm text-charcoal mt-8">Focus on how you can help and benefit your user. Use simple words to avoid confusion.</p>
-            </div>
-          </div>
-
-          <!-- Product Card 6 -->
-          <div class="product-card card">
-            <img src="hero_bedsheets.png" alt="Content Creation" class="product-img">
-            <div class="product-info">
-              <h4 class="headline-sm">Content Creation</h4>
-              <p class="body-sm text-charcoal mt-8">Focus on how you can help and benefit your user. Use simple words to avoid confusion.</p>
-            </div>
-          </div>
-
         </div>
       </div>
     </section>
@@ -166,7 +123,7 @@
     <div class="container footer-container">
       <div class="footer-brand">
         <div class="logo">
-          <img src="logo.jpeg" alt="Grin Living Logo" class="logo-img">
+          <img src="Images/logo.png" alt="Grin Living Logo" class="logo-img">
           <span class="logo-text">Grin Living</span>
         </div>
         <p class="body-sm text-charcoal footer-desc mt-24">
@@ -202,5 +159,32 @@
     </div>
   </footer>
 
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const chips = document.querySelectorAll('.filter-chip');
+      const cards = document.querySelectorAll('.product-card');
+
+      chips.forEach(chip => {
+        chip.addEventListener('click', () => {
+          chips.forEach(c => c.classList.remove('active'));
+          chip.classList.add('active');
+
+          const selectedCategory = chip.getAttribute('data-filter');
+
+          cards.forEach(card => {
+            if (selectedCategory === 'All' || card.getAttribute('data-category') === selectedCategory) {
+              card.style.display = 'flex';
+            } else {
+              card.style.display = 'none';
+            }
+          });
+        });
+      });
+    });
+  </script>
+  <script src="products.js"></script>
 </body>
 </html>
+
+

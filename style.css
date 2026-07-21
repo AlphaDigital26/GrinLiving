@@ -600,3 +600,53 @@ a {
     flex-direction: column;
   }
 }
+
+/* Page Hero Components */
+.page-hero {
+  position: relative;
+  background-size: cover;
+  background-position: center;
+  padding: 120px 0;
+  text-align: center;
+  margin-bottom: 64px;
+}
+
+.page-hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(15, 23, 42, 0.75); /* Dark teal overlay */
+  z-index: 1;
+}
+
+.page-hero .container {
+  position: relative;
+  z-index: 2;
+}
+
+.text-pure-white {
+  color: var(--pure-white) !important;
+}
+
+.opacity-80 {
+  opacity: 0.8;
+}
+
+@media (max-width: 768px) {
+  .page-hero {
+    padding: 80px 0;
+    margin-bottom: 32px;
+  }
+}
+
+/* Inner Page Uniform Hero */
+.inner-hero {
+  min-height: 280px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 0 !important;
+}
