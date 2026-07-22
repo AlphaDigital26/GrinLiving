@@ -1,0 +1,23 @@
+import json
+import re
+
+log_path = r'C:\Users\HP\.gemini\antigravity\brain\b624743e-50c2-47d7-a0a9-c0fa36d0f604\.system_generated\logs\transcript_full.jsonl'
+try:
+    with open(log_path, 'r', encoding='utf-8') as f:
+        for line in f:
+            if 'our-process.html' in line and '<!DOCTYPE html>' in line:
+                data = json.loads(line)
+                content = data.get('content', '')
+                if 'write_to_file' in content and 'our-process.html' in content:
+                    print("FOUND CONTENT in content field.")
+                    # Try to extract it
+                if 'tool_calls' in data:
+                    for tc in data['tool_calls']:
+                        if tc['name'] == 'write_to_file' and 'our-process.html' in str(tc['args']):
+                            print(tc['args'].get('CodeContent', '')[:500])
+                            # Write it to a temp file to recover it!
+                            with open('recovered_process.html', 'w', encoding='utf-8') as out:
+                                out.write(tc['args'].get('CodeContent', ''))
+                            print("Recovered to recovered_process.html")
+except Exception as e:
+    print(e)

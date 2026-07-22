@@ -267,8 +267,41 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // Initial render handled below with updateHeader
+
+  const categoryDescriptions = {
+    "All": "Discover our complete collection of premium fabrics, meticulously manufactured for exceptional quality, durability, and style.",
+    "Cotton Fabrics": "Experience the breathability and comfort of our premium cotton fabrics. Ideal for high-quality bedsheets and everyday apparel.",
+    "Polyester Fabrics": "Durable, wrinkle-resistant polyester fabrics designed for longevity and ease of care.",
+    "Poly Spandex Fabrics": "Flexible and resilient poly spandex blends, perfect for activewear and comfortable stretch garments.",
+    "Rayon Fabrics": "Soft, breathable, and beautifully draped rayon fabrics available in stunning prints and solids.",
+    "Viscose Fabrics": "Luxurious viscose fabrics offering a silk-like feel, perfect for premium fashion and home textiles.",
+    "Mesh Fabrics": "Lightweight, breathable mesh fabrics suitable for athletic wear and decorative layering.",
+    "Knit Fabrics": "Comfortable and versatile knit fabrics providing excellent stretch and recovery.",
+    "Velvet Fabrics": "Plush, opulent velvet fabrics that bring a touch of luxury to any project.",
+    "Embroidered Fabrics": "Exquisite embroidered fabrics featuring detailed craftsmanship and intricate designs.",
+    "Fancy / Fashion Fabrics": "Unique, trend-setting fashion fabrics designed to make a statement in any collection."
+  };
+
+  const categoryHeader = document.getElementById('category-header');
+  const categoryTitle = document.getElementById('category-title');
+  const categoryDesc = document.getElementById('category-desc');
+
+  function updateHeader(selectedCategory) {
+    if (categoryHeader && categoryTitle && categoryDesc) {
+      if (selectedCategory === 'All') {
+        categoryTitle.textContent = "All Fabrics";
+      } else {
+        categoryTitle.textContent = selectedCategory;
+      }
+      categoryDesc.textContent = categoryDescriptions[selectedCategory] || "Explore our premium selection of " + selectedCategory.toLowerCase() + ".";
+      categoryHeader.style.display = 'block';
+    }
+  }
+
   // Initial render
   renderProducts('All');
+  updateHeader('All');
 
   // Add event listeners
   filterChips.forEach(chip => {
@@ -279,6 +312,8 @@ document.addEventListener('DOMContentLoaded', () => {
       
       // Filter products
       const selectedCategory = chip.getAttribute('data-filter');
+      
+      updateHeader(selectedCategory);
       renderProducts(selectedCategory);
     });
   });

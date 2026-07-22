@@ -78,9 +78,7 @@
     <nav class="nav-links">
       <a href="index.html">Home</a>
       <a href="about-us.html">About us</a>
-      <a href="our-teams.html">Our Teams</a>
       <a href="products.html" class="active">Products</a>
-      <a href="our-process.html">Our Process</a>
       <a href="blog.html">BLOG</a>
       <a href="faqs.html">FAQs</a>
       <a href="contact-us.html">Contact Us</a>
@@ -88,10 +86,12 @@
   </header>
 
   <!-- Page Header -->
-  <section class="page-hero" style="background-image: url(\'Images/hero_products.jpg\'); margin-bottom: 0; padding-top: 0; padding-bottom: 120px;">
+  <section class="hero-image-bg" style="background-image: url('Images/hero_products.jpg');">
     <div class="container inner-hero">
       <div class="text-center">
-        <h1 class="display-lg text-pure-white mt-16">Once you choose hope, anything is possible...</h1>
+        <h1 class="display-lg text-pure-white mt-16">Our Products</h1>
+        <p class="display-lg text-pure-white mt-16">Our Products</p>
+
       </div>
     </div>
   </section>
@@ -100,7 +100,7 @@
     <!-- Products Grid -->
     <section class="section-padding">
       <div class="container">
-        <div class="filter-chips" style="justify-content: center; margin-bottom: 40px;">
+        <div class="filter-chips mb-24" style="justify-content: center;">
           <span class="filter-chip active" data-filter="All">All</span>
           <span class="filter-chip" data-filter="Cotton Fabrics">Cotton Fabrics</span>
           <span class="filter-chip" data-filter="Polyester Fabrics">Polyester Fabrics</span>
@@ -113,6 +113,12 @@
           <span class="filter-chip" data-filter="Embroidered Fabrics">Embroidered Fabrics</span>
           <span class="filter-chip" data-filter="Fancy / Fashion Fabrics">Fancy / Fashion Fabrics</span>
         </div>
+        
+        <div id="category-header" class="category-header text-center" style="display: none;">
+          <h2 id="category-title" class="headline-lg text-deep-teal">Category Name</h2>
+          <p id="category-desc" class="body-md text-charcoal mt-16 max-w-700 mx-auto">Category description goes here.</p>
+        </div>
+
         <div class="product-grid-3">
         </div>
       </div>
@@ -135,8 +141,6 @@
           <h4 class="label-lg">COMPANY</h4>
           <a href="index.html" class="body-sm">Home</a>
           <a href="products.html" class="body-sm">Products</a>
-          <a href="our-process.html" class="body-sm">Our Process</a>
-          <a href="our-teams.html" class="body-sm">Our Team</a>
           <a href="about-us.html" class="body-sm">About US</a>
         </div>
         <div class="link-column">
@@ -184,6 +188,8 @@
     });
   </script>
   <script src="products.js"></script>
+
+    <script src="animations.js"></script>
 </body>
 </html>
 
