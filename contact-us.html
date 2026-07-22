@@ -7,6 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -32,7 +33,7 @@
   <section class="hero-image-bg" style="background-image: url('Images/hero_contact_us.jpg');">
     <div class="container inner-hero">
       <div class="text-center">
-        <p class="label-lg text-heritage-gold mt-8">GET IN TOUCH</p>
+        <span class="label-md text-heritage-gold">GET IN TOUCH</span>
         <h1 class="display-lg text-pure-white mt-16">Contact Us</h1>
         <p class="body-lg text-pure-white opacity-80 mt-24 max-w-700 mx-auto">
           Submit your requirement and our team will get back within 24 hours.
@@ -47,7 +48,7 @@
       <div class="contact-container">
 
         <!-- Left Column - Contact Info -->
-        <div class="contact-info">
+        <div class="contact-info" style="display: flex; flex-direction: column; height: 100%;">
           <h2 class="headline-md">Let's Start a Conversation</h2>
           <p class="body-md text-charcoal mt-24">We'd love to hear from you. Reach out to us through any of the channels below.</p>
 
@@ -67,8 +68,15 @@
           </div>
 
           <div class="contact-detail mt-24">
-            <p class="label-lg text-deep-teal">Full Address</p>
-            <p class="body-md text-charcoal">Plot No. 12-15, Textile Industrial Estate,<br>Sachin GIDC, Suarat, Gujarat 394230</p>
+            <p class="label-lg text-deep-teal">Address</p>
+            <p class="body-md text-charcoal">Plot No. 12-15, Textile Industrial Estate,<br>Sachin GIDC, Surat, Gujarat 394230</p>
+          </div>
+
+          <div class="contact-detail mt-24" style="flex-grow: 1; display: flex; flex-direction: column;">
+            <p class="label-lg text-deep-teal">Location Map</p>
+            <div class="map-container mt-8" style="flex-grow: 1; min-height: 280px; border-radius: 12px; overflow: hidden; box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08); border: 1px solid var(--outline-light);">
+              <div id="contact-map" style="width: 100%; height: 100%; min-height: 280px; z-index: 1;"></div>
+            </div>
           </div>
         </div>
 
@@ -161,6 +169,48 @@
 
 
     <script src="animations.js"></script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        // Initialize map centered on Sachin GIDC and hide attribution control
+        var map = L.map('contact-map', {
+          attributionControl: false
+        }).setView([21.088640, 72.842710], 14);
+        
+        // Add OpenStreetMap tiles
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+          maxZoom: 19
+        }).addTo(map);
+
+        var gmapsUrl = 'https://www.google.com/maps/search/?api=1&query=Textile+Industrial+Estate,+Sachin+GIDC,+Surat,+Gujarat+394230';
+
+        // Add custom popup styling inside the map content
+        var popupContent = `
+          <a href="${gmapsUrl}" target="_blank" style="text-decoration: none; display: block; font-family: var(--font-sans); color: var(--deep-teal);">
+            <strong style="display: block; font-size: 16px; margin-bottom: 4px;">Grin Living HQ</strong>
+            <span style="font-size: 13px; color: var(--on-surface);">Textile Industrial Estate, Sachin GIDC, Surat, Gujarat 394230</span>
+            <span style="display: block; font-size: 12px; color: #3b82f6; margin-top: 6px; font-weight: 500;">View on Google Maps &rarr;</span>
+          </a>
+        `;
+
+        // Add marker and open popup immediately
+        var marker = L.marker([21.088640, 72.842710]).addTo(map);
+        marker.bindPopup(popupContent, {
+          closeButton: true,
+          minWidth: 200,
+          autoClose: false,
+          closeOnClick: false
+        }).openPopup();
+
+        // Redirect to Google Maps when the blue location icon is clicked
+        marker.on('click', function() {
+          window.open(gmapsUrl, '_blank');
+          setTimeout(function() {
+            marker.openPopup();
+          }, 10);
+        });
+      });
+    </script>
 </body>
 </html>
 

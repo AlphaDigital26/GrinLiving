@@ -19,9 +19,7 @@
       gap: 24px;
     }
 
-    .product-card {
-      aspect-ratio: 3 / 4;
-    }
+    
 
     .filter-chips {
       display: flex;
@@ -65,6 +63,39 @@
         grid-template-columns: 1fr;
       }
     }
+  
+    .product-card {
+      aspect-ratio: auto !important;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      background: none !important;
+      box-shadow: none !important;
+      border: none !important;
+    }
+    
+    .product-img {
+      width: 100%;
+      aspect-ratio: 1 / 1.1;
+      object-fit: cover;
+      border-radius: 16px !important;
+      border: none !important;
+      height: auto !important;
+    }
+
+    .product-info {
+      padding: 0 !important;
+      text-align: center;
+      flex-grow: 0 !important;
+    }
+
+    .product-title {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--charcoal-textile);
+      text-transform: capitalize;
+    }
+
   </style>
 </head>
 <body>
@@ -89,9 +120,11 @@
   <section class="hero-image-bg" style="background-image: url('Images/hero_products.jpg');">
     <div class="container inner-hero">
       <div class="text-center">
-        <h1 class="display-lg text-pure-white mt-16">Our Products</h1>
-        <p class="display-lg text-pure-white mt-16">Our Products</p>
-
+        <span class="label-md text-heritage-gold">OUR FABRICS</span>
+        <h1 class="display-lg text-pure-white mt-16">Explore Our Collections</h1>
+        <p class="body-lg text-pure-white opacity-80 mt-24 max-w-700 mx-auto">
+          Discover high-quality, market-ready textiles engineered for comfort, durability, and commercial success.
+        </p>
       </div>
     </div>
   </section>

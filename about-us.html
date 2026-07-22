@@ -3,18 +3,462 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>About us - Grin Living</title>
+  <title>About Us - Grin Living</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="style.css">
+
+  <style>
+    /* Page-Specific Styling for About Us for Cohesive Luxury Aesthetics */
+    .about-story-section {
+      padding: 96px 0;
+    }
+    
+    .story-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+    }
+
+    .story-tag {
+      display: inline-block;
+      font-family: var(--font-label);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      color: var(--heritage-gold);
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    .story-heading {
+      font-family: var(--font-serif);
+      font-size: 42px;
+      line-height: 1.25;
+      color: var(--deep-teal);
+      margin-bottom: 24px;
+    }
+
+    .story-lead {
+      font-size: 18px;
+      line-height: 1.7;
+      color: var(--on-surface);
+      font-weight: 500;
+      margin-bottom: 20px;
+    }
+
+    .story-body {
+      font-size: 15px;
+      line-height: 1.8;
+      color: var(--charcoal-textile);
+    }
+
+    .story-image-wrapper {
+      position: relative;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 20px 40px rgba(15, 23, 42, 0.12);
+    }
+
+    .story-image-wrapper img {
+      width: 100%;
+      height: 480px;
+      object-fit: cover;
+      transition: transform 0.6s ease;
+    }
+
+    .story-image-wrapper:hover img {
+      transform: scale(1.03);
+    }
+
+    .story-badge {
+      position: absolute;
+      bottom: 24px;
+      left: 24px;
+      background: rgba(15, 23, 42, 0.85);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      padding: 16px 24px;
+      border-radius: 12px;
+      color: var(--pure-white);
+    }
+
+    .story-badge-number {
+      font-family: var(--font-serif);
+      font-size: 24px;
+      color: var(--heritage-gold);
+      font-weight: 600;
+    }
+
+    .story-badge-label {
+      font-size: 12px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      opacity: 0.85;
+    }
+
+    /* Stats Counter Bar */
+    .stats-bar-section {
+      background-color: var(--deep-teal);
+      color: var(--pure-white);
+      padding: 64px 0;
+      position: relative;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 32px;
+      text-align: center;
+    }
+
+    .stat-item {
+      padding: 16px;
+      border-right: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .stat-item:last-child {
+      border-right: none;
+    }
+
+    .stat-number {
+      font-family: var(--font-serif);
+      font-size: 48px;
+      font-weight: 700;
+      color: var(--heritage-gold);
+      line-height: 1;
+      margin-bottom: 12px;
+    }
+
+    .stat-label {
+      font-family: var(--font-label);
+      font-size: 14px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      opacity: 0.9;
+    }
+
+    /* Mission & Vision Styling */
+    .mv-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+    }
+
+    .mv-card {
+      background: var(--canvas-white);
+      border: 1px solid var(--outline-light);
+      border-radius: 20px;
+      padding: 48px;
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.04);
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .mv-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 40px rgba(15, 23, 42, 0.08);
+      border-color: var(--heritage-gold);
+    }
+
+    .mv-icon-badge {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      background: rgba(196, 164, 132, 0.15);
+      color: var(--heritage-gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 18px;
+      margin-bottom: 24px;
+    }
+
+    .mv-title {
+      font-family: var(--font-serif);
+      font-size: 28px;
+      color: var(--deep-teal);
+      margin-bottom: 16px;
+    }
+
+    .mv-list {
+      list-style: none;
+      margin-top: 24px;
+      padding: 0;
+    }
+
+    .mv-list li {
+      position: relative;
+      padding-left: 24px;
+      margin-bottom: 12px;
+      font-size: 14px;
+      color: var(--charcoal-textile);
+    }
+
+    .mv-list li::before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      color: var(--heritage-gold);
+      font-weight: bold;
+    }
+
+    /* The Grin Advantage Pillars */
+    .pillars-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 32px;
+    }
+
+    .pillars-grid .pillar-card {
+      flex: 0 0 calc((100% - 64px) / 3);
+      max-width: calc((100% - 64px) / 3);
+      background: var(--canvas-white);
+      border: 1px solid var(--outline-light);
+      border-top: 4px solid var(--heritage-gold);
+      border-radius: 16px;
+      padding: 36px 32px;
+      position: relative;
+      transition: all 0.3s ease;
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.04);
+    }
+
+    .pillars-grid .pillar-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--outline-light);
+      border-top-color: var(--deep-teal);
+      box-shadow: 0 16px 40px rgba(15, 23, 42, 0.08);
+    }
+
+    .pillar-number {
+      font-family: var(--font-serif);
+      font-size: 36px;
+      font-weight: 700;
+      color: var(--heritage-gold);
+      opacity: 0.8;
+      margin-bottom: 16px;
+      line-height: 1;
+    }
+
+    /* Leadership Cards */
+    .leadership-grid-modern {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 28px;
+    }
+
+    .leader-card-modern {
+      background: var(--canvas-white);
+      border: 1px solid var(--outline-light);
+      border-radius: 16px;
+      padding: 32px 24px;
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+
+    .leader-card-modern:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px rgba(15, 23, 42, 0.08);
+      border-color: var(--heritage-gold);
+    }
+
+    .leader-avatar-circle {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--deep-teal), #1e293b);
+      color: var(--heritage-gold);
+      font-family: var(--font-serif);
+      font-size: 24px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px auto;
+      box-shadow: 0 6px 16px rgba(15, 23, 42, 0.15);
+    }
+
+    .leader-role {
+      font-family: var(--font-label);
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--heritage-gold);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-top: 4px;
+    }
+
+    /* Department Cards - Artistic Luxury Styling */
+    .depts-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 28px;
+    }
+
+    .dept-card {
+      flex: 0 0 calc((100% - 56px) / 3);
+      max-width: calc((100% - 56px) / 3);
+      background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
+      border: 1px solid rgba(15, 23, 42, 0.07);
+      border-left: 4px solid var(--heritage-gold);
+      border-radius: 16px;
+      padding: 32px 26px;
+      display: flex;
+      align-items: flex-start;
+      gap: 20px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 10px 25px rgba(15, 23, 42, 0.03);
+      transition: all 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .dept-card:hover {
+      background: #ffffff;
+      transform: translateY(-6px);
+      border-left-color: var(--deep-teal);
+      border-color: rgba(15, 23, 42, 0.12);
+      box-shadow: 0 20px 40px rgba(15, 23, 42, 0.08);
+    }
+
+    .dept-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--deep-teal) 0%, #1e293b 100%);
+      color: var(--heritage-gold);
+      font-family: var(--font-serif);
+      font-size: 16px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      box-shadow: 0 4px 14px rgba(15, 23, 42, 0.15);
+      border: 1px solid rgba(196, 164, 132, 0.3);
+      transition: all 0.3s ease;
+    }
+
+    .dept-card:hover .dept-icon {
+      transform: scale(1.08) rotate(-3deg);
+      background: linear-gradient(135deg, var(--heritage-gold) 0%, #d8b795 100%);
+      color: var(--deep-teal);
+      border-color: transparent;
+    }
+
+    .dept-card h4 {
+      font-family: var(--font-serif);
+      font-size: 19px;
+      font-weight: 600;
+      color: var(--deep-teal);
+      line-height: 1.3;
+    }
+
+    .dept-card p {
+      font-size: 14px;
+      color: var(--charcoal-textile);
+      line-height: 1.6;
+      margin-top: 6px;
+    }
+
+    /* CTA Section */
+    .about-cta-section {
+      background: linear-gradient(135deg, var(--deep-teal) 0%, #1E293B 100%);
+      color: var(--pure-white);
+      padding: 80px 0;
+      text-align: center;
+      border-radius: 24px;
+      margin: 64px auto;
+    }
+
+    .cta-button-gold {
+      display: inline-block;
+      background-color: var(--heritage-gold);
+      color: var(--deep-teal);
+      font-family: var(--font-label);
+      font-weight: 600;
+      font-size: 14px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      padding: 16px 36px;
+      border-radius: 6px;
+      transition: all 0.3s ease;
+    }
+
+    .cta-button-gold:hover {
+      background-color: #d8b795;
+      transform: translateY(-2px);
+    }
+
+    .cta-button-outline {
+      display: inline-block;
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      color: var(--pure-white);
+      font-family: var(--font-label);
+      font-weight: 600;
+      font-size: 14px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      padding: 16px 36px;
+      border-radius: 6px;
+      transition: all 0.3s ease;
+      margin-left: 16px;
+    }
+
+    .cta-button-outline:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: var(--pure-white);
+    }
+
+    @media (max-width: 1024px) {
+      .story-grid, .mv-grid {
+        grid-template-columns: 1fr;
+      }
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .leadership-grid-modern {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .pillars-grid .pillar-card {
+        flex: 0 0 calc((100% - 32px) / 2);
+        max-width: calc((100% - 32px) / 2);
+      }
+      .dept-card {
+        flex: 0 0 calc((100% - 28px) / 2);
+        max-width: calc((100% - 28px) / 2);
+      }
+      .stat-item {
+        border-right: none;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        padding-bottom: 24px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .stats-grid, .leadership-grid-modern {
+        grid-template-columns: 1fr;
+      }
+      .pillars-grid .pillar-card, .dept-card {
+        flex: 0 0 100%;
+        max-width: 100%;
+      }
+      .cta-button-outline {
+        margin-left: 0;
+        margin-top: 16px;
+      }
+    }
+  </style>
 </head>
 <body>
 
-  <!-- Grid Background: Navbar + Page Header -->
-    <!-- Navbar -->
+  <!-- Navbar -->
   <header class="navbar container">
     <div class="logo">
       <img src="Images/logo.png" alt="Grin Living Logo" class="logo-img">
@@ -30,188 +474,337 @@
     </nav>
   </header>
 
-  <!-- Page Header -->
+  <!-- Page Header / Hero Banner -->
   <section class="hero-image-bg" style="background-image: url('Images/hero_about_us.jpg');">
-    <div class="container inner-hero">
+       <div class="container inner-hero">
       <div class="text-center">
-        <span class="label-md text-heritage-gold">ABOUT US</span>
-        <h1 class="display-lg text-pure-white mt-16">Our Story</h1>
+        <span class="label-md text-heritage-gold">ABOUT GRIN LIVING</span>
+        <h1 class="display-lg text-pure-white mt-16">Crafting Quality. Powering B2B Growth.</h1>
         <p class="body-lg text-pure-white opacity-80 mt-24 max-w-700 mx-auto">
-          Driven by quality and innovation, Grin Living creates premium bedsheets that blend comfort, craftsmanship, and market appeal.
+          Driven by precision engineering and market design, Grin Living manufactures premium bedsheets that empower retail and wholesale partners worldwide.
         </p>
       </div>
     </div>
   </section>
 
-
   <main>
 
-    <!-- About Us Section -->
-    <section class="section-padding">
+    <!-- Company Story Section -->
+    <section class="about-story-section canvas-bg">
       <div class="container">
-        <span class="label-lg highlight">ABOUT US</span>
-        <h2 class="headline-lg mt-16">Precision Manufacturing.<br>Reliable Partnerships</h2>
-        <p class="body-md text-charcoal mt-24 max-w-700">
-          At Grin Living, we don't just manufacture bedsheets — we build products that help businesses sell better. With a fully in-house setup covering design, production, and packaging, we ensure every piece meets consistent quality standards while staying aligned with current market demand. Our approach is simple: keep it efficient, keep it reliable, and keep it profitable for our partners. From small retailers to large distributors, we support businesses that value dependable supply and products that move.
-        </p>
+        <div class="story-grid">
+          <div class="story-text">
+            <span class="story-tag">OUR HERITAGE & VISION</span>
+            <h2 class="story-heading">Precision Manufacturing.<br>Reliable Partnerships.</h2>
+            <p class="story-lead">
+              At Grin Living, we don't just manufacture bedsheets — we build market-ready textile solutions engineered for commercial success.
+            </p>
+            <p class="story-body">
+              With a fully integrated, state-of-the-art facility in Surat, Gujarat, we manage every step of the manufacturing journey in-house — from yarn sourcing and high-definition digital printing to precision stitching and retail-ready packaging. 
+            </p>
+            <p class="story-body mt-16">
+              Our philosophy is straightforward: provide our B2B partners with consistent product quality, predictable supply timelines, and market-tested designs that yield high inventory turnover and superior profit margins.
+            </p>
+          </div>
+          <div class="story-image-wrapper">
+            <img src="Images/hero_our_teams.jpg" alt="Grin Living Factory Workshop">
+            <div class="story-badge">
+              <div class="story-badge-number">100% In-House</div>
+              <div class="story-badge-label">Design, Weaving & Packaging Control</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Key Performance Metrics Bar -->
+    <section class="stats-bar-section">
+      <div class="container">
+        <div class="stats-grid">
+          <div class="stat-item">
+            <div class="stat-number">10M+</div>
+            <div class="stat-label">Meters Manufactured Annually</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">500+</div>
+            <div class="stat-label">Active B2B Retail Partners</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">99.8%</div>
+            <div class="stat-label">Quality Check Pass Rate</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">24/7</div>
+            <div class="stat-label">Production Line Reliability</div>
+          </div>
+        </div>
       </div>
     </section>
 
     <!-- Mission & Vision Section -->
-    <section class="surface-bg section-padding">
+    <section class="section-padding surface-bg">
       <div class="container">
-        <div class="testimonials-grid">
+        <div class="text-center mb-64">
+          <span class="story-tag">FOUNDATIONAL PILLARS</span>
+          <h2 class="headline-lg mt-8">Driven By Purpose & Direction</h2>
+        </div>
+
+        <div class="mv-grid">
           <!-- Our Mission -->
-          <div class="card">
-            <h3 class="headline-md">Our Mission</h3>
-            <p class="body-md text-charcoal mt-16">
+          <div class="mv-card">
+            <div class="mv-icon-badge">M</div>
+            <h3 class="mv-title">Our Mission</h3>
+            <p class="body-md text-charcoal">
               To empower B2B partners with high-quality, market-ready bedsheet products manufactured through efficient, fully in-house processes—delivering consistent supply, competitive pricing, and designs that drive sales.
             </p>
+            <ul class="mv-list">
+              <li>End-to-end quality assurance on every order</li>
+              <li>Competitive wholesale pricing for maximized margins</li>
+              <li>Rapid response times and dedicated client support</li>
+            </ul>
           </div>
+
           <!-- Our Vision -->
-          <div class="card">
-            <h3 class="headline-md">Our Vision</h3>
-            <p class="body-md text-charcoal mt-16">
-              To become India's most trusted bedsheet manufacturing partner—known for reliability, innovation, and enabling our partners to lead their markets.
+          <div class="mv-card">
+            <div class="mv-icon-badge">V</div>
+            <h3 class="mv-title">Our Vision</h3>
+            <p class="body-md text-charcoal">
+              To become India's most trusted bedsheet manufacturing partner—known for operational reliability, innovative fabric finishing, and enabling our business partners to dominate their respective markets.
             </p>
+            <ul class="mv-list">
+              <li>Pioneering sustainable and eco-friendly printing tech</li>
+              <li>Setting global benchmarks in B2B textile manufacturing</li>
+              <li>Expanding global distribution networks across continents</li>
+            </ul>
           </div>
         </div>
       </div>
     </section>
 
     <!-- The Grin Advantage Section -->
-    <section class="section-padding">
+    <section class="section-padding canvas-bg">
       <div class="container">
-        <div class="section-header">
-          <span class="label-lg highlight">THE GRIN ADVANTAGE</span>
-          <h2 class="headline-lg mt-16">What Sets Us Apart</h2>
+        <div class="text-center mb-64">
+          <span class="story-tag">THE GRIN ADVANTAGE</span>
+          <h2 class="headline-lg mt-8">What Sets Our Manufacturing Apart</h2>
+          <p class="body-lg text-charcoal mt-16 max-w-700 mx-auto">
+            We eliminate industry bottlenecks to deliver a seamless supply chain tailored to your business needs.
+          </p>
         </div>
 
-        <div class="features-grid-3 mt-64">
-          <!-- Card 1 -->
-          <div class="card">
+        <div class="pillars-grid">
+          <!-- Pillar 1 -->
+          <div class="pillar-card">
+            <div class="pillar-number">01</div>
             <h4 class="headline-sm">End-to-End In-House Control</h4>
-            <p class="body-sm text-charcoal mt-8">Better quality, faster turnaround, zero dependency. We own the journey from fiber to finish.</p>
+            <p class="body-sm text-charcoal mt-12">
+              Better quality, faster turnaround, zero third-party dependency. We own the complete journey from yarn to finished packaging.
+            </p>
           </div>
-          <!-- Card 2 -->
-          <div class="card">
-            <h4 class="headline-sm">Designs That Actually Sell</h4>
-            <p class="body-sm text-charcoal mt-8">Market-driven patterns, not guesswork. Our design team monitors global trends to ensure your inventory moves.</p>
+          <!-- Pillar 2 -->
+          <div class="pillar-card">
+            <div class="pillar-number">02</div>
+            <h4 class="headline-sm">Designs That Move Inventory</h4>
+            <p class="body-sm text-charcoal mt-12">
+              Market-driven patterns created by expert textile artists who analyze retail trends to ensure high consumer demand.
+            </p>
           </div>
-          <!-- Card 3 -->
-          <div class="card">
+          <!-- Pillar 3 -->
+          <div class="pillar-card">
+            <div class="pillar-number">03</div>
             <h4 class="headline-sm">Consistency at Scale</h4>
-            <p class="body-sm text-charcoal mt-8">Bulk orders delivered without quality variation. The last sheet of a 10,000-unit run is as perfect as the first.</p>
+            <p class="body-sm text-charcoal mt-12">
+              Bulk orders delivered without quality variation. The 10,000th bedsheet matches the exact spec of the initial approved sample.
+            </p>
           </div>
-          <!-- Card 4 -->
-          <div class="card">
+          <!-- Pillar 4 -->
+          <div class="pillar-card">
+            <div class="pillar-number">04</div>
             <h4 class="headline-sm">Timely, No-Excuse Delivery</h4>
-            <p class="body-sm text-charcoal mt-8">Because your business runs on timelines. We respect your schedules as much as our own craftsmanship.</p>
+            <p class="body-sm text-charcoal mt-12">
+              We respect your retail schedules. Optimized logistics ensure your shipments arrive on schedule, every time.
+            </p>
           </div>
-          <!-- Card 5 -->
-          <div class="card">
-            <h4 class="headline-sm">Competitive by Design</h4>
-            <p class="body-sm text-charcoal mt-8">Efficient processes that translate into better pricing and stronger margins for your bottom line.</p>
+          <!-- Pillar 5 -->
+          <div class="pillar-card">
+            <div class="pillar-number">05</div>
+            <h4 class="headline-sm">Margin-Optimized Pricing</h4>
+            <p class="body-sm text-charcoal mt-12">
+              Our lean, highly automated production process directly translates into competitive pricing and stronger profit margins for your business.
+            </p>
           </div>
         </div>
       </div>
     </section>
 
-  
     <!-- Leadership Section -->
-    <section class="section-padding">
+    <section class="section-padding surface-bg">
       <div class="container">
-        <h2 class="headline-lg">Leadership</h2>
+        <div class="text-center mb-64">
+          <span class="story-tag">EXECUTIVE LEADERSHIP</span>
+          <h2 class="headline-lg mt-8">The Visionaries Driving Grin Living</h2>
+          <p class="body-lg text-charcoal mt-16 max-w-700 mx-auto">
+            Experienced industry professionals dedicated to manufacturing excellence and partner growth.
+          </p>
+        </div>
 
-        <div class="leadership-grid mt-64">
+        <div class="leadership-grid-modern">
           <!-- Leader 1 -->
-          <div class="leader-card">
-            <div class="team-avatar">L1</div>
-            <h4 class="headline-sm">Leader 1</h4>
-            <p class="body-sm text-charcoal mt-8">A short description of the service and how the visitor will benefit from it.</p>
+          <div class="leader-card-modern">
+            <div class="leader-avatar-circle">VS</div>
+            <h4 class="headline-sm">Vikram Shah</h4>
+            <div class="leader-role">Founder & Managing Director</div>
+            <p class="body-sm text-charcoal mt-12">20+ years of industrial textile leadership, driving strategic vision and manufacturing expansion.</p>
           </div>
+
           <!-- Leader 2 -->
-          <div class="leader-card">
-            <div class="team-avatar">L2</div>
-            <h4 class="headline-sm">Leader 2</h4>
-            <p class="body-sm text-charcoal mt-8">A short description of the service and how the visitor will benefit from it.</p>
+          <div class="leader-card-modern">
+            <div class="leader-avatar-circle">AP</div>
+            <h4 class="headline-sm">Ananya Patel</h4>
+            <div class="leader-role">Head of Textile Design</div>
+            <p class="body-sm text-charcoal mt-12">Pioneering trend forecasting and pattern aesthetics that resonate with modern consumer preferences.</p>
           </div>
+
           <!-- Leader 3 -->
-          <div class="leader-card">
-            <div class="team-avatar">L3</div>
-            <h4 class="headline-sm">Leader 3</h4>
-            <p class="body-sm text-charcoal mt-8">A short description of the service and how the visitor will benefit from it.</p>
+          <div class="leader-card-modern">
+            <div class="leader-avatar-circle">RM</div>
+            <h4 class="headline-sm">Rajesh Mehta</h4>
+            <div class="leader-role">VP of Operations & Production</div>
+            <p class="body-sm text-charcoal mt-12">Managing high-volume automated weaving lines and zero-defect production scheduling.</p>
           </div>
+
           <!-- Leader 4 -->
-          <div class="leader-card">
-            <div class="team-avatar">L4</div>
-            <h4 class="headline-sm">Leader 4</h4>
-            <p class="body-sm text-charcoal mt-8">A short description of the service and how the visitor will benefit from it.</p>
+          <div class="leader-card-modern">
+            <div class="leader-avatar-circle">PN</div>
+            <h4 class="headline-sm">Priya Nair</h4>
+            <div class="leader-role">Director of Quality & B2B Relations</div>
+            <p class="body-sm text-charcoal mt-12">Ensuring 99.8% quality compliance and fostering long-term relationships with retail partners.</p>
           </div>
         </div>
       </div>
     </section>
 
     <!-- Departments Section -->
-    <section class="surface-bg section-padding">
+    <section class="section-padding canvas-bg">
       <div class="container">
-        <h2 class="headline-lg">Our Team</h2>
-        <p class="body-lg text-charcoal mt-24 max-w-700">
-          Every department aligned to deliver precision, consistency, and scale.
-        </p>
+        <div class="text-center mb-64">
+          <span class="story-tag">OUR OPERATIONAL DIVISIONS</span>
+          <h2 class="headline-lg mt-8">Specialized Teams Working in Harmony</h2>
+          <p class="body-lg text-charcoal mt-16 max-w-700 mx-auto">
+            Every department is aligned to deliver precision, consistency, and scale.
+          </p>
+        </div>
 
-        <div class="features-grid-3 mt-64">
-          <!-- 1. Leadership -->
-          <div class="card">
-            <h4 class="headline-sm">Leadership</h4>
-            <p class="body-sm text-charcoal mt-8">Founder / Management — Driving vision, strategy, and long-term growth.</p>
+        <div class="depts-grid">
+          <!-- 01. Leadership & Strategy -->
+          <div class="dept-card">
+            <div class="dept-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon></svg>
+            </div>
+            <div>
+              <h4 class="headline-sm">Leadership & Strategy</h4>
+              <p class="body-sm text-charcoal mt-4">Driving vision, business development, and long-term industrial infrastructure growth.</p>
+            </div>
           </div>
-          <!-- 2. Design -->
-          <div class="card">
-            <h4 class="headline-sm">Design</h4>
-            <p class="body-sm text-charcoal mt-8">Textile Designers, Print & Pattern Specialists, Sampling Team</p>
+
+          <!-- 02. Design & Pattern Lab -->
+          <div class="dept-card">
+            <div class="dept-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19l7-7 3 3-7 7-3-3z"></path><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"></path><path d="M2 2l7.586 7.586"></path></svg>
+            </div>
+            <div>
+              <h4 class="headline-sm">Design & Pattern Lab</h4>
+              <p class="body-sm text-charcoal mt-4">Textile designers, colorists, and sampling specialists creating market-ready prints.</p>
+            </div>
           </div>
-          <!-- 3. Production -->
-          <div class="card">
-            <h4 class="headline-sm">Production</h4>
-            <p class="body-sm text-charcoal mt-8">Production Manager, Machine Operators, Stitching & Finishing Staff</p>
+
+          <!-- 03. Production & Weaving -->
+          <div class="dept-card">
+            <div class="dept-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 12 12 17 22 12"></polyline><polyline points="2 17 12 22 22 17"></polyline></svg>
+            </div>
+            <div>
+              <h4 class="headline-sm">Production & Weaving</h4>
+              <p class="body-sm text-charcoal mt-4">Automated looms, stitching units, and finishing operators maintaining high daily output.</p>
+            </div>
           </div>
-          <!-- 4. Quality Control -->
-          <div class="card">
-            <h4 class="headline-sm">Quality Control</h4>
-            <p class="body-sm text-charcoal mt-8">Quality Inspectors, Fabric & Finish Check Team</p>
+
+          <!-- 04. Quality Assurance Lab -->
+          <div class="dept-card">
+            <div class="dept-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><polyline points="9 12 11 14 15 10"></polyline></svg>
+            </div>
+            <div>
+              <h4 class="headline-sm">Quality Assurance Lab</h4>
+              <p class="body-sm text-charcoal mt-4">Rigorous fabric inspectors performing tensile strength, colorfastness, and wash testing.</p>
+            </div>
           </div>
-          <!-- 5. Procurement -->
-          <div class="card">
-            <h4 class="headline-sm">Procurement</h4>
-            <p class="body-sm text-charcoal mt-8">Fabric Sourcing Team, Vendor Management</p>
+
+          <!-- 05. Yarn & Fabric Sourcing -->
+          <div class="dept-card">
+            <div class="dept-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="3"></circle><circle cx="6" cy="18" r="3"></circle><line x1="20" y1="4" x2="8.12" y2="15.88"></line><line x1="14.47" y1="14.48" x2="20" y2="20"></line><line x1="8.12" y1="8.12" x2="12" y2="12"></line></svg>
+            </div>
+            <div>
+              <h4 class="headline-sm">Yarn & Fabric Sourcing</h4>
+              <p class="body-sm text-charcoal mt-4">Securing premium cotton and poly-spandex raw materials from verified ethical mills.</p>
+            </div>
           </div>
-          <!-- 6. Packaging -->
-          <div class="card">
-            <h4 class="headline-sm">Packaging</h4>
-            <p class="body-sm text-charcoal mt-8">Packaging Designers, Packing Staff</p>
+
+          <!-- 06. Custom Packaging -->
+          <div class="dept-card">
+            <div class="dept-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+            </div>
+            <div>
+              <h4 class="headline-sm">Custom Packaging</h4>
+              <p class="body-sm text-charcoal mt-4">Designing retail-ready branding, inserts, and protective poly-packaging for bulk orders.</p>
+            </div>
           </div>
-          <!-- 7. Logistics & Dispatch -->
-          <div class="card">
-            <h4 class="headline-sm">Logistics & Dispatch</h4>
-            <p class="body-sm text-charcoal mt-8">Dispatch Manager, Inventory & Warehouse Team</p>
+
+          <!-- 07. Logistics & Dispatch -->
+          <div class="dept-card">
+            <div class="dept-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg>
+            </div>
+            <div>
+              <h4 class="headline-sm">Logistics & Dispatch</h4>
+              <p class="body-sm text-charcoal mt-4">Warehouse management team coordinating container loading and door-step dispatch.</p>
+            </div>
           </div>
-          <!-- 8. Sales & B2B Relations -->
-          <div class="card">
-            <h4 class="headline-sm">Sales & B2B Relations</h4>
-            <p class="body-sm text-charcoal mt-8">Sales Managers, Client Servicing Team</p>
-          </div>
-          <!-- 9. Accounts & Operations -->
-          <div class="card">
-            <h4 class="headline-sm">Accounts & Operations</h4>
-            <p class="body-sm text-charcoal mt-8">Accounts Team, Operations Coordinators</p>
+
+          <!-- 08. B2B Partner Support -->
+          <div class="dept-card">
+            <div class="dept-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18v-6a9 9 0 0 1 18 0v6"></path><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"></path></svg>
+            </div>
+            <div>
+              <h4 class="headline-sm">B2B Partner Support</h4>
+              <p class="body-sm text-charcoal mt-4">Dedicated account managers providing 24/7 order tracking and re-order facilitation.</p>
+            </div>
           </div>
         </div>
+
+        <!-- B2B CTA Banner -->
+        <div class="about-cta-section">
+          <div class="container">
+            <h2 class="display-lg text-pure-white mb-16" style="font-size: 38px;">Ready to Elevate Your Fabric Sourcing?</h2>
+            <p class="body-lg text-pure-white opacity-80 max-w-700 mx-auto mb-32">
+              Partner with Grin Living today for dependable manufacturing, premium fabric quality, and market-ready bedsheet collections.
+            </p>
+            <div>
+              <a href="contact-us.html" class="cta-button-gold">Contact B2B Sales</a>
+              <a href="products.html" class="cta-button-outline">Explore Products</a>
+            </div>
+          </div>
+        </div>
+
       </div>
     </section>
 
   </main>
 
+  <!-- Footer -->
   <footer class="site-footer">
     <div class="container footer-container">
       <div class="footer-brand">
@@ -234,7 +827,7 @@
           <h4 class="label-lg">HEADQUARTERS</h4>
           <p class="body-sm text-charcoal">
             Plot No. 12-15, Textile Industrial Estate<br>
-            Sachin GIDC, Suarat, Gujarat 394230
+            Sachin GIDC, Surat, Gujarat 394230
           </p>
           <a href="mailto:info@grinliving.com" class="body-sm block mt-8">info@grinliving.com</a>
           <a href="tel:+91262458800" class="body-sm block mt-8">+91 262458800</a>
@@ -250,8 +843,6 @@
     </div>
   </footer>
 
-
-    <script src="animations.js"></script>
+  <script src="animations.js"></script>
 </body>
 </html>
-
