@@ -1,4 +1,5 @@
 <?php
+require_once 'auth.php';
 require_once 'db_connect.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -34,6 +35,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $msg = "<div class='alert alert-danger'>Error: " . $conn->error . "</div>";
     }
 }
+
+// Fetch categories from database
+$categories = [];
+$catResult = $conn->query("SELECT name FROM categories ORDER BY name ASC");
+if ($catResult && $catResult->num_rows > 0) {
+    while($catRow = $catResult->fetch_assoc()) {
+        $categories[] = $catRow['name'];
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -44,12 +54,35 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header class="admin-header">
-        <h1>Grin Living Admin</h1>
-        <a href="index.php">&larr; Back to Dashboard</a>
-    </header>
+    <div class="admin-wrapper">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h1>Grin Living Admin</h1>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="index.php" class="active">Products</a>
+                <a href="manage_categories.php">Categories</a>
+            </nav>
+            <div class="sidebar-footer">
+                <a href="../products.html" target="_blank" style="color: var(--secondary-color); text-decoration: none; font-size: 14px;">View Live Website &rarr;</a>
+                <a href="logout.php" class="btn btn-danger" style="text-align: center;">Logout</a>
+            </div>
+        </aside>
 
-    <div class="admin-container" style="max-width: 600px;">
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="top-header">
+                <div>
+                    <!-- Optional top right items -->
+                    <span style="font-size: 14px; color: var(--text-light);">Welcome, Admin</span>
+                </div>
+            </header>
+
+            <div class="admin-container" style="flex: 1; max-width: 600px;">
+                <div style="margin-bottom: 20px;">
+                    <a href="index.php" style="text-decoration: none; color: var(--text-light); font-weight: 500;">&larr; Back to Products</a>
+                </div>
         <?php if(isset($msg)) echo $msg; ?>
         
         <div class="card">
@@ -64,16 +97,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <div class="form-group">
                     <label for="category">Category</label>
                     <select id="category" name="category" class="form-control" required>
-                        <option value="Cotton Fabrics">Cotton Fabrics</option>
-                        <option value="Polyester Fabrics">Polyester Fabrics</option>
-                        <option value="Poly Spandex Fabrics">Poly Spandex Fabrics</option>
-                        <option value="Rayon Fabrics">Rayon Fabrics</option>
-                        <option value="Viscose Fabrics">Viscose Fabrics</option>
-                        <option value="Mesh Fabrics">Mesh Fabrics</option>
-                        <option value="Knit Fabrics">Knit Fabrics</option>
-                        <option value="Velvet Fabrics">Velvet Fabrics</option>
-                        <option value="Embroidered Fabrics">Embroidered Fabrics</option>
-                        <option value="Fancy / Fashion Fabrics">Fancy / Fashion Fabrics</option>
+                        <?php foreach($categories as $cat): ?>
+                            <option value="<?php echo htmlspecialchars($cat); ?>"><?php echo htmlspecialchars($cat); ?></option>
+                        <?php endforeach; ?>
                     </select>
                 </div>
 
@@ -85,6 +111,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <button type="submit" class="btn btn-primary" style="width: 100%;">Save Product</button>
             </form>
         </div>
+    </div>
+        </main>
     </div>
 </body>
 </html>

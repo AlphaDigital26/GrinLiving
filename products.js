@@ -1,21 +1,55 @@
 document.addEventListener('DOMContentLoaded', () => {
   const grid = document.querySelector('.product-grid-3');
-  const filterChips = document.querySelectorAll('.filter-chip');
+  const filterChipsContainer = document.querySelector('.filter-chips');
+  const categoryHeader = document.getElementById('category-header');
+  const categoryTitle = document.getElementById('category-title');
+  const categoryDesc = document.getElementById('category-desc');
+  
   let products = []; // Will hold data from API
+  let categoryDescriptions = {
+    "All": "Discover our complete collection of premium fabrics, meticulously manufactured for exceptional quality, durability, and style."
+  };
 
-  // Fetch products from backend
-  fetch('api/get_products.php')
+  // Fetch categories
+  fetch('api/get_categories.php')
     .then(response => response.json())
-    .then(data => {
-      products = data;
-      // Initial render after fetching data
-      renderProducts('All');
-      updateHeader('All');
+    .then(categories => {
+      categories.forEach(cat => {
+        // Add to dictionary
+        categoryDescriptions[cat.name] = cat.description;
+        
+        // Create chip
+        const chip = document.createElement('span');
+        chip.className = 'filter-chip';
+        chip.setAttribute('data-filter', cat.name);
+        chip.textContent = cat.name;
+        filterChipsContainer.appendChild(chip);
+      });
+      
+      // Bind events to newly created chips
+      bindChipEvents();
+
+      // Now fetch products
+      fetchProducts();
     })
     .catch(error => {
-      console.error('Error fetching products:', error);
-      grid.innerHTML = '<p class="body-md text-charcoal">Failed to load products. Please try again later.</p>';
+      console.error('Error fetching categories:', error);
+      fetchProducts(); // Try to fetch products anyway
     });
+
+  function fetchProducts() {
+    fetch('api/get_products.php')
+      .then(response => response.json())
+      .then(data => {
+        products = data;
+        renderProducts('All');
+        updateHeader('All');
+      })
+      .catch(error => {
+        console.error('Error fetching products:', error);
+        grid.innerHTML = '<p class="body-md text-charcoal">Failed to load products. Please try again later.</p>';
+      });
+  }
 
   function renderProducts(filterCategory) {
     grid.innerHTML = ''; // clear grid
@@ -27,13 +61,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     products.forEach(p => {
       if (filterCategory === 'All' || p.category === filterCategory) {
-        // create card
         const card = document.createElement('div');
         card.className = 'product-card';
         card.dataset.category = p.category;
         
         card.innerHTML = `
-          <img src="${p.image}" alt="${p.title}" class="product-img">
+          <img src="${p.image}" alt="${p.title}" class="product-img" onerror="this.src='https://via.placeholder.com/300'">
           <div class="product-info">
             <h3 class="product-title">${p.title}</h3>
           </div>
@@ -42,24 +75,6 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   }
-
-  const categoryDescriptions = {
-    "All": "Discover our complete collection of premium fabrics, meticulously manufactured for exceptional quality, durability, and style.",
-    "Cotton Fabrics": "Experience the breathability and comfort of our premium cotton fabrics. Ideal for high-quality bedsheets and everyday apparel.",
-    "Polyester Fabrics": "Durable, wrinkle-resistant polyester fabrics designed for longevity and ease of care.",
-    "Poly Spandex Fabrics": "Flexible and resilient poly spandex blends, perfect for activewear and comfortable stretch garments.",
-    "Rayon Fabrics": "Soft, breathable, and beautifully draped rayon fabrics available in stunning prints and solids.",
-    "Viscose Fabrics": "Luxurious viscose fabrics offering a silk-like feel, perfect for premium fashion and home textiles.",
-    "Mesh Fabrics": "Lightweight, breathable mesh fabrics suitable for athletic wear and decorative layering.",
-    "Knit Fabrics": "Comfortable and versatile knit fabrics providing excellent stretch and recovery.",
-    "Velvet Fabrics": "Plush, opulent velvet fabrics that bring a touch of luxury to any project.",
-    "Embroidered Fabrics": "Exquisite embroidered fabrics featuring detailed craftsmanship and intricate designs.",
-    "Fancy / Fashion Fabrics": "Unique, trend-setting fashion fabrics designed to make a statement in any collection."
-  };
-
-  const categoryHeader = document.getElementById('category-header');
-  const categoryTitle = document.getElementById('category-title');
-  const categoryDesc = document.getElementById('category-desc');
 
   function updateHeader(selectedCategory) {
     if (categoryHeader && categoryTitle && categoryDesc) {
@@ -73,18 +88,17 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // Add event listeners
-  filterChips.forEach(chip => {
-    chip.addEventListener('click', () => {
-      // Update active class
-      filterChips.forEach(c => c.classList.remove('active'));
-      chip.classList.add('active');
-      
-      // Filter products
-      const selectedCategory = chip.getAttribute('data-filter');
-      
-      updateHeader(selectedCategory);
-      renderProducts(selectedCategory);
+  function bindChipEvents() {
+    const chips = document.querySelectorAll('.filter-chip');
+    chips.forEach(chip => {
+      chip.addEventListener('click', () => {
+        chips.forEach(c => c.classList.remove('active'));
+        chip.classList.add('active');
+        
+        const selectedCategory = chip.getAttribute('data-filter');
+        updateHeader(selectedCategory);
+        renderProducts(selectedCategory);
+      });
     });
-  });
+  }
 });

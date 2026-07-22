@@ -1,4 +1,5 @@
 <?php
+require_once 'auth.php';
 require_once 'db_connect.php';
 
 $id = isset($_GET['id']) ? intval($_GET['id']) : 0;
@@ -40,6 +41,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $msg = "<div class='alert alert-danger'>Error: " . $conn->error . "</div>";
     }
 }
+
+// Fetch categories from database
+$dbCategories = [];
+$catResult = $conn->query("SELECT name FROM categories ORDER BY name ASC");
+if ($catResult && $catResult->num_rows > 0) {
+    while($catRow = $catResult->fetch_assoc()) {
+        $dbCategories[] = $catRow['name'];
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -50,12 +60,35 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header class="admin-header">
-        <h1>Grin Living Admin</h1>
-        <a href="index.php">&larr; Back to Dashboard</a>
-    </header>
+    <div class="admin-wrapper">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h1>Grin Living Admin</h1>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="index.php" class="active">Products</a>
+                <a href="manage_categories.php">Categories</a>
+            </nav>
+            <div class="sidebar-footer">
+                <a href="../products.html" target="_blank" style="color: var(--secondary-color); text-decoration: none; font-size: 14px;">View Live Website &rarr;</a>
+                <a href="logout.php" class="btn btn-danger" style="text-align: center;">Logout</a>
+            </div>
+        </aside>
 
-    <div class="admin-container" style="max-width: 600px;">
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="top-header">
+                <div>
+                    <!-- Optional top right items -->
+                    <span style="font-size: 14px; color: var(--text-light);">Welcome, Admin</span>
+                </div>
+            </header>
+
+            <div class="admin-container" style="flex: 1; max-width: 600px;">
+                <div style="margin-bottom: 20px;">
+                    <a href="index.php" style="text-decoration: none; color: var(--text-light); font-weight: 500;">&larr; Back to Products</a>
+                </div>
         <?php if(isset($msg)) echo $msg; ?>
         
         <div class="card">
@@ -71,14 +104,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <label for="category">Category</label>
                     <select id="category" name="category" class="form-control" required>
                         <?php
-                        $categories = [
-                            "Cotton Fabrics", "Polyester Fabrics", "Poly Spandex Fabrics", 
-                            "Rayon Fabrics", "Viscose Fabrics", "Mesh Fabrics", 
-                            "Knit Fabrics", "Velvet Fabrics", "Embroidered Fabrics", "Fancy / Fashion Fabrics"
-                        ];
-                        foreach ($categories as $cat) {
+                        foreach ($dbCategories as $cat) {
                             $selected = ($product['category'] == $cat) ? "selected" : "";
-                            echo "<option value='$cat' $selected>$cat</option>";
+                            echo "<option value='" . htmlspecialchars($cat) . "' $selected>" . htmlspecialchars($cat) . "</option>";
                         }
                         ?>
                     </select>
@@ -98,6 +126,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <button type="submit" class="btn btn-primary" style="width: 100%;">Update Product</button>
             </form>
         </div>
+    </div>
+        </main>
     </div>
 </body>
 </html>

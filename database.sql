@@ -8,6 +8,37 @@ CREATE TABLE IF NOT EXISTS `products` (
   `image` VARCHAR(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+CREATE TABLE IF NOT EXISTS `admins` (
+  `id` INT AUTO_INCREMENT PRIMARY KEY,
+  `username` VARCHAR(50) NOT NULL UNIQUE,
+  `password` VARCHAR(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- Default admin user (admin / admin123)
+INSERT INTO `admins` (`username`, `password`) VALUES 
+('admin', '$2y$10$w0/5s1.9c6y6.oN1K3FwJ.xH.Xf1gG7lS.4K.92iL2X9oI1R2x5M6') 
+ON DUPLICATE KEY UPDATE `username`='admin';
+
+CREATE TABLE IF NOT EXISTS `categories` (
+  `id` INT AUTO_INCREMENT PRIMARY KEY,
+  `name` VARCHAR(100) NOT NULL UNIQUE,
+  `description` TEXT
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+INSERT INTO `categories` (`name`, `description`) VALUES
+('Cotton Fabrics', 'Experience the breathability and comfort of our premium cotton fabrics. Ideal for high-quality bedsheets and everyday apparel.'),
+('Polyester Fabrics', 'Durable, wrinkle-resistant, and perfect for activewear and outerwear. Our polyester blends offer superior performance.'),
+('Poly Spandex Fabrics', 'Enjoy the perfect stretch and recovery. Excellent for activewear, leggings, and form-fitting garments.'),
+('Rayon Fabrics', 'Soft, smooth, and highly absorbent. Our rayon fabrics are ideal for comfortable summer dresses and blouses.'),
+('Viscose Fabrics', 'Luxurious drape and silk-like feel. Viscose is perfect for elegant dresses and high-end fashion.'),
+('Mesh Fabrics', 'Breathable and lightweight. Our mesh fabrics are perfect for sportswear panels and stylish overlays.'),
+('Knit Fabrics', 'Comfortable and stretchy. From t-shirts to cozy sweaters, our knit fabrics are incredibly versatile.'),
+('Velvet Fabrics', 'Rich, soft, and luxurious. Velvet adds a touch of elegance to evening wear and home decor.'),
+('Embroidered Fabrics', 'Intricate designs and beautiful textures. Our embroidered fabrics are perfect for special occasion garments.'),
+('Fancy / Fashion Fabrics', 'Make a statement with our unique and trendy fashion fabrics. Perfect for standout pieces and accessories.')
+ON DUPLICATE KEY UPDATE `description` = VALUES(`description`);
+
+-- Default product data
 INSERT INTO `products` (`title`, `category`, `image`) VALUES
 ('Yummy fabric 90% polyester 10% spandex fluorescent digital printed', 'Poly Spandex Fabrics', 'Images/WhatsApp Image 2026-07-14 at 2.20.55 PM (1).jpeg'),
 ('poly spandex fancy knits', 'Poly Spandex Fabrics', 'Images/WhatsApp Image 2026-07-14 at 2.20.55 PM.jpeg'),

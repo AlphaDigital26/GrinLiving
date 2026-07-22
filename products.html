@@ -135,16 +135,6 @@
       <div class="container">
         <div class="filter-chips mb-24" style="justify-content: center;">
           <span class="filter-chip active" data-filter="All">All</span>
-          <span class="filter-chip" data-filter="Cotton Fabrics">Cotton Fabrics</span>
-          <span class="filter-chip" data-filter="Polyester Fabrics">Polyester Fabrics</span>
-          <span class="filter-chip" data-filter="Poly Spandex Fabrics">Poly Spandex Fabrics</span>
-          <span class="filter-chip" data-filter="Rayon Fabrics">Rayon Fabrics</span>
-          <span class="filter-chip" data-filter="Viscose Fabrics">Viscose Fabrics</span>
-          <span class="filter-chip" data-filter="Mesh Fabrics">Mesh Fabrics</span>
-          <span class="filter-chip" data-filter="Knit Fabrics">Knit Fabrics</span>
-          <span class="filter-chip" data-filter="Velvet Fabrics">Velvet Fabrics</span>
-          <span class="filter-chip" data-filter="Embroidered Fabrics">Embroidered Fabrics</span>
-          <span class="filter-chip" data-filter="Fancy / Fashion Fabrics">Fancy / Fashion Fabrics</span>
         </div>
         
         <div id="category-header" class="category-header text-center" style="display: none;">
@@ -198,27 +188,7 @@
 
 
   <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const chips = document.querySelectorAll('.filter-chip');
-      const cards = document.querySelectorAll('.product-card');
-
-      chips.forEach(chip => {
-        chip.addEventListener('click', () => {
-          chips.forEach(c => c.classList.remove('active'));
-          chip.classList.add('active');
-
-          const selectedCategory = chip.getAttribute('data-filter');
-
-          cards.forEach(card => {
-            if (selectedCategory === 'All' || card.getAttribute('data-category') === selectedCategory) {
-              card.style.display = 'flex';
-            } else {
-              card.style.display = 'none';
-            }
-          });
-        });
-      });
-    });
+    // Filter script logic moved entirely to products.js
   </script>
   <script src="products.js"></script>
 
