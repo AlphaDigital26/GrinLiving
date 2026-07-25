@@ -66,6 +66,7 @@ if ($result && $result->num_rows > 0) {
             <nav class="sidebar-nav">
                 <a href="index.php">Products</a>
                 <a href="manage_categories.php" class="active">Categories</a>
+                <a href="manage_blogs.php">Blogs</a>
             </nav>
             <div class="sidebar-footer">
                 <a href="../products.html" target="_blank" style="color: var(--secondary-color); text-decoration: none; font-size: 14px;">View Live Website &rarr;</a>

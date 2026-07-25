@@ -20,25 +20,37 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $title = $conn->real_escape_string($_POST['title']);
     $category = $conn->real_escape_string($_POST['category']);
     $imagePath = $product['image']; // Keep old image by default
+    $imageData = null;
+    $imageType = null;
+    $hasNewImage = false;
 
     // Handle File Upload
     if (isset($_FILES['image']) && $_FILES['image']['error'] == 0) {
-        $uploadDir = '../Images/';
+        $fileTmpName = $_FILES['image']['tmp_name'];
         $fileName = time() . '_' . basename($_FILES['image']['name']);
-        $targetFilePath = $uploadDir . $fileName;
+        $uploadPath = '../Images/' . $fileName;
         
-        if (move_uploaded_file($_FILES['image']['tmp_name'], $targetFilePath)) {
+        if (move_uploaded_file($fileTmpName, $uploadPath)) {
             $imagePath = 'Images/' . $fileName;
+            $hasNewImage = true;
         }
     }
 
-    $sql = "UPDATE products SET title = '$title', category = '$category', image = '$imagePath' WHERE id = $id";
+    if ($hasNewImage) {
+        $stmt = $conn->prepare("UPDATE products SET title = ?, category = ?, image = ? WHERE id = ?");
+        $stmt->bind_param("sssi", $title, $category, $imagePath, $id);
+    } else {
+        $stmt = $conn->prepare("UPDATE products SET title = ?, category = ? WHERE id = ?");
+        $stmt->bind_param("ssi", $title, $category, $id);
+    }
     
-    if ($conn->query($sql) === TRUE) {
+    if ($stmt->execute()) {
+        $stmt->close();
         header("Location: index.php?msg=updated");
         exit();
     } else {
-        $msg = "<div class='alert alert-danger'>Error: " . $conn->error . "</div>";
+        $msg = "<div class='alert alert-danger'>Error: " . $stmt->error . "</div>";
+        $stmt->close();
     }
 }
 
@@ -69,6 +81,7 @@ if ($catResult && $catResult->num_rows > 0) {
             <nav class="sidebar-nav">
                 <a href="index.php" class="active">Products</a>
                 <a href="manage_categories.php">Categories</a>
+                <a href="manage_blogs.php">Blogs</a>
             </nav>
             <div class="sidebar-footer">
                 <a href="../products.html" target="_blank" style="color: var(--secondary-color); text-decoration: none; font-size: 14px;">View Live Website &rarr;</a>

@@ -8,31 +8,30 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
     // Default image path fallback
     $imagePath = "Images/placeholder.jpg";
+    $imageData = null;
+    $imageType = null;
 
     // Handle File Upload
     if (isset($_FILES['image']) && $_FILES['image']['error'] == 0) {
-        $uploadDir = '../Images/';
-        // Ensure directory exists
-        if (!is_dir($uploadDir)) {
-            mkdir($uploadDir, 0755, true);
-        }
-        
+        $fileTmpName = $_FILES['image']['tmp_name'];
         $fileName = time() . '_' . basename($_FILES['image']['name']);
-        $targetFilePath = $uploadDir . $fileName;
+        $uploadPath = '../Images/' . $fileName;
         
-        if (move_uploaded_file($_FILES['image']['tmp_name'], $targetFilePath)) {
-            // Store relative path in DB (e.g. Images/filename.jpg)
+        if (move_uploaded_file($fileTmpName, $uploadPath)) {
             $imagePath = 'Images/' . $fileName;
         }
     }
 
-    $sql = "INSERT INTO products (title, category, image) VALUES ('$title', '$category', '$imagePath')";
+    $stmt = $conn->prepare("INSERT INTO products (title, category, image) VALUES (?, ?, ?)");
+    $stmt->bind_param("sss", $title, $category, $imagePath);
     
-    if ($conn->query($sql) === TRUE) {
+    if ($stmt->execute()) {
+        $stmt->close();
         header("Location: index.php?msg=success");
         exit();
     } else {
-        $msg = "<div class='alert alert-danger'>Error: " . $conn->error . "</div>";
+        $msg = "<div class='alert alert-danger'>Error: " . $stmt->error . "</div>";
+        $stmt->close();
     }
 }
 
@@ -63,6 +62,7 @@ if ($catResult && $catResult->num_rows > 0) {
             <nav class="sidebar-nav">
                 <a href="index.php" class="active">Products</a>
                 <a href="manage_categories.php">Categories</a>
+                <a href="manage_blogs.php">Blogs</a>
             </nav>
             <div class="sidebar-footer">
                 <a href="../products.html" target="_blank" style="color: var(--secondary-color); text-decoration: none; font-size: 14px;">View Live Website &rarr;</a>

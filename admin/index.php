@@ -33,7 +33,7 @@ $total_products = $total_row['total'];
 $total_pages = ceil($total_products / $limit);
 
 // Fetch products for current page
-$sql = "SELECT * FROM products" . $searchQuery . " ORDER BY id DESC LIMIT $limit OFFSET $offset";
+$sql = "SELECT id, title, category, image, is_featured FROM products" . $searchQuery . " ORDER BY id DESC LIMIT $limit OFFSET $offset";
 $result = $conn->query($sql);
 
 $searchParam = !empty($search) ? '&search=' . urlencode($search) : '';
@@ -57,6 +57,7 @@ $searchParam = !empty($search) ? '&search=' . urlencode($search) : '';
             <nav class="sidebar-nav">
                 <a href="index.php" class="active">Products</a>
                 <a href="manage_categories.php">Categories</a>
+                <a href="manage_blogs.php">Blogs</a>
             </nav>
             <div class="sidebar-footer">
                 <a href="../products.html" target="_blank" style="color: var(--secondary-color); text-decoration: none; font-size: 14px;">View Live Website &rarr;</a>
@@ -106,14 +107,14 @@ $searchParam = !empty($search) ? '&search=' . urlencode($search) : '';
                     <?php
                     if ($result && $result->num_rows > 0) {
                         while($row = $result->fetch_assoc()) {
-                            // Adjust image path for display in admin (going up one dir)
+                            // Adjust image path for display in admin
                             $imgPath = '../' . $row['image'];
                             echo "<tr>";
                             echo "<td>#" . $row['id'] . "</td>";
                             echo "<td><img src='" . htmlspecialchars($imgPath) . "' class='product-thumb' onerror=\"this.onerror=null; this.src='https://placehold.co/60x60/e2e8f0/64748b?text=No+Image'\"></td>";
                             echo "<td>" . htmlspecialchars($row['title']) . "</td>";
                             echo "<td><span style='background: #e2e8f0; padding: 4px 8px; border-radius: 4px; font-size: 12px;'>" . htmlspecialchars($row['category']) . "</span></td>";
-                            $checked = $row['is_featured'] ? 'checked' : '';
+                            $checked = !empty($row['is_featured']) ? 'checked' : '';
                             echo "<td>
                                     <label class='switch' style='position: relative; display: inline-block; width: 44px; height: 24px;'>
                                       <input type='checkbox' class='feature-toggle' data-id='" . $row['id'] . "' $checked style='opacity: 0; width: 0; height: 0;'>
