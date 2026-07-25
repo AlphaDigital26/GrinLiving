@@ -214,6 +214,21 @@ a {
   align-items: center;
 }
 
+.mobile-menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--deep-teal);
+  cursor: pointer;
+  padding: 8px;
+  z-index: 1001;
+}
+
+.mobile-menu-toggle svg {
+  width: 28px;
+  height: 28px;
+}
+
 .nav-links a {
   font-family: var(--font-label);
   font-size: 12px;
@@ -603,8 +618,35 @@ a {
     line-height: 1.2;
   }
   
+  .mobile-menu-toggle {
+    display: block;
+    margin-left: auto;
+    position: relative;
+  }
+  
+  .navbar {
+    position: relative;
+    flex-wrap: nowrap;
+  }
+
   .nav-links {
-    display: none; 
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 280px;
+    height: 100vh;
+    background-color: var(--pure-white);
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 80px 32px 32px;
+    box-shadow: -4px 0 15px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    transition: right 0.3s ease;
+    display: flex;
+  }
+
+  .nav-links.active {
+    right: 0;
   }
   
   .features-grid-3, .product-grid, .testimonials-grid {
