@@ -94,10 +94,11 @@ $searchParam = !empty($search) ? '&search=' . urlencode($search) : '';
             <table>
                 <thead>
                     <tr>
-                        <th>ID</th>
-                        <th>Image</th>
+                        <th style="width: 60px;">ID</th>
+                        <th style="width: 80px;">Image</th>
                         <th>Title</th>
-                        <th>Category</th>
+                        <th style="width: 150px;">Category</th>
+                        <th>Featured</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -109,9 +110,16 @@ $searchParam = !empty($search) ? '&search=' . urlencode($search) : '';
                             $imgPath = '../' . $row['image'];
                             echo "<tr>";
                             echo "<td>#" . $row['id'] . "</td>";
-                            echo "<td><img src='" . htmlspecialchars($imgPath) . "' class='product-thumb' onerror=\"this.src='https://via.placeholder.com/60'\"></td>";
+                            echo "<td><img src='" . htmlspecialchars($imgPath) . "' class='product-thumb' onerror=\"this.onerror=null; this.src='https://placehold.co/60x60/e2e8f0/64748b?text=No+Image'\"></td>";
                             echo "<td>" . htmlspecialchars($row['title']) . "</td>";
                             echo "<td><span style='background: #e2e8f0; padding: 4px 8px; border-radius: 4px; font-size: 12px;'>" . htmlspecialchars($row['category']) . "</span></td>";
+                            $checked = $row['is_featured'] ? 'checked' : '';
+                            echo "<td>
+                                    <label class='switch' style='position: relative; display: inline-block; width: 44px; height: 24px;'>
+                                      <input type='checkbox' class='feature-toggle' data-id='" . $row['id'] . "' $checked style='opacity: 0; width: 0; height: 0;'>
+                                      <span class='slider round' style='position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; transition: .4s; border-radius: 24px;'></span>
+                                    </label>
+                                  </td>";
                             echo "<td>
                                     <a href='edit_product.php?id=" . $row['id'] . "' class='btn btn-edit'>Edit</a>
                                     <a href='index.php?delete_id=" . $row['id'] . "' class='btn btn-danger' onclick='return confirm(\"Are you sure you want to delete this product?\");'>Delete</a>
@@ -119,7 +127,7 @@ $searchParam = !empty($search) ? '&search=' . urlencode($search) : '';
                             echo "</tr>";
                         }
                     } else {
-                        echo "<tr><td colspan='5' style='text-align:center;'>No products found. Add some!</td></tr>";
+                        echo "<tr><td colspan='6' style='text-align:center;'>No products found. Add some!</td></tr>";
                     }
                     ?>
                 </tbody>
@@ -156,5 +164,93 @@ $searchParam = !empty($search) ? '&search=' . urlencode($search) : '';
         </div>
         </main>
     </div>
+    
+    <div id="toast-container" style="position: fixed; bottom: 20px; right: 20px; z-index: 9999; display: flex; flex-direction: column; gap: 10px;"></div>
+    
+    <style>
+        .slider {
+            background-color: #ccc;
+        }
+        .switch input:checked + .slider {
+            background-color: var(--success-color, #10B981);
+        }
+        .switch input:checked + .slider:before {
+            transform: translateX(20px);
+        }
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 18px;
+            width: 18px;
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+    </style>
+    <script>
+        function showToast(message, type = 'error') {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            toast.style.padding = '12px 20px';
+            toast.style.borderRadius = '6px';
+            toast.style.color = '#fff';
+            toast.style.fontWeight = '500';
+            toast.style.fontSize = '14px';
+            toast.style.boxShadow = '0 4px 12px rgba(0,0,0,0.15)';
+            toast.style.opacity = '0';
+            toast.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+            toast.style.transform = 'translateY(20px)';
+            toast.style.backgroundColor = type === 'error' ? 'var(--danger-color, #EF4444)' : 'var(--success-color, #10B981)';
+            toast.innerText = message;
+            
+            container.appendChild(toast);
+            
+            // Trigger animation
+            setTimeout(() => {
+                toast.style.opacity = '1';
+                toast.style.transform = 'translateY(0)';
+            }, 10);
+            
+            // Remove after 3s
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                toast.style.transform = 'translateY(20px)';
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
+        }
+
+        document.querySelectorAll('.feature-toggle').forEach(toggle => {
+            toggle.addEventListener('change', function() {
+                const productId = this.getAttribute('data-id');
+                const isFeatured = this.checked ? 1 : 0;
+                
+                fetch('toggle_featured.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: `id=${productId}&is_featured=${isFeatured}`
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if(!data.success) {
+                        showToast(data.error || 'Error updating featured status');
+                        this.checked = !isFeatured; // Revert
+                    } else {
+                        if (isFeatured) {
+                           showToast('Product featured successfully', 'success');
+                        }
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    showToast('Network error while updating.');
+                    this.checked = !isFeatured; // Revert
+                });
+            });
+        });
+    </script>
 </body>
 </html>

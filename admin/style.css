@@ -44,9 +44,10 @@ body {
 }
 
 .admin-container {
-  max-width: 1200px;
+  max-width: 1600px;
+  width: 96%;
   margin: 40px auto;
-  padding: 0 20px;
+  padding: 0 10px;
 }
 
 .card {
