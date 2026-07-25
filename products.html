@@ -62,6 +62,26 @@
       .product-grid-3 {
         grid-template-columns: 1fr;
       }
+      
+      .filter-chips {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        justify-content: flex-start !important;
+        -webkit-overflow-scrolling: touch;
+        padding-bottom: 8px;
+        /* Hide scrollbar for IE, Edge and Firefox */
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+      }
+      
+      /* Hide scrollbar for Chrome, Safari and Opera */
+      .filter-chips::-webkit-scrollbar {
+        display: none;
+      }
+      
+      .filter-chip {
+        white-space: nowrap;
+      }
     }
   
     .product-card {
@@ -96,6 +116,51 @@
       text-transform: capitalize;
     }
 
+    /* Pagination Styles */
+    .pagination-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      margin-top: 48px;
+    }
+
+    .pagination-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 40px;
+      height: 40px;
+      padding: 0 12px;
+      background-color: var(--pure-white);
+      color: var(--charcoal-textile);
+      font-family: var(--font-label);
+      font-size: 14px;
+      font-weight: 600;
+      border-radius: 4px;
+      border: 1px solid var(--outline-light);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .pagination-btn:hover:not(:disabled) {
+      background-color: var(--deep-teal);
+      color: var(--pure-white);
+      border-color: var(--deep-teal);
+    }
+
+    .pagination-btn.active {
+      background-color: var(--deep-teal);
+      color: var(--pure-white);
+      border-color: var(--deep-teal);
+      cursor: default;
+    }
+
+    .pagination-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
   </style>
 </head>
 <body>
@@ -106,6 +171,9 @@
       <img src="Images/logo.png" alt="Grin Living Logo" class="logo-img">
       <span class="logo-text">Grin Living</span>
     </div>
+    <button class="mobile-menu-toggle" aria-label="Toggle navigation">
+      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+    </button>
     <nav class="nav-links">
       <a href="index.html">Home</a>
       <a href="about-us.html">About us</a>
@@ -143,6 +211,10 @@
         </div>
 
         <div class="product-grid-3">
+        </div>
+
+        <div id="pagination" class="pagination-container" style="display: none;">
+          <!-- Pagination buttons will be rendered here -->
         </div>
       </div>
     </section>
@@ -190,10 +262,10 @@
   <script>
     // Filter script logic moved entirely to products.js
   </script>
-  <script src="products.js"></script>
+  <script src="products.js?v=3"></script>
 
-    <script src="animations.js"></script>
-</body>
+    <script src="animations.js?v=3"></script>
+<script src="main.js"></script></body>
 </html>
 
 

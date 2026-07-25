@@ -1,6 +1,3 @@
--- Grin Living Database
--- Import this file into your existing Hostinger database via phpMyAdmin
-
 CREATE TABLE IF NOT EXISTS `products` (
   `id` INT AUTO_INCREMENT PRIMARY KEY,
   `title` VARCHAR(255) NOT NULL,
@@ -26,7 +23,7 @@ CREATE TABLE IF NOT EXISTS `categories` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 INSERT INTO `categories` (`name`, `description`) VALUES
-('Cotton Fabrics', 'Experience the breathability and comfort of our premium cotton fabrics. Ideal for high-quality bedsheets and everyday apparel.'),
+('Cotton Fabrics', 'Experience the breathability and comfort of our premium cotton fabrics. Ideal for high-quality textiles and everyday apparel.'),
 ('Polyester Fabrics', 'Durable, wrinkle-resistant, and perfect for activewear and outerwear. Our polyester blends offer superior performance.'),
 ('Poly Spandex Fabrics', 'Enjoy the perfect stretch and recovery. Excellent for activewear, leggings, and form-fitting garments.'),
 ('Rayon Fabrics', 'Soft, smooth, and highly absorbent. Our rayon fabrics are ideal for comfortable summer dresses and blouses.'),
