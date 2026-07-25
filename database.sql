@@ -1,5 +1,5 @@
-CREATE DATABASE IF NOT EXISTS `grin_living_db`;
-USE `grin_living_db`;
+-- Grin Living Database
+-- Import this file into your existing Hostinger database via phpMyAdmin
 
 CREATE TABLE IF NOT EXISTS `products` (
   `id` INT AUTO_INCREMENT PRIMARY KEY,

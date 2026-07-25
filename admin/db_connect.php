@@ -6,12 +6,12 @@ if (file_exists($envFile)) {
     $env = parse_ini_file($envFile);
 }
 
-$host = $env['DB_HOST'] ?? "localhost";
-$username = $env['DB_USER'] ?? "root";
-$password = $env['DB_PASS'] ?? "";
-$database = $env['DB_NAME'] ?? "grin_living_db";
+$db_host = $env['DB_HOST'] ?? "localhost";
+$db_user = $env['DB_USER'] ?? "root";
+$db_pass = $env['DB_PASS'] ?? "";
+$db_name = $env['DB_NAME'] ?? "grin_living_db";
 
-$conn = new mysqli($host, $username, $password, $database);
+$conn = new mysqli($db_host, $db_user, $db_pass, $db_name);
 
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);

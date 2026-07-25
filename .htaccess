@@ -1,0 +1,17 @@
+RewriteEngine On
+
+# Block access to sensitive files
+<FilesMatch "\.(env|sql|py|md)$">
+    Order Allow,Deny
+    Deny from all
+</FilesMatch>
+
+# Block access to admin/db_connect.php directly
+<Files "db_connect.php">
+    Order Allow,Deny
+    Deny from all
+</Files>
+
+# Force HTTPS (uncomment after SSL is active on Hostinger)
+# RewriteCond %{HTTPS} off
+# RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
