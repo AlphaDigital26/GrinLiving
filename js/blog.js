@@ -46,7 +46,7 @@ function renderBlogs(blogs) {
                     ${textContent}
                 </p>
                 <div class="mt-24">
-                    <a href="#" class="label-lg text-deep-teal" onclick="alert('Full blog view not implemented yet. You can build a blog-detail.html later!')">Read More &rarr;</a>
+                    <a href="blog-detail?id=${blog.id}" class="label-lg text-deep-teal">Read More &rarr;</a>
                 </div>
             </div>
         `;

@@ -1,0 +1,64 @@
+document.addEventListener('DOMContentLoaded', () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const blogId = urlParams.get('id');
+    const contentArea = document.getElementById('blog-content-area');
+
+    if (!blogId) {
+        contentArea.innerHTML = `
+            <div class="text-center" style="padding: 100px 0;">
+                <h1 class="display-sm text-charcoal">Blog Not Found</h1>
+                <p class="body-md mt-16 mb-32">The article you are looking for does not exist or the link is invalid.</p>
+                <a href="blog" class="btn btn-primary">Back to Blogs</a>
+            </div>
+        `;
+        return;
+    }
+
+    fetch(`api/get_blog_detail.php?id=${blogId}`)
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === 'success' && data.blog) {
+                const blog = data.blog;
+                
+                // Format Date
+                const dateObj = new Date(blog.created_at);
+                const formattedDate = dateObj.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+
+                document.title = `${blog.title} - Grin Living`;
+
+                contentArea.innerHTML = `
+                    <a href="blog" class="back-btn">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+                        Back to Blogs
+                    </a>
+                    
+                    <span class="label-md text-heritage-gold" style="display: block; margin-top: 24px;">${formattedDate} • ${blog.author}</span>
+                    <h1 class="display-md text-charcoal mt-16 mb-40" style="font-family: 'Playfair Display', serif;">${blog.title}</h1>
+                    
+                    <img src="${blog.image}" alt="${blog.title}" class="blog-detail-image" onerror="this.style.display='none'">
+                    
+                    <div class="blog-detail-content">
+                        ${blog.content}
+                    </div>
+                `;
+            } else {
+                contentArea.innerHTML = `
+                    <div class="text-center" style="padding: 100px 0;">
+                        <h1 class="display-sm text-charcoal">Article Not Found</h1>
+                        <p class="body-md mt-16 mb-32">${data.message || "The article you requested could not be loaded."}</p>
+                        <a href="blog" class="btn btn-primary">Browse All Blogs</a>
+                    </div>
+                `;
+            }
+        })
+        .catch(error => {
+            console.error('Error fetching blog detail:', error);
+            contentArea.innerHTML = `
+                <div class="text-center" style="padding: 100px 0;">
+                    <h1 class="display-sm text-charcoal">Connection Error</h1>
+                    <p class="body-md mt-16 mb-32">Unable to connect to the server. Please try again later.</p>
+                    <a href="blog" class="btn btn-primary">Back to Blogs</a>
+                </div>
+            `;
+        });
+});

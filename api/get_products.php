@@ -2,7 +2,7 @@
 header('Content-Type: application/json');
 
 // Include db_connect.php relative to api directory
-require_once __DIR__ . '/../admin/db_connect.php';
+require_once __DIR__ . '/../grin-admin/db_connect.php';
 
 $category = isset($_GET['category']) ? $_GET['category'] : 'All';
 $page = isset($_GET['page']) ? max(1, (int)$_GET['page']) : 1;

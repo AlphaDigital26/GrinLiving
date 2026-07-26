@@ -1,6 +1,6 @@
 <?php
 header('Content-Type: application/json');
-require_once __DIR__ . '/../admin/db_connect.php';
+require_once __DIR__ . '/../grin-admin/db_connect.php';
 
 $limit = isset($_GET['limit']) ? intval($_GET['limit']) : 12;
 $page = isset($_GET['page']) ? intval($_GET['page']) : 1;

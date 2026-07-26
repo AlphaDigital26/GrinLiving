@@ -7,9 +7,11 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap" rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap"></noscript>
 
-  <link rel="stylesheet" href="style.css">
+  <link rel="preload" href="style.css?v=1.0.1" as="style">
+  <link rel="stylesheet" href="style.css?v=1.0.1">
 
   <style>
     /* Page-Specific Styling for About Us for Cohesive Luxury Aesthetics */
@@ -455,6 +457,7 @@
       }
     }
   </style>
+  <link rel="preload" as="image" href="Images/hero_our_teams.webp">
 </head>
 <body>
 
@@ -478,7 +481,7 @@
   </header>
 
   <!-- Page Header / Hero Banner -->
-  <section class="hero-image-bg" style="background-image: url('Images/hero_about_us.jpg');">
+  <section class="hero-image-bg" style="background-image: url('Images/hero_about_us.webp');">
        <div class="container inner-hero">
       <div class="text-center">
         <span class="label-md text-heritage-gold">ABOUT GRIN LIVING</span>
@@ -510,7 +513,7 @@
             </p>
           </div>
           <div class="story-image-wrapper">
-            <img src="Images/hero_our_teams.webp" alt="Grin Living Factory Workshop">
+            <img src="Images/hero_our_teams.webp" alt="Grin Living Factory Workshop" fetchpriority="high">
             <div class="story-badge">
               <div class="story-badge-number">100% In-House</div>
               <div class="story-badge-label">Design, Weaving & Packaging Control</div>
@@ -599,7 +602,7 @@
           <!-- Pillar 1 -->
           <div class="pillar-card">
             <div class="pillar-number">01</div>
-            <h4 class="headline-sm">End-to-End In-House Control</h4>
+            <h3 class="headline-sm">End-to-End In-House Control</h3>
             <p class="body-sm text-charcoal mt-12">
               Better quality, faster turnaround, zero third-party dependency. We own the complete journey from yarn to finished packaging.
             </p>
@@ -607,7 +610,7 @@
           <!-- Pillar 2 -->
           <div class="pillar-card">
             <div class="pillar-number">02</div>
-            <h4 class="headline-sm">Designs That Move Inventory</h4>
+            <h3 class="headline-sm">Designs That Move Inventory</h3>
             <p class="body-sm text-charcoal mt-12">
               Market-driven patterns created by expert textile artists who analyze retail trends to ensure high consumer demand.
             </p>
@@ -615,7 +618,7 @@
           <!-- Pillar 3 -->
           <div class="pillar-card">
             <div class="pillar-number">03</div>
-            <h4 class="headline-sm">Consistency at Scale</h4>
+            <h3 class="headline-sm">Consistency at Scale</h3>
             <p class="body-sm text-charcoal mt-12">
               Bulk orders delivered without quality variation. The 10,000th piece of fabric matches the exact spec of the initial approved sample.
             </p>
@@ -623,7 +626,7 @@
           <!-- Pillar 4 -->
           <div class="pillar-card">
             <div class="pillar-number">04</div>
-            <h4 class="headline-sm">Timely, No-Excuse Delivery</h4>
+            <h3 class="headline-sm">Timely, No-Excuse Delivery</h3>
             <p class="body-sm text-charcoal mt-12">
               We respect your retail schedules. Optimized logistics ensure your shipments arrive on schedule, every time.
             </p>
@@ -631,7 +634,7 @@
           <!-- Pillar 5 -->
           <div class="pillar-card">
             <div class="pillar-number">05</div>
-            <h4 class="headline-sm">Margin-Optimized Pricing</h4>
+            <h3 class="headline-sm">Margin-Optimized Pricing</h3>
             <p class="body-sm text-charcoal mt-12">
               Our lean, highly automated production process directly translates into competitive pricing and stronger profit margins for your business.
             </p>
@@ -655,7 +658,7 @@
           <!-- Leader 1 -->
           <div class="leader-card-modern">
             <div class="leader-avatar-circle">VS</div>
-            <h4 class="headline-sm">Vikram Shah</h4>
+            <h3 class="headline-sm">Vikram Shah</h3>
             <div class="leader-role">Founder & Managing Director</div>
             <p class="body-sm text-charcoal mt-12">20+ years of industrial textile leadership, driving strategic vision and manufacturing expansion.</p>
           </div>
@@ -663,7 +666,7 @@
           <!-- Leader 2 -->
           <div class="leader-card-modern">
             <div class="leader-avatar-circle">AP</div>
-            <h4 class="headline-sm">Ananya Patel</h4>
+            <h3 class="headline-sm">Ananya Patel</h3>
             <div class="leader-role">Head of Textile Design</div>
             <p class="body-sm text-charcoal mt-12">Pioneering trend forecasting and pattern aesthetics that resonate with modern consumer preferences.</p>
           </div>
@@ -671,7 +674,7 @@
           <!-- Leader 3 -->
           <div class="leader-card-modern">
             <div class="leader-avatar-circle">RM</div>
-            <h4 class="headline-sm">Rajesh Mehta</h4>
+            <h3 class="headline-sm">Rajesh Mehta</h3>
             <div class="leader-role">VP of Operations & Production</div>
             <p class="body-sm text-charcoal mt-12">Managing high-volume automated weaving lines and zero-defect production scheduling.</p>
           </div>
@@ -679,7 +682,7 @@
           <!-- Leader 4 -->
           <div class="leader-card-modern">
             <div class="leader-avatar-circle">PN</div>
-            <h4 class="headline-sm">Priya Nair</h4>
+            <h3 class="headline-sm">Priya Nair</h3>
             <div class="leader-role">Director of Quality & B2B Relations</div>
             <p class="body-sm text-charcoal mt-12">Ensuring 99.8% quality compliance and fostering long-term relationships with retail partners.</p>
           </div>
@@ -705,7 +708,7 @@
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon></svg>
             </div>
             <div>
-              <h4 class="headline-sm">Leadership & Strategy</h4>
+              <h3 class="headline-sm">Leadership & Strategy</h3>
               <p class="body-sm text-charcoal mt-4">Driving vision, business development, and long-term industrial infrastructure growth.</p>
             </div>
           </div>
@@ -716,7 +719,7 @@
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19l7-7 3 3-7 7-3-3z"></path><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"></path><path d="M2 2l7.586 7.586"></path></svg>
             </div>
             <div>
-              <h4 class="headline-sm">Design & Pattern Lab</h4>
+              <h3 class="headline-sm">Design & Pattern Lab</h3>
               <p class="body-sm text-charcoal mt-4">Textile designers, colorists, and sampling specialists creating market-ready prints.</p>
             </div>
           </div>
@@ -727,7 +730,7 @@
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 12 12 17 22 12"></polyline><polyline points="2 17 12 22 22 17"></polyline></svg>
             </div>
             <div>
-              <h4 class="headline-sm">Production & Weaving</h4>
+              <h3 class="headline-sm">Production & Weaving</h3>
               <p class="body-sm text-charcoal mt-4">Automated looms, stitching units, and finishing operators maintaining high daily output.</p>
             </div>
           </div>
@@ -738,7 +741,7 @@
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><polyline points="9 12 11 14 15 10"></polyline></svg>
             </div>
             <div>
-              <h4 class="headline-sm">Quality Assurance Lab</h4>
+              <h3 class="headline-sm">Quality Assurance Lab</h3>
               <p class="body-sm text-charcoal mt-4">Rigorous fabric inspectors performing tensile strength, colorfastness, and wash testing.</p>
             </div>
           </div>
@@ -749,7 +752,7 @@
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="3"></circle><circle cx="6" cy="18" r="3"></circle><line x1="20" y1="4" x2="8.12" y2="15.88"></line><line x1="14.47" y1="14.48" x2="20" y2="20"></line><line x1="8.12" y1="8.12" x2="12" y2="12"></line></svg>
             </div>
             <div>
-              <h4 class="headline-sm">Yarn & Fabric Sourcing</h4>
+              <h3 class="headline-sm">Yarn & Fabric Sourcing</h3>
               <p class="body-sm text-charcoal mt-4">Securing premium cotton and poly-spandex raw materials from verified ethical mills.</p>
             </div>
           </div>
@@ -760,7 +763,7 @@
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
             </div>
             <div>
-              <h4 class="headline-sm">Custom Packaging</h4>
+              <h3 class="headline-sm">Custom Packaging</h3>
               <p class="body-sm text-charcoal mt-4">Designing retail-ready branding, inserts, and protective poly-packaging for bulk orders.</p>
             </div>
           </div>
@@ -771,7 +774,7 @@
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg>
             </div>
             <div>
-              <h4 class="headline-sm">Logistics & Dispatch</h4>
+              <h3 class="headline-sm">Logistics & Dispatch</h3>
               <p class="body-sm text-charcoal mt-4">Warehouse management team coordinating container loading and door-step dispatch.</p>
             </div>
           </div>
@@ -782,7 +785,7 @@
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18v-6a9 9 0 0 1 18 0v6"></path><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"></path></svg>
             </div>
             <div>
-              <h4 class="headline-sm">B2B Partner Support</h4>
+              <h3 class="headline-sm">B2B Partner Support</h3>
               <p class="body-sm text-charcoal mt-4">Dedicated account managers providing 24/7 order tracking and re-order facilitation.</p>
             </div>
           </div>
@@ -821,13 +824,13 @@
       </div>
       <div class="footer-links">
         <div class="link-column">
-          <h4 class="label-lg">COMPANY</h4>
+          <h3 class="label-lg">COMPANY</h3>
           <a href="./" class="body-sm">Home</a>
           <a href="products" class="body-sm">Products</a>
           <a href="about-us" class="body-sm">About US</a>
         </div>
         <div class="link-column">
-          <h4 class="label-lg">HEADQUARTERS</h4>
+          <h3 class="label-lg">HEADQUARTERS</h3>
           <p class="body-sm text-charcoal">
             Plot No. 12-15, Textile Industrial Estate<br>
             Sachin GIDC, Surat, Gujarat 394230
@@ -846,6 +849,6 @@
     </div>
   </footer>
 
-  <script src="animations.js"></script>
-<script src="main.js"></script></body>
+  <script src="animations.js?v=1.0.1" defer></script>
+<script src="main.js?v=1.0.1" defer></script></body>
 </html>

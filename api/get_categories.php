@@ -1,7 +1,7 @@
 <?php
 header('Content-Type: application/json');
 
-require_once __DIR__ . '/../admin/db_connect.php';
+require_once __DIR__ . '/../grin-admin/db_connect.php';
 
 $sql = "SELECT id, name, description FROM categories ORDER BY id ASC";
 $result = $conn->query($sql);

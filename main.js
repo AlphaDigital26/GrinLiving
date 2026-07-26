@@ -2,7 +2,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const t = document.querySelector('.mobile-menu-toggle'); 
     const n = document.querySelector('.nav-links'); 
     if (t && n) { 
-        t.addEventListener('click', () => n.classList.toggle('active')); 
+        t.addEventListener('click', (e) => {
+            e.stopPropagation();
+            n.classList.toggle('active');
+        });
+        
+        document.addEventListener('click', (e) => {
+            if (n.classList.contains('active') && !n.contains(e.target) && !t.contains(e.target)) {
+                n.classList.remove('active');
+            }
+        });
     } 
     
     // Fetch Featured Products for homepage

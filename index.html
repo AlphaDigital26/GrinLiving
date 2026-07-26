@@ -7,9 +7,12 @@
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap" rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap"></noscript>
   
-  <link rel="stylesheet" href="style.css">
+  <link rel="preload" href="style.css?v=1.0.1" as="style">
+  <link rel="stylesheet" href="style.css?v=1.0.1">
+  <link rel="preload" as="image" href="Images/hero_textile.webp">
 </head>
 <body>
 
@@ -57,7 +60,7 @@
         
         <div class="hero-image-wrapper">
           <div class="hero-image-offset"></div>
-          <img src="Images/hero_textile.webp" alt="Textile & Fabric Manufacturing in Surat" class="hero-img">
+          <img src="Images/hero_textile.webp" alt="Textile & Fabric Manufacturing in Surat" class="hero-img" fetchpriority="high">
         </div>
       </section>
     </div> <!-- end grid background -->
@@ -160,35 +163,35 @@
             <div class="icon-wrapper">
               <svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
             </div>
-            <h4 class="headline-sm">Low MOQs & High Volume</h4>
+            <h3 class="headline-sm">Low MOQs & High Volume</h3>
             <p class="body-sm text-charcoal mt-8">Supporting both scaling businesses and established distributors.</p>
           </div>
           <div class="icon-card">
             <div class="icon-wrapper">
               <svg viewBox="0 0 24 24"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg>
             </div>
-            <h4 class="headline-sm">Quick Design Adaptation</h4>
+            <h3 class="headline-sm">Quick Design Adaptation</h3>
             <p class="body-sm text-charcoal mt-8">Fast private labeling to create your own market identity.</p>
           </div>
           <div class="icon-card">
             <div class="icon-wrapper">
               <svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="7 12 10 15 17 8"></polyline></svg>
             </div>
-            <h4 class="headline-sm">Ready Stock Available</h4>
+            <h3 class="headline-sm">Ready Stock Available</h3>
             <p class="body-sm text-charcoal mt-8">Fast-moving designs always in stock to reduce your lead time.</p>
           </div>
           <div class="icon-card">
             <div class="icon-wrapper">
               <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
             </div>
-            <h4 class="headline-sm">Secure Packaging</h4>
+            <h3 class="headline-sm">Secure Packaging</h3>
             <p class="body-sm text-charcoal mt-8">Structured quality checks minimizing returns and transit issues.</p>
           </div>
           <div class="icon-card">
             <div class="icon-wrapper">
               <svg viewBox="0 0 24 24"><path d="M3 18v-6a9 9 0 0 1 18 0v6"></path><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"></path></svg>
             </div>
-            <h4 class="headline-sm">Dependable Service</h4>
+            <h3 class="headline-sm">Dependable Service</h3>
             <p class="body-sm text-charcoal mt-8">Clear communication making sourcing smooth and predictable.</p>
           </div>
         </div>
@@ -215,7 +218,7 @@
                 <svg viewBox="0 0 24 24"><path d="M12 19l7-7 3 3-7 7-3-3z"></path><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"></path><path d="M2 2l7.586 7.586"></path></svg>
               </div>
               <div class="timeline-text">
-                <h4 class="headline-sm">Design & Development</h4>
+                <h3 class="headline-sm">Design & Development</h3>
                 <p class="body-sm text-charcoal mt-8">Collaborating with you to create market-ready patterns, exact thread counts, and fabric blends tailored to your audience.</p>
               </div>
             </div>
@@ -228,7 +231,7 @@
                 <svg viewBox="0 0 24 24"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 12 12 17 22 12"></polyline><polyline points="2 17 12 22 22 17"></polyline></svg>
               </div>
               <div class="timeline-text">
-                <h4 class="headline-sm">Sourcing & Weaving</h4>
+                <h3 class="headline-sm">Sourcing & Weaving</h3>
                 <p class="body-sm text-charcoal mt-8">Using premium yarns and advanced looms to weave fabrics that balance durability with an exceptionally soft hand-feel.</p>
               </div>
             </div>
@@ -241,7 +244,7 @@
                 <svg viewBox="0 0 24 24"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path></svg>
               </div>
               <div class="timeline-text">
-                <h4 class="headline-sm">Dyeing & Printing</h4>
+                <h3 class="headline-sm">Dyeing & Printing</h3>
                 <p class="body-sm text-charcoal mt-8">Industrial-grade, color-fast dyeing processes that ensure your fabrics won't fade, even after repeated commercial washes.</p>
               </div>
             </div>
@@ -254,7 +257,7 @@
                 <svg viewBox="0 0 24 24"><circle cx="6" cy="6" r="3"></circle><circle cx="6" cy="18" r="3"></circle><line x1="20" y1="4" x2="8.12" y2="15.88"></line><line x1="14.47" y1="14.48" x2="20" y2="20"></line><line x1="8.12" y1="8.12" x2="12" y2="12"></line></svg>
               </div>
               <div class="timeline-text">
-                <h4 class="headline-sm">Stitching & Finishing</h4>
+                <h3 class="headline-sm">Stitching & Finishing</h3>
                 <p class="body-sm text-charcoal mt-8">Precision stitching by experienced operators, followed by specialized finishing treatments for extra softness and luster.</p>
               </div>
             </div>
@@ -267,7 +270,7 @@
                 <svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
               </div>
               <div class="timeline-text">
-                <h4 class="headline-sm">Quality Inspection</h4>
+                <h3 class="headline-sm">Quality Inspection</h3>
                 <p class="body-sm text-charcoal mt-8">Rigorous multi-point checks to eliminate defects. Only flawless sheets make it past our inspection tables.</p>
               </div>
             </div>
@@ -280,7 +283,7 @@
                 <svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
               </div>
               <div class="timeline-text">
-                <h4 class="headline-sm">Packaging & Dispatch</h4>
+                <h3 class="headline-sm">Packaging & Dispatch</h3>
                 <p class="body-sm text-charcoal mt-8">Retail-ready packaging, securely boxed and dispatched through reliable logistics networks to meet your deadlines.</p>
               </div>
             </div>
@@ -353,12 +356,12 @@
         <div class="contact-form card">
           <form>
             <div class="form-group">
-              <label class="label-md">City</label>
-              <input type="text" class="form-control" placeholder="Enter City">
+              <label class="label-md" for="city">City</label>
+              <input type="text" id="city" class="form-control" placeholder="Enter City">
             </div>
             <div class="form-group mt-16">
-              <label class="label-md">Business Type</label>
-              <select class="form-control">
+              <label class="label-md" for="business-type">Business Type</label>
+              <select id="business-type" name="business_type" aria-label="Business Type" class="form-control">
                 <option>Select</option>
                 <option>Retailer</option>
                 <option>Wholesaler</option>
@@ -391,13 +394,13 @@
       
       <div class="footer-links">
         <div class="link-column">
-          <h4 class="label-lg">COMPANY</h4>
+          <h3 class="label-lg">COMPANY</h3>
           <a href="./" class="body-sm">Home</a>
           <a href="products" class="body-sm">Products</a>
           <a href="about-us" class="body-sm">About US</a>
         </div>
         <div class="link-column">
-          <h4 class="label-lg">HEADQUARTERS</h4>
+          <h3 class="label-lg">HEADQUARTERS</h3>
           <p class="body-sm text-charcoal">
             Plot No. 12-15, Textile Industrial Estate<br>
             Sachin GIDC, Suarat, Gujarat 394230
@@ -417,7 +420,7 @@
   </footer>
 
 
-    <script src="animations.js"></script>
-<script src="main.js"></script></body>
+    <script src="animations.js?v=1.0.1" defer></script>
+<script src="main.js?v=1.0.1" defer></script></body>
 </html>
 

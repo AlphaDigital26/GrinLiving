@@ -156,9 +156,7 @@ a {
   text-transform: uppercase;
 }
 
-.highlight {
-  color: var(--heritage-gold);
-}
+.highlight { color: #8A6538; /* Darker gold for accessibility contrast */ }
 
 /* Layout Utilities */
 .container {
