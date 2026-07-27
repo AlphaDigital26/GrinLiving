@@ -17,8 +17,8 @@ if (!$product) {
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $title = $conn->real_escape_string($_POST['title']);
-    $category = $conn->real_escape_string($_POST['category']);
+    $title = trim($_POST['title']);
+    $category = trim($_POST['category']);
     $imagePath = $product['image']; // Keep old image by default
     $imageData = null;
     $imageType = null;

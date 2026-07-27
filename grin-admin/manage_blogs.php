@@ -95,7 +95,7 @@ $searchParam = !empty($search) ? '&search=' . urlencode($search) : '';
             <table>
                 <thead>
                     <tr>
-                        <th style="width: 60px;">ID</th>
+                        <th style="width: 60px;">#</th>
                         <th style="width: 80px;">Image</th>
                         <th>Title</th>
                         <th style="width: 150px;">Author</th>
@@ -106,10 +106,11 @@ $searchParam = !empty($search) ? '&search=' . urlencode($search) : '';
                 <tbody>
                     <?php
                     if ($result && $result->num_rows > 0) {
+                        $counter = $offset + 1;
                         while($row = $result->fetch_assoc()) {
                             $imgPath = !empty($row['image']) ? '../' . $row['image'] : 'https://placehold.co/60x60/e2e8f0/64748b?text=No+Image';
                             echo "<tr>";
-                            echo "<td>#" . $row['id'] . "</td>";
+                            echo "<td>" . $counter . "</td>";
                             echo "<td><img src='" . $imgPath . "' class='product-thumb' style='object-fit:cover;' onerror=\"this.onerror=null; this.src='https://placehold.co/60x60/e2e8f0/64748b?text=No+Image'\"></td>";
                             echo "<td>" . htmlspecialchars($row['title']) . "</td>";
                             echo "<td>" . htmlspecialchars($row['author']) . "</td>";
@@ -119,6 +120,7 @@ $searchParam = !empty($search) ? '&search=' . urlencode($search) : '';
                                     <a href='manage_blogs.php?delete_id=" . $row['id'] . "' class='btn btn-danger' onclick='return confirm(\"Are you sure you want to delete this blog?\");'>Delete</a>
                                   </td>";
                             echo "</tr>";
+                            $counter++;
                         }
                     } else {
                         echo "<tr><td colspan='6' style='text-align:center;'>No blogs found. Add some!</td></tr>";

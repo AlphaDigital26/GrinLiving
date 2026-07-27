@@ -2,14 +2,49 @@
 require_once 'auth.php';
 require_once 'db_connect.php';
 
+// Handle Bulk Actions
+$toast_msg = '';
+$toast_type = '';
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['bulk_action']) && !empty($_POST['product_ids'])) {
+    $action = $_POST['bulk_action'];
+    $ids = array_map('intval', $_POST['product_ids']);
+    $ids_string = implode(',', $ids);
+    
+    if ($action === 'delete') {
+        $sql = "DELETE FROM products WHERE id IN ($ids_string)";
+        if ($conn->query($sql) === TRUE) {
+            $toast_msg = "Selected products deleted successfully!";
+            $toast_type = "success";
+        } else {
+            $toast_msg = "Error deleting products: " . $conn->error;
+            $toast_type = "error";
+        }
+    } elseif ($action === 'feature') {
+        $sql = "UPDATE products SET is_featured = 1 WHERE id IN ($ids_string)";
+        if ($conn->query($sql) === TRUE) {
+            $toast_msg = "Selected products featured!";
+            $toast_type = "success";
+        }
+    } elseif ($action === 'unfeature') {
+        $sql = "UPDATE products SET is_featured = 0 WHERE id IN ($ids_string)";
+        if ($conn->query($sql) === TRUE) {
+            $toast_msg = "Selected products unfeatured!";
+            $toast_type = "success";
+        }
+    }
+}
+
 // Handle Delete Request
 if (isset($_GET['delete_id'])) {
     $id = intval($_GET['delete_id']);
     $sql = "DELETE FROM products WHERE id = $id";
     if ($conn->query($sql) === TRUE) {
-        $msg = "<div class='alert alert-success'>Product deleted successfully!</div>";
+        $toast_msg = "Product deleted successfully!";
+        $toast_type = "success";
     } else {
-        $msg = "<div class='alert alert-danger'>Error deleting product: " . $conn->error . "</div>";
+        $toast_msg = "Error deleting product: " . $conn->error;
+        $toast_type = "error";
     }
 }
 
@@ -76,7 +111,6 @@ $searchParam = !empty($search) ? '&search=' . urlencode($search) : '';
             </header>
 
             <div class="admin-container" style="flex: 1;">
-        <?php if(isset($msg)) echo $msg; ?>
         
         <div class="card">
             <div class="card-header" style="flex-wrap: wrap; gap: 15px;">
@@ -93,10 +127,31 @@ $searchParam = !empty($search) ? '&search=' . urlencode($search) : '';
                 <a href="add_product.php" class="btn btn-primary" style="white-space: nowrap;">+ Add New</a>
             </div>
 
-            <table>
+            <form method="POST" action="index" id="bulk-form">
+                <div id="bulk-actions-container" style="display: none; padding: 12px 20px; background: var(--bg-color); border: 1px solid var(--border-light); margin-bottom: 20px; border-radius: 8px;">
+                    <div style="display: flex; align-items: center; gap: 16px; flex-wrap: wrap;">
+                        <button type="button" class="btn" style="background: white; border: 1px solid var(--border-light); color: var(--text-dark); display: flex; align-items: center; gap: 8px; padding: 6px 14px; border-radius: 6px; box-shadow: 0 1px 2px rgba(0,0,0,0.05);" onclick="document.getElementById('bulk-actions-menu').style.display = document.getElementById('bulk-actions-menu').style.display === 'none' ? 'flex' : 'none';">
+                            <span style="font-size: 16px; font-weight: bold; transform: rotate(90deg); display: inline-block;">&#8230;</span> Bulk actions
+                        </button>
+                        <div id="selected-count" style="font-size: 14px; color: var(--text-dark); font-weight: 500;">0 records selected</div>
+                        
+                        <div id="bulk-actions-menu" style="display: none; align-items: center; gap: 10px; margin-left: auto;">
+                            <select id="bulk_action_select" name="bulk_action" class="form-control" style="width: auto; margin-bottom: 0; padding: 6px 12px;">
+                                <option value="">Select Action</option>
+                                <option value="delete">Delete</option>
+                                <option value="feature">Feature</option>
+                                <option value="unfeature">Unfeature</option>
+                            </select>
+                            <button type="button" class="btn btn-primary" style="padding: 6px 16px;" onclick="confirmBulkAction()">Apply</button>
+                        </div>
+                    </div>
+                </div>
+
+            <table style="margin-bottom: 0;">
                 <thead>
                     <tr>
-                        <th style="width: 60px;">ID</th>
+                        <th style="width: 40px;"><input type="checkbox" id="select-all"></th>
+                        <th style="width: 60px;">#</th>
                         <th style="width: 80px;">Image</th>
                         <th>Title</th>
                         <th style="width: 150px;">Category</th>
@@ -107,11 +162,13 @@ $searchParam = !empty($search) ? '&search=' . urlencode($search) : '';
                 <tbody>
                     <?php
                     if ($result && $result->num_rows > 0) {
+                        $counter = $offset + 1;
                         while($row = $result->fetch_assoc()) {
                             // Adjust image path for display in admin
                             $imgPath = '../' . $row['image'];
                             echo "<tr>";
-                            echo "<td>#" . $row['id'] . "</td>";
+                            echo "<td><input type='checkbox' name='product_ids[]' value='" . $row['id'] . "' class='bulk-checkbox'></td>";
+                            echo "<td>" . $counter . "</td>";
                             echo "<td><img src='" . htmlspecialchars($imgPath) . "' class='product-thumb' onerror=\"this.onerror=null; this.src='https://placehold.co/60x60/e2e8f0/64748b?text=No+Image'\"></td>";
                             echo "<td>" . htmlspecialchars($row['title']) . "</td>";
                             echo "<td><span style='background: #e2e8f0; padding: 4px 8px; border-radius: 4px; font-size: 12px;'>" . htmlspecialchars($row['category']) . "</span></td>";
@@ -124,16 +181,18 @@ $searchParam = !empty($search) ? '&search=' . urlencode($search) : '';
                                   </td>";
                             echo "<td>
                                     <a href='edit_product?id=" . $row['id'] . "' class='btn btn-edit'>Edit</a>
-                                    <a href='index?delete_id=" . $row['id'] . "' class='btn btn-danger' onclick='return confirm(\"Are you sure you want to delete this product?\");'>Delete</a>
+                                    <a href='javascript:void(0)' class='btn btn-danger' onclick='confirmDelete(\"index?delete_id=" . $row['id'] . "\")'>Delete</a>
                                   </td>";
                             echo "</tr>";
+                            $counter++;
                         }
                     } else {
-                        echo "<tr><td colspan='6' style='text-align:center;'>No products found. Add some!</td></tr>";
+                        echo "<tr><td colspan='7' style='text-align:center;'>No products found. Add some!</td></tr>";
                     }
                     ?>
                 </tbody>
             </table>
+            </form>
 
             <?php if ($total_products > 0): ?>
             <div style="display: flex; justify-content: space-between; align-items: center; padding: 16px 0; margin-top: 16px; flex-wrap: wrap; gap: 16px;">
@@ -253,6 +312,44 @@ $searchParam = !empty($search) ? '&search=' . urlencode($search) : '';
                 });
             });
         });
+
+        function updateBulkActions() {
+            let checkboxes = document.querySelectorAll('.bulk-checkbox');
+            let selectedCount = 0;
+            checkboxes.forEach(cb => {
+                let tr = cb.closest('tr');
+                if (cb.checked) {
+                    selectedCount++;
+                    tr.classList.add('selected-row');
+                } else {
+                    tr.classList.remove('selected-row');
+                }
+            });
+            
+            const container = document.getElementById('bulk-actions-container');
+            const countText = document.getElementById('selected-count');
+            const selectAll = document.getElementById('select-all');
+            
+            if (selectedCount > 0) {
+                container.style.display = 'block';
+                countText.innerText = selectedCount + ' record' + (selectedCount > 1 ? 's' : '') + ' selected';
+                if (selectAll) selectAll.checked = selectedCount === checkboxes.length;
+            } else {
+                container.style.display = 'none';
+                if (selectAll) selectAll.checked = false;
+                document.getElementById('bulk-actions-menu').style.display = 'none';
+            }
+        }
+
+        document.getElementById('select-all')?.addEventListener('change', function() {
+            let checkboxes = document.querySelectorAll('.bulk-checkbox');
+            checkboxes.forEach(cb => cb.checked = this.checked);
+            updateBulkActions();
+        });
+
+        document.querySelectorAll('.bulk-checkbox').forEach(cb => {
+            cb.addEventListener('change', updateBulkActions);
+        });
     </script>
 <script>
 let lastWidth = window.innerWidth;
@@ -273,6 +370,66 @@ if(window.innerWidth <= 768 && document.getElementById('admin-sidebar')) {
     document.getElementById('admin-sidebar').classList.add('collapsed');
 }
 </script>
+
+<div class="modal-overlay" id="confirm-modal">
+    <div class="modal-content" style="max-width: 400px; text-align: center;">
+        <h3 style="margin-bottom: 15px; font-weight: 600;">Confirm Action</h3>
+        <p id="confirm-modal-text" style="color: var(--text-light); margin-bottom: 24px; font-size: 14px;">Are you sure you want to proceed?</p>
+        <div style="display: flex; justify-content: center; gap: 12px;">
+            <button type="button" class="btn" style="background: var(--border-light); color: var(--text-dark);" onclick="closeConfirmModal()">Cancel</button>
+            <button type="button" class="btn btn-danger" id="confirm-modal-btn">Confirm</button>
+        </div>
+    </div>
+</div>
+
+<script>
+let confirmActionCallback = null;
+
+function showConfirmModal(message, callback) {
+    document.getElementById('confirm-modal-text').innerText = message;
+    document.getElementById('confirm-modal').classList.add('active');
+    confirmActionCallback = callback;
+}
+
+function closeConfirmModal() {
+    document.getElementById('confirm-modal').classList.remove('active');
+    confirmActionCallback = null;
+}
+
+document.getElementById('confirm-modal-btn').addEventListener('click', function() {
+    if (confirmActionCallback) {
+        confirmActionCallback();
+    }
+    closeConfirmModal();
+});
+
+function confirmDelete(url) {
+    showConfirmModal('Are you sure you want to delete this product?', function() {
+        window.location.href = url;
+    });
+}
+
+function confirmBulkAction() {
+    if(document.getElementById('bulk_action_select').value === '') {
+        showToast('Please select an action', 'error');
+        return;
+    }
+    showConfirmModal('Are you sure you want to apply this action to the selected items?', function() {
+        document.getElementById('bulk-form').submit();
+    });
+}
+</script>
+
+<?php if (!empty($toast_msg)): ?>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    setTimeout(function() {
+        showToast(<?php echo json_encode($toast_msg); ?>, '<?php echo $toast_type; ?>');
+    }, 100);
+});
+</script>
+<?php endif; ?>
+
 </body>
 </html>
 

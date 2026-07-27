@@ -37,6 +37,14 @@ function renderBlogs(blogs) {
         const dateObj = new Date(blog.created_at);
         const formattedDate = dateObj.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
 
+        // Generate SEO Friendly Slug
+        const slug = blog.title.toString().toLowerCase()
+            .replace(/\s+/g, '-')           // Replace spaces with -
+            .replace(/[^\w\-]+/g, '')       // Remove all non-word chars
+            .replace(/\-\-+/g, '-')         // Replace multiple - with single -
+            .replace(/^-+/, '')             // Trim - from start of text
+            .replace(/-+$/, '');            // Trim - from end of text
+
         card.innerHTML = `
             <img src="${blog.image}" alt="${blog.title}" class="product-img" style="object-fit: cover; height: 250px;">
             <div class="product-info">
@@ -46,7 +54,7 @@ function renderBlogs(blogs) {
                     ${textContent}
                 </p>
                 <div class="mt-24">
-                    <a href="blog-detail?id=${blog.id}" class="label-lg text-deep-teal">Read More &rarr;</a>
+                    <a href="blog-${slug}-${blog.id}" class="label-lg text-deep-teal">Read More &rarr;</a>
                 </div>
             </div>
         `;

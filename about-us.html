@@ -251,15 +251,17 @@
     /* Leadership Cards */
     .leadership-grid-modern {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 28px;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 40px;
+      max-width: 900px;
+      margin: 0 auto;
     }
 
     .leader-card-modern {
       background: var(--canvas-white);
       border: 1px solid var(--outline-light);
       border-radius: 16px;
-      padding: 32px 24px;
+      padding: 40px 32px;
       text-align: center;
       transition: all 0.3s ease;
     }
@@ -271,8 +273,8 @@
     }
 
     .leader-avatar-circle {
-      width: 80px;
-      height: 80px;
+      width: 160px;
+      height: 160px;
       border-radius: 50%;
       background: linear-gradient(135deg, var(--deep-teal), #1e293b);
       color: var(--heritage-gold);
@@ -462,7 +464,8 @@
 <body>
 
   <!-- Navbar -->
-  <header class="navbar container">
+  <div class="navbar-wrapper">
+    <header class="navbar container">
     <a href="./" class="logo" style="text-decoration: none; color: inherit;">
         <img src="Images/logo.webp" alt="Grin Living Logo" class="logo-img">
         <span class="logo-text">Grin Living</span>
@@ -479,6 +482,7 @@
       <a href="contact-us">Contact Us</a>
     </nav>
   </header>
+  </div>
 
   <!-- Page Header / Hero Banner -->
   <section class="hero-image-bg" style="background-image: url('Images/hero_about_us.webp');">
@@ -657,34 +661,18 @@
         <div class="leadership-grid-modern">
           <!-- Leader 1 -->
           <div class="leader-card-modern">
-            <div class="leader-avatar-circle">VS</div>
-            <h3 class="headline-sm">Vikram Shah</h3>
-            <div class="leader-role">Founder & Managing Director</div>
-            <p class="body-sm text-charcoal mt-12">20+ years of industrial textile leadership, driving strategic vision and manufacturing expansion.</p>
+            <img src="Images/neha-gupta.jpeg" alt="Neha Gupta" class="leader-avatar-circle" style="object-fit: cover; object-position: top; padding: 0; background: none;">
+            <h3 class="headline-sm">Neha Gupta</h3>
+            <div class="leader-role">Executive Leadership</div>
+            <p class="body-sm text-charcoal mt-12">Driving strategic initiatives and leadership excellence across our expanding operations.</p>
           </div>
 
-          <!-- Leader 2 -->
+          <!-- Leader 6 -->
           <div class="leader-card-modern">
-            <div class="leader-avatar-circle">AP</div>
-            <h3 class="headline-sm">Ananya Patel</h3>
-            <div class="leader-role">Head of Textile Design</div>
-            <p class="body-sm text-charcoal mt-12">Pioneering trend forecasting and pattern aesthetics that resonate with modern consumer preferences.</p>
-          </div>
-
-          <!-- Leader 3 -->
-          <div class="leader-card-modern">
-            <div class="leader-avatar-circle">RM</div>
-            <h3 class="headline-sm">Rajesh Mehta</h3>
-            <div class="leader-role">VP of Operations & Production</div>
-            <p class="body-sm text-charcoal mt-12">Managing high-volume automated weaving lines and zero-defect production scheduling.</p>
-          </div>
-
-          <!-- Leader 4 -->
-          <div class="leader-card-modern">
-            <div class="leader-avatar-circle">PN</div>
-            <h3 class="headline-sm">Priya Nair</h3>
-            <div class="leader-role">Director of Quality & B2B Relations</div>
-            <p class="body-sm text-charcoal mt-12">Ensuring 99.8% quality compliance and fostering long-term relationships with retail partners.</p>
+            <img src="Images/anirudh-gupta.webp" alt="Anirudh Gupta" class="leader-avatar-circle" style="object-fit: cover; object-position: top; padding: 0; background: none;">
+            <h3 class="headline-sm">Anirudh Gupta</h3>
+            <div class="leader-role">Executive Leadership</div>
+            <p class="body-sm text-charcoal mt-12">Leading operational strategies, business development, and sustainable manufacturing practices.</p>
           </div>
         </div>
       </div>

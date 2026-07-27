@@ -4,9 +4,9 @@ require_once 'db_connect.php';
 
 $error = '';
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $title = $conn->real_escape_string($_POST['title']);
-    $content = $conn->real_escape_string($_POST['content']);
-    $author = $conn->real_escape_string($_POST['author']);
+    $title = trim($_POST['title']);
+    $content = trim($_POST['content']);
+    $author = trim($_POST['author']);
     $imagePath = '';
 
     // Handle File Upload

@@ -3,8 +3,8 @@ require_once 'auth.php';
 require_once 'db_connect.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $title = $conn->real_escape_string($_POST['title']);
-    $category = $conn->real_escape_string($_POST['category']);
+    $title = $_POST['title'];
+    $category = $_POST['category'];
     
     // Default image path fallback
     $imagePath = "Images/placeholder.jpg";

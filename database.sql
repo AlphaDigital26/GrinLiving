@@ -3,7 +3,9 @@ CREATE TABLE IF NOT EXISTS `products` (
   `title` VARCHAR(255) NOT NULL,
   `category` VARCHAR(100) NOT NULL,
   `image` VARCHAR(255) NOT NULL,
-  `is_featured` TINYINT(1) DEFAULT 0
+  `is_featured` TINYINT(1) DEFAULT 0,
+  `image_data` LONGBLOB NULL,
+  `image_type` VARCHAR(50) NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE IF NOT EXISTS `admins` (
@@ -86,3 +88,31 @@ INSERT INTO `products` (`title`, `category`, `image`) VALUES
 ('100% Viscose georgette flocking', 'Viscose Fabrics', 'Images/WhatsApp Image 2026-07-14 at 2.21.11 PM.jpeg'),
 ('Viscose satin burnout solid dyed', 'Viscose Fabrics', 'Images/WhatsApp Image 2026-07-14 at 2.21.12 PM (1).jpeg'),
 ('Viscose georgette eyelet solid dyed', 'Viscose Fabrics', 'Images/WhatsApp Image 2026-07-14 at 2.21.12 PM.jpeg');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `blogs`
+--
+CREATE TABLE IF NOT EXISTS `blogs` (
+  `id` INT AUTO_INCREMENT PRIMARY KEY,
+  `title` VARCHAR(255) NOT NULL,
+  `content` TEXT NOT NULL,
+  `author` VARCHAR(100) NOT NULL,
+  `image` VARCHAR(255) NULL,
+  `image_data` LONGTEXT NULL,
+  `image_type` VARCHAR(50) NULL,
+  `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `login_attempts`
+--
+CREATE TABLE IF NOT EXISTS `login_attempts` (
+  `id` INT AUTO_INCREMENT PRIMARY KEY,
+  `ip_address` VARCHAR(45) NOT NULL,
+  `attempt_time` DATETIME DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;

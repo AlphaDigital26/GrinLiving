@@ -12,9 +12,9 @@ if (!$blog_id && !isset($_POST['id'])) {
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $id = intval($_POST['id']);
-    $title = $conn->real_escape_string($_POST['title']);
-    $content = $conn->real_escape_string($_POST['content']);
-    $author = $conn->real_escape_string($_POST['author']);
+    $title = trim($_POST['title']);
+    $content = trim($_POST['content']);
+    $author = trim($_POST['author']);
     $hasNewImage = false;
     $imagePath = '';
 

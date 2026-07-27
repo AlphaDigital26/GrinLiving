@@ -14,6 +14,18 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     } 
     
+    // Navbar scroll effect for home page
+    const homeNav = document.querySelector('.home-navbar');
+    if (homeNav) {
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                homeNav.classList.add('scrolled');
+            } else {
+                homeNav.classList.remove('scrolled');
+            }
+        });
+    }
+    
     // Fetch Featured Products for homepage
     const featuredContainer = document.getElementById('featured-collage-container');
     if (featuredContainer) {

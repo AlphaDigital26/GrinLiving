@@ -16,6 +16,9 @@ RewriteEngine On
 # RewriteCond %{HTTPS} off
 # RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
+# SEO Friendly Blog URLs
+RewriteRule ^blog-[a-zA-Z0-9\-]+-([0-9]+)$ blog-detail.html [NC,L]
+
 # Remove .html extension
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d

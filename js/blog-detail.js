@@ -1,6 +1,15 @@
 document.addEventListener('DOMContentLoaded', () => {
     const urlParams = new URLSearchParams(window.location.search);
-    const blogId = urlParams.get('id');
+    let blogId = urlParams.get('id');
+
+    // Fallback to SEO Friendly URL extraction (e.g. blog-title-slug-1)
+    if (!blogId) {
+        const match = window.location.pathname.match(/-(\d+)$/);
+        if (match) {
+            blogId = match[1];
+        }
+    }
+
     const contentArea = document.getElementById('blog-content-area');
 
     if (!blogId) {
@@ -32,12 +41,16 @@ document.addEventListener('DOMContentLoaded', () => {
                         Back to Blogs
                     </a>
                     
-                    <span class="label-md text-heritage-gold" style="display: block; margin-top: 24px;">${formattedDate} • ${blog.author}</span>
-                    <h1 class="display-md text-charcoal mt-16 mb-40" style="font-family: 'Playfair Display', serif;">${blog.title}</h1>
+                    <div class="blog-header-wrapper" style="text-align: center; margin: 40px 0 48px 0; max-width: 1000px; margin-left: auto; margin-right: auto;">
+                        <span class="label-md text-heritage-gold" style="display: inline-block; letter-spacing: 1.5px; text-transform: uppercase;">${formattedDate} <span style="margin: 0 12px; color: #CBD5E1;">•</span> ${blog.author}</span>
+                        <h1 class="display-md text-charcoal mt-24 mb-0" style="font-family: 'Playfair Display', serif; line-height: 1.2; font-size: 3.5rem;">${blog.title}</h1>
+                    </div>
                     
-                    <img src="${blog.image}" alt="${blog.title}" class="blog-detail-image" onerror="this.style.display='none'">
+                    <div style="margin: 0 -10%; text-align: center; margin-bottom: 56px;">
+                        <img src="${blog.image}" alt="${blog.title}" class="blog-detail-image" onerror="this.style.display='none'" style="width: 100%; height: auto; max-height: 600px; object-fit: cover; border-radius: 24px; box-shadow: 0 15px 35px rgba(0,0,0,0.05); margin-bottom: 0;">
+                    </div>
                     
-                    <div class="blog-detail-content">
+                    <div class="blog-detail-content" style="max-width: 900px; margin: 0 auto;">
                         ${blog.content}
                     </div>
                 `;

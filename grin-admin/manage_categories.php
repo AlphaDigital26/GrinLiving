@@ -5,8 +5,8 @@ require_once 'db_connect.php';
 // Handle Add/Edit Category
 if (isset($_POST['save_category'])) {
     $id = isset($_POST['id']) ? intval($_POST['id']) : 0;
-    $name = $conn->real_escape_string(trim($_POST['name']));
-    $desc = $conn->real_escape_string(trim($_POST['description']));
+    $name = trim($_POST['name']);
+    $desc = trim($_POST['description']);
     
     if (!empty($name)) {
         if ($id > 0) {

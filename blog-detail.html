@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -13,17 +13,18 @@
   <link rel="preload" href="style.css?v=1.0.1" as="style">
   <link rel="stylesheet" href="style.css?v=1.0.1">
   <style>
-    .blog-detail-container { max-width: 800px; margin: 0 auto; }
+    .blog-detail-container { max-width: 1000px; margin: 0 auto; }
     .blog-detail-image { width: 100%; height: auto; max-height: 500px; object-fit: cover; border-radius: 16px; margin-bottom: 32px; }
     .blog-detail-content { line-height: 1.8; color: #475569; font-size: 1.125rem; }
-    .blog-detail-content p { margin-bottom: 24px; }
+    .blog-detail-content p { margin-bottom: 24px; text-align: justify; }
     .blog-detail-content h2, .blog-detail-content h3 { color: #0f172a; margin-top: 40px; margin-bottom: 16px; font-family: 'Playfair Display', serif; }
     .back-btn { display: inline-flex; align-items: center; gap: 8px; font-weight: 500; text-decoration: none; color: #8A6538; margin-bottom: 24px; transition: opacity 0.2s; }
     .back-btn:hover { opacity: 0.8; }
   </style>
 </head>
 <body>
-  <header class="navbar container" style="background: rgba(255, 255, 255, 0.95); box-shadow: 0 1px 12px rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 1000;">
+  <div class="navbar-wrapper">
+    <header class="navbar container">
     <a href="./" class="logo" style="text-decoration: none; color: inherit;">
         <img src="Images/logo.webp" alt="Grin Living Logo" class="logo-img" aria-label="Grin Living Logo">
         <span class="logo-text">Grin Living</span>
@@ -40,6 +41,7 @@
       <a href="contact-us">Contact Us</a>
     </nav>
   </header>
+  </div>
 
   <main style="background: #F8FAFC; padding-bottom: 80px;">
     <!-- Loading / Content Area -->
