@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Fetch Featured Products for homepage
     const featuredContainer = document.getElementById('featured-collage-container');
     if (featuredContainer) {
-        fetch('api/get_featured_products.php')
+        fetch(`api/get_featured_products.php?_t=${Date.now()}`, { cache: 'no-store' })
             .then(response => response.json())
             .then(products => {
                 featuredContainer.innerHTML = ''; // clear loading text

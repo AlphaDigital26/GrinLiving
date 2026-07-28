@@ -287,8 +287,10 @@ $searchParam = !empty($search) ? '&search=' . urlencode($search) : '';
                 const productId = this.getAttribute('data-id');
                 const isFeatured = this.checked ? 1 : 0;
                 
-                fetch('toggle_featured.php', {
+                fetch(`toggle_featured.php?_t=${Date.now()}`, {
                     method: 'POST',
+                    credentials: 'same-origin',
+                    cache: 'no-store',
                     headers: {
                         'Content-Type': 'application/x-www-form-urlencoded',
                     },

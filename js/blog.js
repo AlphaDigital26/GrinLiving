@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function fetchBlogs(page = 1) {
-    fetch(`api/get_blogs.php?page=${page}`)
+    fetch(`api/get_blogs.php?page=${page}&_t=${Date.now()}`, { cache: 'no-store' })
         .then(response => response.json())
         .then(data => {
             renderBlogs(data.blogs);

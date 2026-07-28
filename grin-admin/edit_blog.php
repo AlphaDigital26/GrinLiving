@@ -22,7 +22,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_FILES['image']) && $_FILES['image']['error'] == 0) {
         $fileTmpName = $_FILES['image']['tmp_name'];
         $fileName = time() . '_' . basename($_FILES['image']['name']);
-        $uploadPath = '../Images/' . $fileName;
+        $targetDir = __DIR__ . '/../Images/';
+        if (!is_dir($targetDir)) {
+            mkdir($targetDir, 0755, true);
+        }
+        $uploadPath = $targetDir . $fileName;
         
         if (move_uploaded_file($fileTmpName, $uploadPath)) {
             $imagePath = 'Images/' . $fileName;

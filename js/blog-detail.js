@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
     }
 
-    fetch(`api/get_blog_detail.php?id=${blogId}`)
+    fetch(`api/get_blog_detail.php?id=${blogId}&_t=${Date.now()}`, { cache: 'no-store' })
         .then(response => response.json())
         .then(data => {
             if (data.status === 'success' && data.blog) {

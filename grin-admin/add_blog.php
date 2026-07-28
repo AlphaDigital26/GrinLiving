@@ -7,32 +7,39 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $title = trim($_POST['title']);
     $content = trim($_POST['content']);
     $author = trim($_POST['author']);
-    $imagePath = '';
+    $imagePath = "Images/hero_blog.webp"; // Default fallback image
 
     // Handle File Upload
     if (isset($_FILES['image']) && $_FILES['image']['error'] == 0) {
         $fileTmpName = $_FILES['image']['tmp_name'];
         $fileName = time() . '_' . basename($_FILES['image']['name']);
-        $uploadPath = '../Images/' . $fileName;
+        $targetDir = __DIR__ . '/../Images/';
+        if (!is_dir($targetDir)) {
+            mkdir($targetDir, 0755, true);
+        }
+        $uploadPath = $targetDir . $fileName;
         
         if (move_uploaded_file($fileTmpName, $uploadPath)) {
             $imagePath = 'Images/' . $fileName;
         }
     }
 
-    if (empty($title) || empty($content) || empty($author) || empty($imagePath)) {
-        $error = "All fields (including an image) are required.";
+    if (empty($title) || empty($content) || empty($author)) {
+        $error = "Title, content, and author fields are required.";
     } else {
         $stmt = $conn->prepare("INSERT INTO blogs (title, content, author, image) VALUES (?, ?, ?, ?)");
-        $stmt->bind_param("ssss", $title, $content, $author, $imagePath);
-        
-        if ($stmt->execute()) {
-            header("Location: manage_blogs.php?msg=success");
-            exit();
+        if ($stmt) {
+            $stmt->bind_param("ssss", $title, $content, $author, $imagePath);
+            if ($stmt->execute()) {
+                header("Location: manage_blogs.php?msg=success");
+                exit();
+            } else {
+                $error = "Database Error: " . $stmt->error;
+            }
+            $stmt->close();
         } else {
-            $error = "Database Error: " . $stmt->error;
+            $error = "Database Prepare Error: " . $conn->error;
         }
-        $stmt->close();
     }
 }
 ?>
@@ -88,8 +95,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         </div>
 
                         <div class="form-group" style="margin-bottom: 20px;">
-                            <label>Cover Image (Required)</label>
-                            <input type="file" name="image" class="form-control" accept="image/*" required>
+                            <label>Cover Image (Optional - default image used if omitted)</label>
+                            <input type="file" name="image" class="form-control" accept="image/*">
                         </div>
 
                         <div class="form-group" style="margin-bottom: 20px;">

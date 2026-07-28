@@ -15,37 +15,54 @@ document.addEventListener('DOMContentLoaded', () => {
     "All": "Discover our complete collection of premium fabrics, meticulously manufactured for exceptional quality, durability, and style."
   };
 
+  const defaultCategories = [
+    { name: "Cotton Fabrics", description: "Experience the breathability and comfort of our premium cotton fabrics. Ideal for high-quality bedsheets and everyday apparel." },
+    { name: "Polyester Fabrics", description: "Durable, wrinkle-resistant, and perfect for activewear and outerwear. Our polyester blends offer superior performance." },
+    { name: "Poly Spandex Fabrics", description: "Enjoy the perfect stretch and recovery. Excellent for activewear, leggings, and form-fitting garments." },
+    { name: "Rayon Fabrics", description: "Soft, smooth, and highly absorbent. Our rayon fabrics are ideal for comfortable summer dresses and blouses." },
+    { name: "Viscose Fabrics", description: "Luxurious drape and silk-like feel. Viscose is perfect for elegant dresses and high-end fashion." },
+    { name: "Mesh Fabrics", description: "Breathable and lightweight. Our mesh fabrics are perfect for sportswear panels and stylish overlays." },
+    { name: "Knit Fabrics", description: "Comfortable and stretchy. From t-shirts to cozy sweaters, our knit fabrics are incredibly versatile." },
+    { name: "Velvet Fabrics", description: "Rich, soft, and luxurious. Velvet adds a touch of elegance to evening wear and home decor." },
+    { name: "Embroidered Fabrics", description: "Intricate designs and beautiful textures. Our embroidered fabrics are perfect for special occasion garments." },
+    { name: "Fancy / Fashion Fabrics", description: "Make a statement with our unique and trendy fashion fabrics. Perfect for standout pieces and accessories." }
+  ];
+
+  function renderCategoryChips(cats) {
+    cats.forEach(cat => {
+      if (!cat || !cat.name) return;
+      categoryDescriptions[cat.name] = cat.description || "";
+      
+      const chip = document.createElement('span');
+      chip.className = 'filter-chip';
+      chip.setAttribute('data-filter', cat.name);
+      chip.textContent = cat.name;
+      filterChipsContainer.appendChild(chip);
+    });
+    bindChipEvents();
+  }
+
   // Fetch categories
-  fetch('api/get_categories.php')
+  fetch(`api/get_categories.php?_t=${Date.now()}`, { cache: 'no-store' })
     .then(response => response.json())
     .then(categories => {
-      categories.forEach(cat => {
-        // Add to dictionary
-        categoryDescriptions[cat.name] = cat.description;
-        
-        // Create chip
-        const chip = document.createElement('span');
-        chip.className = 'filter-chip';
-        chip.setAttribute('data-filter', cat.name);
-        chip.textContent = cat.name;
-        filterChipsContainer.appendChild(chip);
-      });
-      
-      // Bind events to newly created chips
-      bindChipEvents();
-
-      // Now fetch products
+      if (Array.isArray(categories) && categories.length > 0 && categories[0].name) {
+        renderCategoryChips(categories);
+      } else {
+        renderCategoryChips(defaultCategories);
+      }
       fetchProducts();
     })
     .catch(error => {
       console.error('Error fetching categories:', error);
-      fetchProducts(); // Try to fetch products anyway
+      renderCategoryChips(defaultCategories);
+      fetchProducts();
     });
 
   function fetchProducts() {
-    const url = `api/get_products.php?category=${encodeURIComponent(currentCategory)}&page=${currentPage}&limit=${limit}`;
+    const url = `api/get_products.php?category=${encodeURIComponent(currentCategory)}&page=${currentPage}&limit=${limit}&_t=${Date.now()}`;
     
-    fetch(url)
+    fetch(url, { cache: 'no-store' })
       .then(response => response.json())
       .then(data => {
         if (Array.isArray(data)) {
