@@ -131,7 +131,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 if (data.success) {
                     form.reset();
-                    showToast('Inquiry sent successfully to info@grinliving.in!', false);
+                    showToast('Inquiry sent successfully!', false);
                     if (feedback) {
                         feedback.style.display = 'block';
                         feedback.style.padding = '14px 18px';
