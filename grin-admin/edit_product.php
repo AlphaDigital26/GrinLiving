@@ -53,7 +53,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
     if ($stmt->execute()) {
         $stmt->close();
-        header("Location: index.php?msg=updated");
+        header("Location: index?msg=updated");
         exit();
     } else {
         $msg = "<div class='alert alert-danger'>Error: " . $stmt->error . "</div>";

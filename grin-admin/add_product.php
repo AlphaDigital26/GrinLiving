@@ -31,7 +31,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
     if ($stmt->execute()) {
         $stmt->close();
-        header("Location: index.php?msg=success");
+        header("Location: index?msg=added");
         exit();
     } else {
         $msg = "<div class='alert alert-danger'>Error: " . $stmt->error . "</div>";

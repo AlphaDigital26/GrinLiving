@@ -11,18 +11,20 @@ if (isset($_POST['save_category'])) {
     if (!empty($name)) {
         if ($id > 0) {
             $sql = "UPDATE categories SET name='$name', description='$desc' WHERE id=$id";
-            $msgSuccess = "Category updated successfully!";
+            $redirectMsg = "updated";
             $msgError = "Error updating category: ";
         } else {
             $sql = "INSERT INTO categories (name, description) VALUES ('$name', '$desc')";
-            $msgSuccess = "Category added successfully!";
+            $redirectMsg = "added";
             $msgError = "Error adding category: ";
         }
         
         if ($conn->query($sql) === TRUE) {
-            $msg = "<div class='alert alert-success'>$msgSuccess</div>";
+            header("Location: manage_categories?msg=" . $redirectMsg);
+            exit();
         } else {
-            $msg = "<div class='alert alert-danger'>$msgError" . $conn->error . "</div>";
+            $toast_msg = $msgError . $conn->error;
+            $toast_type = "error";
         }
     }
 }
@@ -32,11 +34,31 @@ if (isset($_GET['delete_id'])) {
     $id = intval($_GET['delete_id']);
     $sql = "DELETE FROM categories WHERE id = $id";
     if ($conn->query($sql) === TRUE) {
-        $msg = "<div class='alert alert-success'>Category deleted successfully!</div>";
+        header("Location: manage_categories?msg=deleted");
+        exit();
     } else {
-        $msg = "<div class='alert alert-danger'>Error deleting category: " . $conn->error . "</div>";
+        $toast_msg = "Error deleting category: " . $conn->error;
+        $toast_type = "error";
     }
 }
+
+// Handle redirect messages for Add, Edit, Delete
+if (isset($_GET['msg'])) {
+    if ($_GET['msg'] === 'success' || $_GET['msg'] === 'added') {
+        $toast_msg = "Category added successfully!";
+        $toast_type = "success";
+    } elseif ($_GET['msg'] === 'updated') {
+        $toast_msg = "Category updated successfully!";
+        $toast_type = "success";
+    } elseif ($_GET['msg'] === 'deleted') {
+        $toast_msg = "Category deleted successfully!";
+        $toast_type = "error"; // red toast message for delete
+    } elseif ($_GET['msg'] === 'error') {
+        $toast_msg = "Error processing category request!";
+        $toast_type = "error";
+    }
+}
+
 
 // Fetch all categories
 $categories = [];
@@ -85,7 +107,7 @@ if ($result && $result->num_rows > 0) {
             </header>
 
             <div class="admin-container" style="flex: 1;">
-        <?php if(isset($msg)) echo $msg; ?>
+        <div id="toast-container" style="position: fixed; bottom: 20px; right: 20px; z-index: 9999; display: flex; flex-direction: column; gap: 10px;"></div>
         
         <div class="card">
             <div class="card-header">
@@ -110,7 +132,7 @@ if ($result && $result->num_rows > 0) {
                                 <td style="color: #64748b; font-size: 14px;"><?php echo htmlspecialchars($cat['description']); ?></td>
                                 <td style="white-space: nowrap;">
                                     <button type="button" class="btn btn-edit" onclick="openModal(<?php echo $cat['id']; ?>, '<?php echo htmlspecialchars(addslashes($cat['name'])); ?>', '<?php echo htmlspecialchars(addslashes($cat['description'])); ?>')">Edit</button>
-                                    <a href="manage_categories.php?delete_id=<?php echo $cat['id']; ?>" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this category?');">Delete</a>
+                                    <a href="javascript:void(0)" class="btn btn-danger" onclick="confirmDelete('manage_categories?delete_id=<?php echo $cat['id']; ?>')">Delete</a>
                                 </td>
                             </tr>
                         <?php endforeach; ?>
@@ -142,7 +164,45 @@ if ($result && $result->num_rows > 0) {
         </div>
     </div>
 
+    <!-- Confirm Action Modal -->
+    <div class="modal-overlay" id="confirm-modal">
+        <div class="modal-content" style="max-width: 400px; text-align: center;">
+            <h3 style="margin-bottom: 15px; font-weight: 600;">Confirm Action</h3>
+            <p id="confirm-modal-text" style="color: var(--text-light); margin-bottom: 24px; font-size: 14px;">Are you sure you want to proceed?</p>
+            <div style="display: flex; justify-content: center; gap: 12px;">
+                <button type="button" class="btn" style="background: var(--border-light); color: var(--text-dark);" onclick="closeConfirmModal()">Cancel</button>
+                <button type="button" class="btn btn-danger" id="confirm-modal-btn">Confirm</button>
+            </div>
+        </div>
+    </div>
+
     <script>
+        let confirmActionCallback = null;
+
+        function showConfirmModal(message, callback) {
+            document.getElementById('confirm-modal-text').innerText = message;
+            document.getElementById('confirm-modal').classList.add('active');
+            confirmActionCallback = callback;
+        }
+
+        function closeConfirmModal() {
+            document.getElementById('confirm-modal').classList.remove('active');
+            confirmActionCallback = null;
+        }
+
+        document.getElementById('confirm-modal-btn').addEventListener('click', function() {
+            if (confirmActionCallback) {
+                confirmActionCallback();
+            }
+            closeConfirmModal();
+        });
+
+        function confirmDelete(url) {
+            showConfirmModal('Are you sure you want to delete this category?', function() {
+                window.location.href = url;
+            });
+        }
+
         function openModal(id = 0, name = '', desc = '') {
             document.getElementById('categoryId').value = id;
             document.getElementById('name').value = name;
@@ -177,7 +237,46 @@ window.addEventListener('resize', checkSidebar);
 if(window.innerWidth <= 768 && document.getElementById('admin-sidebar')) {
     document.getElementById('admin-sidebar').classList.add('collapsed');
 }
+
+function showToast(message, type = 'error') {
+    const container = document.getElementById('toast-container');
+    if (!container) return;
+    const toast = document.createElement('div');
+    toast.style.padding = '12px 20px';
+    toast.style.borderRadius = '6px';
+    toast.style.color = '#fff';
+    toast.style.fontWeight = '500';
+    toast.style.fontSize = '14px';
+    toast.style.boxShadow = '0 4px 12px rgba(0,0,0,0.15)';
+    toast.style.opacity = '0';
+    toast.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+    toast.style.transform = 'translateY(20px)';
+    toast.style.backgroundColor = (type === 'error' || type === 'delete' || type === 'danger' || type === 'red') ? 'var(--danger-color, #EF4444)' : 'var(--success-color, #10B981)';
+    toast.innerText = message;
+    
+    container.appendChild(toast);
+    
+    setTimeout(() => {
+        toast.style.opacity = '1';
+        toast.style.transform = 'translateY(0)';
+    }, 10);
+    
+    setTimeout(() => {
+        toast.style.opacity = '0';
+        toast.style.transform = 'translateY(20px)';
+        setTimeout(() => toast.remove(), 300);
+    }, 3000);
+}
 </script>
+<?php if (!empty($toast_msg)): ?>
+<script>
+setTimeout(function() {
+    if (typeof showToast === 'function') {
+        showToast(<?php echo json_encode($toast_msg); ?>, '<?php echo $toast_type; ?>');
+    }
+}, 100);
+</script>
+<?php endif; ?>
 </body>
 </html>
 

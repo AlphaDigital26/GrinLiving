@@ -46,7 +46,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
         
         if ($stmt->execute()) {
-            header("Location: manage_blogs.php?msg=updated");
+            header("Location: manage_blogs?msg=updated");
             exit();
         } else {
             $error = "Database Error: " . $stmt->error;
@@ -132,7 +132,15 @@ $blog = $result->fetch_assoc();
                             <label>Content</label>
                             <textarea name="content" id="blogContent" class="form-control" rows="10" required><?php echo htmlspecialchars($blog['content']); ?></textarea>
                             <script>
-                                CKEDITOR.replace('blogContent', { versionCheck: false });
+                                CKEDITOR.replace('blogContent', {
+                                    versionCheck: false,
+                                    removeButtons: 'Cut,Copy,Paste,PasteText,PasteFromWord',
+                                    removePlugins: 'contextmenu,liststyle,tabletools,tableselection',
+                                    contentsCss: [
+                                        'https://cdn.ckeditor.com/4.22.1/standard/contents.css',
+                                        'data:text/css;charset=utf-8,' + encodeURIComponent('a { color: #2563eb !important; text-decoration: underline !important; font-weight: 600; background-color: rgba(37, 99, 235, 0.12); padding: 2px 5px; border-radius: 4px; }')
+                                    ]
+                                });
                             </script>
                         </div>
 

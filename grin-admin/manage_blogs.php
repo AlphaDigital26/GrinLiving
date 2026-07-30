@@ -6,15 +6,26 @@ require_once 'db_connect.php';
 if (isset($_GET['delete_id'])) {
     $del_id = intval($_GET['delete_id']);
     $conn->query("DELETE FROM blogs WHERE id = $del_id");
-    header("Location: manage_blogs.php?msg=deleted");
+    header("Location: manage_blogs?msg=deleted");
     exit();
 }
 
-$msg = "";
-if(isset($_GET['msg'])) {
-    if($_GET['msg'] == 'success') $msg = "<div class='alert alert-success'>Blog added successfully!</div>";
-    if($_GET['msg'] == 'updated') $msg = "<div class='alert alert-success'>Blog updated successfully!</div>";
-    if($_GET['msg'] == 'deleted') $msg = "<div class='alert alert-success'>Blog deleted successfully!</div>";
+$toast_msg = "";
+$toast_type = "success";
+if (isset($_GET['msg'])) {
+    if ($_GET['msg'] === 'success' || $_GET['msg'] === 'added') {
+        $toast_msg = "Blog added successfully!";
+        $toast_type = "success";
+    } elseif ($_GET['msg'] === 'updated') {
+        $toast_msg = "Blog updated successfully!";
+        $toast_type = "success";
+    } elseif ($_GET['msg'] === 'deleted') {
+        $toast_msg = "Blog deleted successfully!";
+        $toast_type = "error"; // red toast message for delete
+    } elseif ($_GET['msg'] === 'error') {
+        $toast_msg = "Error processing blog request!";
+        $toast_type = "error";
+    }
 }
 
 // Pagination & Search
@@ -75,7 +86,7 @@ $searchParam = !empty($search) ? '&search=' . urlencode($search) : '';
             </header>
 
             <div class="admin-container" style="flex: 1;">
-        <?php if($msg) echo $msg; ?>
+        <div id="toast-container" style="position: fixed; bottom: 20px; right: 20px; z-index: 9999; display: flex; flex-direction: column; gap: 10px;"></div>
         
         <div class="card">
             <div class="card-header" style="flex-wrap: wrap; gap: 15px;">
@@ -117,7 +128,7 @@ $searchParam = !empty($search) ? '&search=' . urlencode($search) : '';
                             echo "<td>" . date('M j, Y', strtotime($row['created_at'])) . "</td>";
                             echo "<td>
                                     <a href='edit_blog.php?id=" . $row['id'] . "' class='btn btn-edit'>Edit</a>
-                                    <a href='manage_blogs.php?delete_id=" . $row['id'] . "' class='btn btn-danger' onclick='return confirm(\"Are you sure you want to delete this blog?\");'>Delete</a>
+                                    <a href='javascript:void(0)' class='btn btn-danger' onclick='confirmDelete(\"manage_blogs?delete_id=" . $row['id'] . "\")'>Delete</a>
                                   </td>";
                             echo "</tr>";
                             $counter++;
@@ -148,7 +159,46 @@ $searchParam = !empty($search) ? '&search=' . urlencode($search) : '';
         </div>
         </main>
     </div>
+
+    <!-- Confirm Action Modal -->
+    <div class="modal-overlay" id="confirm-modal">
+        <div class="modal-content" style="max-width: 400px; text-align: center;">
+            <h3 style="margin-bottom: 15px; font-weight: 600;">Confirm Action</h3>
+            <p id="confirm-modal-text" style="color: var(--text-light); margin-bottom: 24px; font-size: 14px;">Are you sure you want to proceed?</p>
+            <div style="display: flex; justify-content: center; gap: 12px;">
+                <button type="button" class="btn" style="background: var(--border-light); color: var(--text-dark);" onclick="closeConfirmModal()">Cancel</button>
+                <button type="button" class="btn btn-danger" id="confirm-modal-btn">Confirm</button>
+            </div>
+        </div>
+    </div>
+
 <script>
+let confirmActionCallback = null;
+
+function showConfirmModal(message, callback) {
+    document.getElementById('confirm-modal-text').innerText = message;
+    document.getElementById('confirm-modal').classList.add('active');
+    confirmActionCallback = callback;
+}
+
+function closeConfirmModal() {
+    document.getElementById('confirm-modal').classList.remove('active');
+    confirmActionCallback = null;
+}
+
+document.getElementById('confirm-modal-btn').addEventListener('click', function() {
+    if (confirmActionCallback) {
+        confirmActionCallback();
+    }
+    closeConfirmModal();
+});
+
+function confirmDelete(url) {
+    showConfirmModal('Are you sure you want to delete this blog?', function() {
+        window.location.href = url;
+    });
+}
+
 let lastWidth = window.innerWidth;
 function checkSidebar() {
     const sb = document.getElementById('admin-sidebar');
@@ -166,7 +216,46 @@ window.addEventListener('resize', checkSidebar);
 if(window.innerWidth <= 768 && document.getElementById('admin-sidebar')) {
     document.getElementById('admin-sidebar').classList.add('collapsed');
 }
+
+function showToast(message, type = 'error') {
+    const container = document.getElementById('toast-container');
+    if (!container) return;
+    const toast = document.createElement('div');
+    toast.style.padding = '12px 20px';
+    toast.style.borderRadius = '6px';
+    toast.style.color = '#fff';
+    toast.style.fontWeight = '500';
+    toast.style.fontSize = '14px';
+    toast.style.boxShadow = '0 4px 12px rgba(0,0,0,0.15)';
+    toast.style.opacity = '0';
+    toast.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+    toast.style.transform = 'translateY(20px)';
+    toast.style.backgroundColor = (type === 'error' || type === 'delete' || type === 'danger' || type === 'red') ? 'var(--danger-color, #EF4444)' : 'var(--success-color, #10B981)';
+    toast.innerText = message;
+    
+    container.appendChild(toast);
+    
+    setTimeout(() => {
+        toast.style.opacity = '1';
+        toast.style.transform = 'translateY(0)';
+    }, 10);
+    
+    setTimeout(() => {
+        toast.style.opacity = '0';
+        toast.style.transform = 'translateY(20px)';
+        setTimeout(() => toast.remove(), 300);
+    }, 3000);
+}
 </script>
+<?php if (!empty($toast_msg)): ?>
+<script>
+setTimeout(function() {
+    if (typeof showToast === 'function') {
+        showToast(<?php echo json_encode($toast_msg); ?>, '<?php echo $toast_type; ?>');
+    }
+}, 100);
+</script>
+<?php endif; ?>
 </body>
 </html>
 

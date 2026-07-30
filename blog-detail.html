@@ -3,6 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
   <title>Blog Post - Grin Living</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -10,14 +13,17 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap" rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'">
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap"></noscript>
 
-  <link rel="preload" href="style.css?v=1.0.1" as="style">
-  <link rel="stylesheet" href="style.css?v=1.0.1">
+  <link rel="preload" href="style.css?v=2.0.0" as="style">
+  <link rel="stylesheet" href="style.css?v=2.0.0">
   <style>
     .blog-detail-container { max-width: 1000px; margin: 0 auto; }
     .blog-detail-image { width: 100%; height: auto; max-height: 500px; object-fit: cover; border-radius: 16px; margin-bottom: 32px; }
     .blog-detail-content { line-height: 1.8; color: #475569; font-size: 1.125rem; }
     .blog-detail-content p { margin-bottom: 24px; text-align: justify; }
     .blog-detail-content h2, .blog-detail-content h3 { color: #0f172a; margin-top: 40px; margin-bottom: 16px; font-family: 'Playfair Display', serif; }
+    .blog-detail-content a { color: #2563eb !important; text-decoration: underline !important; text-underline-offset: 4px; font-weight: 600; background-color: rgba(37, 99, 235, 0.08); padding: 2px 6px; border-radius: 4px; transition: all 0.2s ease; box-decoration-break: clone; -webkit-box-decoration-break: clone; }
+    .blog-detail-content a:hover { color: #1d4ed8 !important; background-color: rgba(37, 99, 235, 0.16); text-decoration: none !important; }
+    .blog-detail-content a:has(img) { background-color: transparent !important; padding: 0 !important; text-decoration: none !important; }
     .back-btn { display: inline-flex; align-items: center; gap: 8px; font-weight: 500; text-decoration: none; color: #8A6538; margin-bottom: 24px; transition: opacity 0.2s; }
     .back-btn:hover { opacity: 0.8; }
   </style>
@@ -78,8 +84,8 @@
             Plot No. 12-15, Textile Industrial Estate<br>
             Sachin GIDC, Suarat, Gujarat 394230
           </p>
-          <a href="mailto:info@grinliving.com" class="body-sm block mt-8">info@grinliving.com</a>
-          <a href="tel:+91262458800" class="body-sm block mt-8">+91 262458800</a>
+          <a href="mailto:info@grinliving.in" class="body-sm block mt-8">info@grinliving.in</a>
+          <a href="tel:+919327559457" class="body-sm block mt-8">+91 93275 59457</a>
         </div>
       </div>
     </div>
@@ -92,8 +98,8 @@
     </div>
   </footer>
 
-  <script src="animations.js?v=1.0.1" defer></script>
-  <script src="main.js?v=1.0.1" defer></script>
-  <script src="js/blog-detail.js" defer></script>
+  <script src="animations.js?v=2.0.0" defer></script>
+  <script src="main.js?v=2.0.0" defer></script>
+  <script src="js/blog-detail.js?v=2.0.0" defer></script>
 </body>
 </html>

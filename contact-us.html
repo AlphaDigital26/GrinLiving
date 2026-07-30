@@ -3,14 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
   <title>Contact Us - Grin Living</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap" rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'">
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap"></noscript>
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-  <link rel="preload" href="style.css?v=1.0.1" as="style">
-  <link rel="stylesheet" href="style.css?v=1.0.1">
+  <link rel="preload" href="style.css?v=2.0.0" as="style">
+  <link rel="stylesheet" href="style.css?v=2.0.0">
 </head>
 <body>
 
@@ -60,12 +63,12 @@
 
           <div class="contact-detail mt-24">
             <p class="label-lg text-deep-teal">Phone</p>
-            <a href="tel:+919723819360" class="body-md">+91 97238 19360</a>
+            <a href="tel:+919327559457" class="body-md">+91 93275 59457</a>
           </div>
 
           <div class="contact-detail mt-24">
             <p class="label-lg text-deep-teal">Email</p>
-            <a href="mailto:info@grinliving.com" class="body-md">info@grinliving.com</a>
+            <a href="mailto:info@grinliving.in" class="body-md">info@grinliving.in</a>
           </div>
 
           <div class="contact-detail mt-24">
@@ -89,25 +92,25 @@
         <!-- Right Column - Contact Form -->
         <div class="card">
           <h3 class="headline-sm">Send Us Your Requirement</h3>
-          <form class="mt-24">
+          <form class="mt-24" id="contactForm" action="api/send_mail.php" method="POST">
             <div class="form-group">
               <label class="label-md" for="name">Name</label>
-              <input type="text" id="name" class="form-control" placeholder="Your full name" required>
+              <input type="text" id="name" name="name" class="form-control" placeholder="Your full name" required>
             </div>
 
             <div class="form-group">
               <label class="label-md" for="phone">Phone</label>
-              <input type="tel" id="phone" class="form-control" placeholder="Your phone number" required>
+              <input type="tel" id="phone" name="phone" class="form-control" placeholder="Your phone number" required>
             </div>
 
             <div class="form-group">
               <label class="label-md" for="email">Email</label>
-              <input type="email" id="email" class="form-control" placeholder="Your email address" required>
+              <input type="email" id="email" name="email" class="form-control" placeholder="Your email address" required>
             </div>
 
             <div class="form-group">
               <label class="label-md" for="city">City</label>
-              <input type="text" id="city" class="form-control" placeholder="Your city" required>
+              <input type="text" id="city" name="city" class="form-control" placeholder="Your city" required>
             </div>
 
             <div class="form-group">
@@ -123,10 +126,11 @@
 
             <div class="form-group">
               <label class="label-md" for="message">Message</label>
-              <textarea id="message" class="form-control" rows="5" placeholder="Tell us about your requirement"></textarea>
+              <textarea id="message" name="message" class="form-control" rows="5" placeholder="Tell us about your requirement"></textarea>
             </div>
 
-            <button type="submit" class="btn btn-primary w-full">Submit Inquiry</button>
+            <button type="submit" id="submitInquiryBtn" class="btn btn-primary w-full">Submit Inquiry</button>
+            <div id="formFeedback" class="mt-16" style="display: none;"></div>
           </form>
         </div>
 
@@ -159,8 +163,8 @@
             Plot No. 12-15, Textile Industrial Estate<br>
             Sachin GIDC, Suarat, Gujarat 394230
           </p>
-          <a href="mailto:info@grinliving.com" class="body-sm block mt-8">info@grinliving.com</a>
-          <a href="tel:+91262458800" class="body-sm block mt-8">+91 262458800</a>
+          <a href="mailto:info@grinliving.in" class="body-sm block mt-8">info@grinliving.in</a>
+          <a href="tel:+919327559457" class="body-sm block mt-8">+91 93275 59457</a>
         </div>
       </div>
     </div>
@@ -217,6 +221,6 @@
         });
       });
     </script>
-<script src="main.js?v=1.0.1" defer></script></body>
+<script src="main.js?v=2.0.0" defer></script></body>
 </html>
 

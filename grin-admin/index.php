@@ -15,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['bulk_action']) && !em
         $sql = "DELETE FROM products WHERE id IN ($ids_string)";
         if ($conn->query($sql) === TRUE) {
             $toast_msg = "Selected products deleted successfully!";
-            $toast_type = "success";
+            $toast_type = "error";
         } else {
             $toast_msg = "Error deleting products: " . $conn->error;
             $toast_type = "error";
@@ -40,13 +40,31 @@ if (isset($_GET['delete_id'])) {
     $id = intval($_GET['delete_id']);
     $sql = "DELETE FROM products WHERE id = $id";
     if ($conn->query($sql) === TRUE) {
-        $toast_msg = "Product deleted successfully!";
-        $toast_type = "success";
+        header("Location: index?msg=deleted");
+        exit();
     } else {
         $toast_msg = "Error deleting product: " . $conn->error;
         $toast_type = "error";
     }
 }
+
+// Handle redirect messages for Add, Edit, Delete
+if (isset($_GET['msg'])) {
+    if ($_GET['msg'] === 'success' || $_GET['msg'] === 'added') {
+        $toast_msg = "Product added successfully!";
+        $toast_type = "success";
+    } elseif ($_GET['msg'] === 'updated') {
+        $toast_msg = "Product updated successfully!";
+        $toast_type = "success";
+    } elseif ($_GET['msg'] === 'deleted') {
+        $toast_msg = "Product deleted successfully!";
+        $toast_type = "error";
+    } elseif ($_GET['msg'] === 'error') {
+        $toast_msg = "Error processing product request!";
+        $toast_type = "error";
+    }
+}
+
 
 // Search and Pagination setup
 $limit = 10; // Number of products per page
@@ -263,7 +281,7 @@ $searchParam = !empty($search) ? '&search=' . urlencode($search) : '';
             toast.style.opacity = '0';
             toast.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
             toast.style.transform = 'translateY(20px)';
-            toast.style.backgroundColor = type === 'error' ? 'var(--danger-color, #EF4444)' : 'var(--success-color, #10B981)';
+            toast.style.backgroundColor = (type === 'error' || type === 'delete' || type === 'danger' || type === 'red') ? 'var(--danger-color, #EF4444)' : 'var(--success-color, #10B981)';
             toast.innerText = message;
             
             container.appendChild(toast);
@@ -287,7 +305,7 @@ $searchParam = !empty($search) ? '&search=' . urlencode($search) : '';
                 const productId = this.getAttribute('data-id');
                 const isFeatured = this.checked ? 1 : 0;
                 
-                fetch(`toggle_featured.php?_t=${Date.now()}`, {
+                fetch(`toggle_featured?_t=${Date.now()}`, {
                     method: 'POST',
                     credentials: 'same-origin',
                     cache: 'no-store',
@@ -303,7 +321,9 @@ $searchParam = !empty($search) ? '&search=' . urlencode($search) : '';
                         this.checked = !isFeatured; // Revert
                     } else {
                         if (isFeatured) {
-                           showToast('Product featured successfully', 'success');
+                           showToast('Successfully featured', 'success');
+                        } else {
+                           showToast('Successfully unfeatured', 'success');
                         }
                     }
                 })
@@ -424,11 +444,11 @@ function confirmBulkAction() {
 
 <?php if (!empty($toast_msg)): ?>
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-    setTimeout(function() {
+setTimeout(function() {
+    if (typeof showToast === 'function') {
         showToast(<?php echo json_encode($toast_msg); ?>, '<?php echo $toast_type; ?>');
-    }, 100);
-});
+    }
+}, 100);
 </script>
 <?php endif; ?>
 

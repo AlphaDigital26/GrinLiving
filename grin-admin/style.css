@@ -488,37 +488,45 @@ td {
   }
 }
 
-/* Custom Checkbox Styles */
+/* Custom Checkbox Styles - Prominent & Highly Visible */
 .bulk-checkbox, #select-all {
   appearance: none;
   -webkit-appearance: none;
-  width: 18px;
-  height: 18px;
-  border: 1.5px solid var(--border-light);
-  border-radius: 4px;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #475569;
+  border-radius: 5px;
   cursor: pointer;
   position: relative;
-  transition: all 0.2s;
+  transition: all 0.2s ease;
   background-color: var(--surface-white);
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.15), 0 0 0 1px rgba(71, 85, 105, 0.08);
   margin: 0;
   vertical-align: middle;
 }
 
-.bulk-checkbox:checked, #select-all:checked {
-  background-color: var(--secondary-color);
-  border-color: var(--secondary-color);
+.bulk-checkbox:hover, #select-all:hover {
+  border-color: var(--primary-color);
+  background-color: #F8FAFC;
+  box-shadow: 0 0 0 3px rgba(15, 23, 42, 0.15);
+  transform: scale(1.05);
 }
 
-.bulk-checkbox:checked::after, #select-all:checked::after {
-  content: '';
-  position: absolute;
-  top: 1px;
-  left: 5px;
-  width: 5px;
-  height: 10px;
-  border: solid white;
-  border-width: 0 2px 2px 0;
-  transform: rotate(45deg);
+@keyframes checkmarkPop {
+  0% { transform: scale(0.85); }
+  50% { transform: scale(1.08); }
+  100% { transform: scale(1); }
+}
+
+.bulk-checkbox:checked, #select-all:checked {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+  box-shadow: 0 2px 5px rgba(15, 23, 42, 0.3);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='white' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='3.5 8.5 6.5 11.5 12.5 4.5'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 13px 13px;
+  animation: checkmarkPop 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 /* Selected Row Style */
@@ -532,4 +540,9 @@ td:first-child, th:first-child {
 
 tr.selected-row td:first-child {
   border-left-color: var(--secondary-color);
+}
+
+/* Hide CKEditor clipboard warning notification box */
+.cke_notification_warning {
+  display: none !important;
 }
