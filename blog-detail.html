@@ -16,8 +16,9 @@
   <link rel="preload" href="style.css?v=2.0.0" as="style">
   <link rel="stylesheet" href="style.css?v=2.0.0">
   <style>
-    .blog-detail-container { max-width: 1000px; margin: 0 auto; }
-    .blog-detail-image { width: 100%; height: auto; max-height: 500px; object-fit: cover; border-radius: 16px; margin-bottom: 32px; }
+    .blog-detail-image { width: 100%; height: 460px; object-fit: cover; object-position: center; border-radius: 24px; box-shadow: 0 15px 35px rgba(0,0,0,0.08); margin: 0 auto 48px auto; display: block; }
+    @media (max-width: 992px) { .blog-detail-image { height: 360px; border-radius: 20px; margin-bottom: 36px; } }
+    @media (max-width: 600px) { .blog-detail-image { height: 240px; border-radius: 16px; margin-bottom: 28px; } }
     .blog-detail-content { line-height: 1.8; color: #475569; font-size: 1.125rem; }
     .blog-detail-content p { margin-bottom: 24px; text-align: justify; }
     .blog-detail-content h2, .blog-detail-content h3 { color: #0f172a; margin-top: 40px; margin-bottom: 16px; font-family: 'Playfair Display', serif; }

@@ -46,9 +46,9 @@ function renderBlogs(blogs) {
             .replace(/-+$/, '');            // Trim - from end of text
 
         card.innerHTML = `
-            <img src="${blog.image}" alt="${blog.title}" class="product-img" style="object-fit: cover; height: 250px;">
+            <img src="${blog.image}" alt="${blog.title}" class="product-img" style="width: 100%; height: 260px; object-fit: cover; object-position: center; display: block;">
             <div class="product-info">
-                <p class="label-sm text-heritage-gold mb-8">${formattedDate} • ${blog.author}</p>
+                <p class="text-heritage-gold mb-8" style="font-size: 0.95rem; font-weight: 600; letter-spacing: 0.8px; text-transform: uppercase; color: #8A6538;">${formattedDate} <span style="margin: 0 8px; color: #CBD5E1;">•</span> ${blog.author}</p>
                 <h3 class="headline-sm">${blog.title}</h3>
                 <p class="body-sm text-charcoal mt-8">
                     ${textContent}

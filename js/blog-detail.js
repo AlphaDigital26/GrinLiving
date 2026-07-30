@@ -42,12 +42,12 @@ document.addEventListener('DOMContentLoaded', () => {
                     </a>
                     
                     <div class="blog-header-wrapper" style="text-align: center; margin: 40px 0 48px 0; max-width: 1000px; margin-left: auto; margin-right: auto;">
-                        <span class="label-md text-heritage-gold" style="display: inline-block; letter-spacing: 1.5px; text-transform: uppercase;">${formattedDate} <span style="margin: 0 12px; color: #CBD5E1;">•</span> ${blog.author}</span>
+                        <span class="text-heritage-gold" style="display: inline-block; font-size: 1.1rem; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: #8A6538;">${formattedDate} <span style="margin: 0 12px; color: #CBD5E1;">•</span> ${blog.author}</span>
                         <h1 class="display-md text-charcoal mt-24 mb-0" style="font-family: 'Playfair Display', serif; line-height: 1.2; font-size: 3.5rem;">${blog.title}</h1>
                     </div>
                     
-                    <div style="margin: 0 -10%; text-align: center; margin-bottom: 56px;">
-                        <img src="${blog.image}" alt="${blog.title}" class="blog-detail-image" onerror="this.style.display='none'" style="width: 100%; height: auto; max-height: 600px; object-fit: cover; border-radius: 24px; box-shadow: 0 15px 35px rgba(0,0,0,0.05); margin-bottom: 0;">
+                    <div style="max-width: 1100px; margin: 0 auto 56px auto; width: 100%; text-align: center;">
+                        <img src="${blog.image}" alt="${blog.title}" class="blog-detail-image" onerror="this.style.display='none'">
                     </div>
                     
                     <div class="blog-detail-content" style="max-width: 900px; margin: 0 auto;">
