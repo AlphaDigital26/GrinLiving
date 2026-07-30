@@ -30,7 +30,7 @@
 html, body {
   width: 100%;
   max-width: 100%;
-  overflow-x: hidden;
+  overflow-x: clip;
   position: relative;
 }
 
@@ -190,6 +190,8 @@ a {
   backdrop-filter: none;
   -webkit-backdrop-filter: none;
   border-bottom: none;
+  position: fixed;
+  width: 100%;
 }
 
 .home-navbar.scrolled {
@@ -511,7 +513,7 @@ a {
   background-color: #1E293B; /* One shade lighter than deep-teal */
   color: var(--pure-white);
   padding-top: 80px;
-  padding-bottom: 40px;
+  padding-bottom: 24px;
 }
 
 .site-footer .text-charcoal {
@@ -554,7 +556,7 @@ a {
 
 .footer-bottom {
   border-top: 1px solid rgba(255, 255, 255, 0.1);
-  padding-top: 32px;
+  padding-top: 16px;
 }
 
 /* FAQ Accordion */

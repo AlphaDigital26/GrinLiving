@@ -41,22 +41,24 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
 
                 contentArea.innerHTML = `
-                    <a href="blog" class="back-btn">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
-                        Back to Blogs
-                    </a>
-                    
-                    <div class="blog-header-wrapper" style="text-align: center; margin: 40px 0 48px 0; max-width: 1000px; margin-left: auto; margin-right: auto;">
-                        <span class="text-heritage-gold" style="display: inline-block; font-size: 1.1rem; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: #8A6538;">${formattedDate} <span style="margin: 0 12px; color: #CBD5E1;">•</span> ${blog.author}</span>
-                        <h1 class="display-md text-charcoal mt-24 mb-0" style="font-family: 'Playfair Display', serif; line-height: 1.2; font-size: 3.5rem;">${blog.title}</h1>
-                    </div>
-                    
-                    <div style="max-width: 1100px; margin: 0 auto 56px auto; width: 100%; text-align: center;">
-                        <img src="${blog.image}" alt="${blog.title}" class="blog-detail-image" onerror="this.style.display='none'">
-                    </div>
-                    
-                    <div class="blog-detail-content" style="max-width: 900px; margin: 0 auto;">
-                        ${blog.content}
+                    <div style="max-width: 900px; margin: 0 auto;">
+                        <a href="blog" class="back-btn">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+                            Back to Blogs
+                        </a>
+                        
+                        <div class="blog-header-wrapper" style="margin: 40px 0 48px 0;">
+                            <span class="text-heritage-gold" style="display: inline-block; font-size: 1.1rem; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: #8A6538;">${formattedDate} <span style="margin: 0 12px; color: #CBD5E1;">•</span> ${blog.author}</span>
+                            <h1 class="display-md text-charcoal mt-24 mb-0" style="font-family: 'Playfair Display', serif; line-height: 1.2; font-size: 3.5rem;">${blog.title}</h1>
+                        </div>
+                        
+                        <div style="margin: 0 auto 56px auto; width: 100%;">
+                            <img src="${blog.image}" alt="${blog.title}" class="blog-detail-image" onerror="this.style.display='none'">
+                        </div>
+                        
+                        <div class="blog-detail-content">
+                            ${blog.content}
+                        </div>
                     </div>
                 `;
             } else {
