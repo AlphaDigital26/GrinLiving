@@ -34,6 +34,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 const formattedDate = dateObj.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
 
                 document.title = `${blog.title} - Grin Living`;
+                const metaDesc = document.getElementById('meta-description') || document.querySelector('meta[name="description"]');
+                if (metaDesc) {
+                    const plainText = blog.content ? blog.content.replace(/<[^>]*>?/gm, '').substring(0, 160) + '...' : blog.title;
+                    metaDesc.setAttribute('content', plainText);
+                }
 
                 contentArea.innerHTML = `
                     <a href="blog" class="back-btn">
