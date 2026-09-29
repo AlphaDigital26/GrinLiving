@@ -1,0 +1,4 @@
+<?php
+require 'admin/db_connect.php';
+$conn->query('UPDATE products SET is_featured = 1 ORDER BY id DESC LIMIT 4');
+echo "Done";

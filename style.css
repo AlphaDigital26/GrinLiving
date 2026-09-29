@@ -928,7 +928,7 @@ a {
     flex-direction: column;
   }
 
-  /* Mobile menu: hamburger button opens a slide-in panel (see nav.js) */
+  /* Mobile menu: hamburger button opens a slide-in panel (see main.js) */
   .mobile-menu-toggle {
     display: block;
     margin-left: auto;

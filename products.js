@@ -42,15 +42,35 @@ document.addEventListener('DOMContentLoaded', () => {
     bindChipEvents();
   }
 
-  // Local build: categories and products come from products-data.js (a snapshot
-  // of the live catalogue) instead of the PHP API, so no server is needed.
-  const allCategories = Array.isArray(window.GRIN_CATEGORIES) && window.GRIN_CATEGORIES.length
-    ? window.GRIN_CATEGORIES
-    : defaultCategories;
-  const allProducts = Array.isArray(window.GRIN_PRODUCTS) ? window.GRIN_PRODUCTS : [];
+  // Load the catalogue from the live database (PHP API). Where PHP isn't
+  // available (e.g. a static local server), fall back to the snapshot in
+  // products-data.js.
+  let allCategories = [];
+  let allProducts = [];
 
-  renderCategoryChips(allCategories);
-  fetchProducts();
+  const getJson = url => fetch(`${url}${url.includes('?') ? '&' : '?'}_t=${Date.now()}`, { cache: 'no-store' })
+    .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); });
+
+  Promise.all([
+    getJson('api/get_categories.php'),
+    getJson('api/get_products.php?category=All&page=1&limit=1000')
+  ])
+    .then(([cats, data]) => {
+      const list = Array.isArray(data) ? data : data.products;
+      if (!Array.isArray(cats) || !Array.isArray(list)) throw new Error('Unexpected API response');
+      allCategories = cats.length ? cats : defaultCategories;
+      allProducts = list;
+    })
+    .catch(() => {
+      allCategories = Array.isArray(window.GRIN_CATEGORIES) && window.GRIN_CATEGORIES.length
+        ? window.GRIN_CATEGORIES
+        : defaultCategories;
+      allProducts = Array.isArray(window.GRIN_PRODUCTS) ? window.GRIN_PRODUCTS : [];
+    })
+    .then(() => {
+      renderCategoryChips(allCategories);
+      fetchProducts();
+    });
 
   // Same filtering and paging as api/get_products.php
   function fetchProducts() {
