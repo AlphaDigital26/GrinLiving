@@ -1,0 +1,20 @@
+Stock footage used on the home page (index.html).
+All clips are free to use under the Pexels License (https://www.pexels.com/license/).
+Re-encoded, cropped and (for the hero) edited together; audio removed.
+
+Replace these with footage of Grin Living's own Surat facility when available,
+keeping the same file names (or update the paths in index.html).
+
+factory_tour_hero.mp4 / .jpg — montage of 7 clips, in order:
+  1. Surat industrial area, aerial       Jaspal Khalsa   https://www.pexels.com/video/industrial-area-factory-views-surat-factory-skyline-19656292/
+  2. Production floor, worker at loom    EqualStock IN   https://www.pexels.com/video/textile-factory-woman-working-at-looms-31369728/
+  3. Circular knitting machine           Mahidul Islam Nakib  https://www.pexels.com/video/industrial-textile-machinery-in-operation-35469650/
+  4. Yarn feeding on knitting machine    Mahidul Islam Nakib  https://www.pexels.com/video/high-speed-textile-production-machinery-35469631/
+  5. Worker threading knitting creel     EqualStock IN   https://www.pexels.com/video/skilled-worker-operating-textile-machine-in-factory-31007052/
+  6. Multi-head embroidery machine       David Pickup    https://www.pexels.com/video/close-up-shot-of-an-embroidery-machine-28050441/
+  7. Wide-format digital printer         (Pexels)        https://www.pexels.com/video/large-format-printer-in-action-close-up-36602523/
+
+Facility section cards (EqualStock IN):
+yarn_winding.mp4 / .jpg        https://www.pexels.com/video/efficient-indian-textile-factory-worker-31580813/
+loom_warping.mp4 / .jpg        https://www.pexels.com/video/indian-textile-worker-operating-loom-machine-31370996/
+fabric_weaving.mp4 / .jpg      https://www.pexels.com/video/textile-worker-operating-weaving-machine-in-factory-31369402/

@@ -1,65 +1,147 @@
 document.addEventListener('DOMContentLoaded', () => {
   const grid = document.querySelector('.product-grid-3');
-  const filterChips = document.querySelectorAll('.filter-chip');
+  const filterChipsContainer = document.querySelector('.filter-chips');
+  const categoryHeader = document.getElementById('category-header');
+  const categoryTitle = document.getElementById('category-title');
+  const categoryDesc = document.getElementById('category-desc');
+  const paginationContainer = document.getElementById('pagination');
+  
   let products = []; // Will hold data from API
+  let currentCategory = 'All';
+  let currentPage = 1;
+  const limit = 12;
 
-  // Fetch products from backend
-  fetch('api/get_products.php')
-    .then(response => response.json())
-    .then(data => {
-      products = data;
-      // Initial render after fetching data
-      renderProducts('All');
-      updateHeader('All');
-    })
-    .catch(error => {
-      console.error('Error fetching products:', error);
-      grid.innerHTML = '<p class="body-md text-charcoal">Failed to load products. Please try again later.</p>';
+  let categoryDescriptions = {
+    "All": "Discover our complete collection of premium fabrics, meticulously manufactured for exceptional quality, durability, and style."
+  };
+
+  const defaultCategories = [
+    { name: "Cotton Fabrics", description: "Experience the breathability and comfort of our premium cotton fabrics. Ideal for high-quality bedsheets and everyday apparel." },
+    { name: "Polyester Fabrics", description: "Durable, wrinkle-resistant, and perfect for activewear and outerwear. Our polyester blends offer superior performance." },
+    { name: "Poly Spandex Fabrics", description: "Enjoy the perfect stretch and recovery. Excellent for activewear, leggings, and form-fitting garments." },
+    { name: "Rayon Fabrics", description: "Soft, smooth, and highly absorbent. Our rayon fabrics are ideal for comfortable summer dresses and blouses." },
+    { name: "Viscose Fabrics", description: "Luxurious drape and silk-like feel. Viscose is perfect for elegant dresses and high-end fashion." },
+    { name: "Mesh Fabrics", description: "Breathable and lightweight. Our mesh fabrics are perfect for sportswear panels and stylish overlays." },
+    { name: "Knit Fabrics", description: "Comfortable and stretchy. From t-shirts to cozy sweaters, our knit fabrics are incredibly versatile." },
+    { name: "Velvet Fabrics", description: "Rich, soft, and luxurious. Velvet adds a touch of elegance to evening wear and home decor." },
+    { name: "Embroidered Fabrics", description: "Intricate designs and beautiful textures. Our embroidered fabrics are perfect for special occasion garments." },
+    { name: "Fancy / Fashion Fabrics", description: "Make a statement with our unique and trendy fashion fabrics. Perfect for standout pieces and accessories." }
+  ];
+
+  function renderCategoryChips(cats) {
+    cats.forEach(cat => {
+      if (!cat || !cat.name) return;
+      categoryDescriptions[cat.name] = cat.description || "";
+      
+      const chip = document.createElement('span');
+      chip.className = 'filter-chip';
+      chip.setAttribute('data-filter', cat.name);
+      chip.textContent = cat.name;
+      filterChipsContainer.appendChild(chip);
     });
+    bindChipEvents();
+  }
 
-  function renderProducts(filterCategory) {
+  // Local build: categories and products come from products-data.js (a snapshot
+  // of the live catalogue) instead of the PHP API, so no server is needed.
+  const allCategories = Array.isArray(window.GRIN_CATEGORIES) && window.GRIN_CATEGORIES.length
+    ? window.GRIN_CATEGORIES
+    : defaultCategories;
+  const allProducts = Array.isArray(window.GRIN_PRODUCTS) ? window.GRIN_PRODUCTS : [];
+
+  renderCategoryChips(allCategories);
+  fetchProducts();
+
+  // Same filtering and paging as api/get_products.php
+  function fetchProducts() {
+    const filtered = currentCategory === 'All'
+      ? allProducts
+      : allProducts.filter(p => p.category === currentCategory);
+    const totalPages = Math.max(1, Math.ceil(filtered.length / limit));
+    products = filtered.slice((currentPage - 1) * limit, currentPage * limit);
+    renderProducts();
+    updateHeader(currentCategory);
+    renderPagination(totalPages);
+  }
+
+  function renderProducts() {
     grid.innerHTML = ''; // clear grid
     
-    if (products.length === 0) {
+    if (!products || products.length === 0) {
        grid.innerHTML = '<p class="body-md text-charcoal">No products found.</p>';
        return;
     }
 
     products.forEach(p => {
-      if (filterCategory === 'All' || p.category === filterCategory) {
-        // create card
-        const card = document.createElement('div');
-        card.className = 'product-card';
-        card.dataset.category = p.category;
-        
-        card.innerHTML = `
-          <img src="${p.image}" alt="${p.title}" class="product-img">
-          <div class="product-info">
-            <h3 class="product-title">${p.title}</h3>
-          </div>
-        `;
-        grid.appendChild(card);
-      }
+      const card = document.createElement('div');
+      card.className = 'product-card';
+      card.dataset.category = p.category;
+      
+      card.innerHTML = `
+        <img src="${p.image}" alt="${p.title}" class="product-img" onerror="this.src='https://via.placeholder.com/300'">
+        <div class="product-info">
+          <h3 class="product-title">${p.title}</h3>
+        </div>
+      `;
+      grid.appendChild(card);
     });
   }
 
-  const categoryDescriptions = {
-    "All": "Discover our complete collection of premium fabrics, meticulously manufactured for exceptional quality, durability, and style.",
-    "Cotton Fabrics": "Experience the breathability and comfort of our premium cotton fabrics. Ideal for high-quality bedsheets and everyday apparel.",
-    "Polyester Fabrics": "Durable, wrinkle-resistant polyester fabrics designed for longevity and ease of care.",
-    "Poly Spandex Fabrics": "Flexible and resilient poly spandex blends, perfect for activewear and comfortable stretch garments.",
-    "Rayon Fabrics": "Soft, breathable, and beautifully draped rayon fabrics available in stunning prints and solids.",
-    "Viscose Fabrics": "Luxurious viscose fabrics offering a silk-like feel, perfect for premium fashion and home textiles.",
-    "Mesh Fabrics": "Lightweight, breathable mesh fabrics suitable for athletic wear and decorative layering.",
-    "Knit Fabrics": "Comfortable and versatile knit fabrics providing excellent stretch and recovery.",
-    "Velvet Fabrics": "Plush, opulent velvet fabrics that bring a touch of luxury to any project.",
-    "Embroidered Fabrics": "Exquisite embroidered fabrics featuring detailed craftsmanship and intricate designs.",
-    "Fancy / Fashion Fabrics": "Unique, trend-setting fashion fabrics designed to make a statement in any collection."
-  };
+  function renderPagination(totalPages) {
+    if (!paginationContainer) return;
+    
+    paginationContainer.innerHTML = '';
+    
+    if (totalPages <= 1) {
+      paginationContainer.style.display = 'none';
+      return;
+    }
+    
+    paginationContainer.style.display = 'flex';
 
-  const categoryHeader = document.getElementById('category-header');
-  const categoryTitle = document.getElementById('category-title');
-  const categoryDesc = document.getElementById('category-desc');
+    // Previous Button
+    const prevBtn = document.createElement('button');
+    prevBtn.className = 'pagination-btn';
+    prevBtn.textContent = 'Prev';
+    prevBtn.disabled = currentPage === 1;
+    prevBtn.addEventListener('click', () => {
+      if (currentPage > 1) {
+        window.scrollTo({ top: grid.offsetTop - 100, behavior: 'smooth' });
+        currentPage--;
+        fetchProducts();
+      }
+    });
+    paginationContainer.appendChild(prevBtn);
+
+    // Page Numbers
+    for (let i = 1; i <= totalPages; i++) {
+      const pageBtn = document.createElement('button');
+      pageBtn.className = `pagination-btn ${i === currentPage ? 'active' : ''}`;
+      pageBtn.textContent = i;
+      if (i !== currentPage) {
+        pageBtn.addEventListener('click', () => {
+          window.scrollTo({ top: grid.offsetTop - 100, behavior: 'smooth' });
+          currentPage = i;
+          fetchProducts();
+        });
+      }
+      paginationContainer.appendChild(pageBtn);
+    }
+
+    // Next Button
+    const nextBtn = document.createElement('button');
+    nextBtn.className = 'pagination-btn';
+    nextBtn.textContent = 'Next';
+    nextBtn.disabled = currentPage === totalPages;
+    nextBtn.addEventListener('click', () => {
+      if (currentPage < totalPages) {
+        window.scrollTo({ top: grid.offsetTop - 100, behavior: 'smooth' });
+        currentPage++;
+        fetchProducts();
+      }
+    });
+    paginationContainer.appendChild(nextBtn);
+  }
 
   function updateHeader(selectedCategory) {
     if (categoryHeader && categoryTitle && categoryDesc) {
@@ -73,18 +155,18 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // Add event listeners
-  filterChips.forEach(chip => {
-    chip.addEventListener('click', () => {
-      // Update active class
-      filterChips.forEach(c => c.classList.remove('active'));
-      chip.classList.add('active');
-      
-      // Filter products
-      const selectedCategory = chip.getAttribute('data-filter');
-      
-      updateHeader(selectedCategory);
-      renderProducts(selectedCategory);
+  function bindChipEvents() {
+    const chips = document.querySelectorAll('.filter-chip');
+    chips.forEach(chip => {
+      chip.addEventListener('click', () => {
+        chips.forEach(c => c.classList.remove('active'));
+        chip.classList.add('active');
+        
+        currentCategory = chip.getAttribute('data-filter');
+        currentPage = 1; // Reset to page 1 on filter change
+        
+        fetchProducts();
+      });
     });
-  });
+  }
 });

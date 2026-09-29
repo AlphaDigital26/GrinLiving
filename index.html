@@ -1,63 +1,80 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Grinliving - Bedsheet Manufacturer in Surat</title>
-  
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
-  
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap"
+    rel="stylesheet">
+
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-  <div class="grid-background">
+  <div class="navbar-wrapper">
     <header class="navbar container">
-      <div class="logo">
+      <a href="index.html" class="logo" style="text-decoration: none; color: inherit;">
         <img src="Images/logo.png" alt="Grin Living Logo" class="logo-img">
         <span class="logo-text">Grin Living</span>
-      </div>
+      </a>
+      <button class="mobile-menu-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+        </svg>
+      </button>
       <nav class="nav-links">
         <a href="index.html" class="active">Home</a>
         <a href="about-us.html">About us</a>
         <a href="products.html">Products</a>
-        <a href="blog.html">BLOG</a>
         <a href="faqs.html">FAQs</a>
         <a href="contact-us.html">Contact Us</a>
       </nav>
     </header>
 
-    <main>
-      <!-- Hero Section -->
-      <section class="hero container">
+  </div>
+
+  <main>
+    <!-- Hero Section: looping factory tour (aerial → floor → knitting → embroidery → digital printing) -->
+    <section class="video-hero">
+      <video class="video-hero-media" autoplay muted loop playsinline preload="auto"
+        poster="Images/videos/factory_tour_hero.jpg" aria-hidden="true">
+        <source src="Images/videos/factory_tour_hero.mp4" type="video/mp4">
+      </video>
+
+      <div class="container video-hero-inner">
         <div class="hero-content">
-          <div class="chip">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
-            B2B TEXTILE MANUFACTURING
-          </div>
-          
           <h1 class="display-lg">
-            Leading Bedsheet <br>
+            Textile &amp; Fabric <br>
             <span class="highlight">Manufacturer in Surat</span>
           </h1>
-          
+
           <p class="body-lg hero-text">
-            Supply bedding that your customers will never forget. Partner with Grin Living — where quality meets soul.
+            Supply textiles and fabrics that your customers will never forget. Partner with Grin Living — where quality
+            meets soul.
           </p>
-          
+
           <div class="hero-actions">
-            <a href="tel:+919723819360" class="btn btn-primary">Call Now +91 97238 19360</a>
+            <a href="tel:+919327559457" class="btn btn-primary">Call Now</a>
           </div>
         </div>
-        
-        <div class="hero-image-wrapper">
-          <div class="hero-image-offset"></div>
-          <img src="Images/hero_bedsheets.png" alt="Crisp white bedsheets" class="hero-img">
-        </div>
-      </section>
-    </div> <!-- end grid background -->
+      </div>
+
+      <button type="button" class="video-toggle" aria-label="Pause background video" data-video-toggle>
+        <svg class="icon-pause" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <rect x="6" y="4" width="4" height="16" rx="1"></rect>
+          <rect x="14" y="4" width="4" height="16" rx="1"></rect>
+        </svg>
+        <svg class="icon-play" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M7 4.5v15a1 1 0 0 0 1.5.86l12.5-7.5a1 1 0 0 0 0-1.72L8.5 3.64A1 1 0 0 0 7 4.5z"></path>
+        </svg>
+      </button>
+    </section>
 
     <!-- Core Features -->
     <section class="features section-padding surface-bg">
@@ -70,29 +87,46 @@
           <!-- Card 1 -->
           <div class="color-card bg-dark-olive">
             <div class="color-card-header">
-              <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+              <svg viewBox="0 0 24 24">
+                <polygon
+                  points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2">
+                </polygon>
+              </svg>
               <span>Premium Quality</span>
             </div>
             <div class="color-card-text">
-              High-grade cotton with superior thread count for a soft, durable feel, wash after wash.
+              Premium-grade polyester with engineered thread structures for a smooth, durable feel, wash after wash.
             </div>
           </div>
-          
+
           <!-- Card 2 -->
           <div class="color-card bg-brown">
             <div class="color-card-header">
-              <svg viewBox="0 0 24 24"><polyline points="23 4 23 10 17 10"></polyline><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path></svg>
+              <svg viewBox="0 0 24 24">
+                <polyline points="23 4 23 10 17 10"></polyline>
+                <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path>
+              </svg>
               <span>Consistent Supply</span>
             </div>
             <div class="color-card-text">
               Advanced production ensures every bulk order meets the same high quality standard.
             </div>
           </div>
-          
+
           <!-- Card 3 -->
           <div class="color-card bg-light-olive">
             <div class="color-card-header">
-              <svg viewBox="0 0 24 24"><line x1="4" y1="21" x2="4" y2="14"></line><line x1="4" y1="10" x2="4" y2="3"></line><line x1="12" y1="21" x2="12" y2="12"></line><line x1="12" y1="8" x2="12" y2="3"></line><line x1="20" y1="21" x2="20" y2="16"></line><line x1="20" y1="12" x2="20" y2="3"></line><line x1="1" y1="14" x2="7" y2="14"></line><line x1="9" y1="8" x2="15" y2="8"></line><line x1="17" y1="16" x2="23" y2="16"></line></svg>
+              <svg viewBox="0 0 24 24">
+                <line x1="4" y1="21" x2="4" y2="14"></line>
+                <line x1="4" y1="10" x2="4" y2="3"></line>
+                <line x1="12" y1="21" x2="12" y2="12"></line>
+                <line x1="12" y1="8" x2="12" y2="3"></line>
+                <line x1="20" y1="21" x2="20" y2="16"></line>
+                <line x1="20" y1="12" x2="20" y2="3"></line>
+                <line x1="1" y1="14" x2="7" y2="14"></line>
+                <line x1="9" y1="8" x2="15" y2="8"></line>
+                <line x1="17" y1="16" x2="23" y2="16"></line>
+              </svg>
               <span>Custom Ready</span>
             </div>
             <div class="color-card-text">
@@ -110,26 +144,27 @@
           <span class="label-lg highlight">PREMIUM FABRICS</span>
           <h2 class="headline-lg mt-16">Our Products</h2>
           <p class="body-md text-charcoal mt-16 max-w-700 mx-auto">
-            Discover our carefully curated selection of premium fabrics, crafted to deliver exceptional comfort, durability, and style for your business.
+            Discover our carefully curated selection of premium fabrics, crafted to deliver exceptional comfort,
+            durability, and style for your business.
           </p>
         </div>
-        
+
         <div class="product-collage-grid mt-64">
           <div class="collage-item collage-tall">
-            <img src="Images/WhatsApp Image 2026-07-14 at 2.20.57 PM.jpeg" alt="Premium Cotton">
-            <div class="collage-item-text">Premium Cotton</div>
+            <img src="Images/WhatsApp Image 2026-07-14 at 2.20.57 PM.jpeg" alt="Premium Polyester">
+            <div class="collage-item-text">Premium Polyester</div>
           </div>
           <div class="collage-item collage-tall">
-            <img src="Images/WhatsApp Image 2026-07-14 at 2.20.58 PM (1).jpeg" alt="Organic Bamboo">
-            <div class="collage-item-text">Organic Bamboo</div>
+            <img src="Images/WhatsApp Image 2026-07-14 at 2.20.58 PM (1).jpeg" alt="Poly Spandex Blend">
+            <div class="collage-item-text">Poly Spandex Blend</div>
           </div>
           <div class="collage-item">
-            <img src="Images/WhatsApp Image 2026-07-14 at 2.20.59 PM (2).jpeg" alt="Percale Weave">
-            <div class="collage-item-text">Percale Weave</div>
+            <img src="Images/WhatsApp Image 2026-07-14 at 2.20.59 PM (2).jpeg" alt="Microfibre Weave">
+            <div class="collage-item-text">Microfibre Weave</div>
           </div>
           <div class="collage-item">
-            <img src="Images/WhatsApp Image 2026-07-14 at 2.21.12 PM.jpeg" alt="Sateen Weave">
-            <div class="collage-item-text">Sateen Weave</div>
+            <img src="Images/WhatsApp Image 2026-07-14 at 2.21.12 PM.jpeg" alt="Velvet Finish">
+            <div class="collage-item-text">Velvet Finish</div>
           </div>
         </div>
       </div>
@@ -142,61 +177,263 @@
           <span class="label-lg highlight">ABOUT US</span>
           <h2 class="headline-lg mt-16">Precision Manufacturing.<br>Reliable Partnerships</h2>
           <p class="body-md text-charcoal mt-24">
-            At Grin Living, we manufacture high-quality, market-ready bedsheets through a fully in-house process, ensuring consistent quality, reliable supply, and value for our business partners.
+            At Grin Living, we manufacture high-quality, market-ready bedsheets through a fully in-house process,
+            ensuring
+            consistent quality, reliable supply, and value for our business partners.
           </p>
           <div class="mt-40">
-            <a href="#" class="btn btn-primary">Know More</a>
+            <a href="about-us.html" class="btn btn-primary">Know More</a>
           </div>
         </div>
         <div class="about-image">
-          <img src="Images/hero_about_us.jpg" alt="About Grin Living" style="border-radius: 16px; box-shadow: 0 12px 32px rgba(15, 23, 42, 0.1); width: 100%; height: 100%; object-fit: cover; max-height: 500px;">
+          <img src="Images/hero_about_us.jpeg" alt="About Grin Living"
+            style="border-radius: 16px; box-shadow: 0 12px 32px rgba(15, 23, 42, 0.1); width: 100%; height: 100%; object-fit: cover; max-height: 500px;">
         </div>
       </div>
     </section>
 
-    <!-- Why Partner With Us -->
+    <!-- Manufacturing Facility -->
+    <section class="section-padding" style="background-color: var(--deep-teal);">
+      <div class="container">
+        <div class="section-header facility-header text-center mb-64">
+          <span class="label-lg" style="color: var(--heritage-gold);">OUR FACILITY</span>
+          <h2 class="headline-lg mt-16" style="color: var(--pure-white);">Inside Our Manufacturing Floor</h2>
+          <p class="body-md mt-16 max-w-700 mx-auto" style="color: rgba(255,255,255,0.7);">
+            State-of-the-art circular knitting machines and digital embroidery lines operating at full industrial
+            capacity — all under one roof in Surat, Gujarat.
+          </p>
+        </div>
+
+        <div class="facility-grid" style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px;">
+
+          <div
+            style="position: relative; border-radius: 16px; overflow: hidden; aspect-ratio: 3/4; box-shadow: 0 16px 40px rgba(0,0,0,0.35);">
+            <video class="facility-video" autoplay muted loop playsinline preload="metadata"
+              poster="Images/videos/yarn_winding.jpg" aria-label="Worker preparing yarn on a winding machine"
+              style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; display: block;">
+              <source src="Images/videos/yarn_winding.mp4" type="video/mp4">
+            </video>
+            <div
+              style="position: absolute; bottom: 0; left: 0; right: 0; padding: 20px 24px; background: linear-gradient(to top, rgba(10,20,35,0.92) 0%, rgba(10,20,35,0.65) 55%, transparent 100%);">
+              <p
+                style="font-family: var(--font-label); font-size: 12px; letter-spacing: 0.1em; color: var(--heritage-gold); text-transform: uppercase; margin-bottom: 4px;">
+                Yarn</p>
+              <p style="font-family: var(--font-serif); font-size: 17px; color: var(--pure-white); line-height: 1.3;">
+                Yarn Winding &amp; Preparation</p>
+            </div>
+          </div>
+
+          <div
+            style="position: relative; border-radius: 16px; overflow: hidden; aspect-ratio: 3/4; box-shadow: 0 16px 40px rgba(0,0,0,0.35); margin-top: -32px;">
+            <video class="facility-video" autoplay muted loop playsinline preload="metadata"
+              poster="Images/videos/loom_warping.jpg" aria-label="Worker threading warp yarns on an industrial loom"
+              style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; display: block;">
+              <source src="Images/videos/loom_warping.mp4" type="video/mp4">
+            </video>
+            <div
+              style="position: absolute; bottom: 0; left: 0; right: 0; padding: 20px 24px; background: linear-gradient(to top, rgba(10,20,35,0.92) 0%, rgba(10,20,35,0.65) 55%, transparent 100%);">
+              <p
+                style="font-family: var(--font-label); font-size: 12px; letter-spacing: 0.1em; color: var(--heritage-gold); text-transform: uppercase; margin-bottom: 4px;">
+                Warping</p>
+              <p style="font-family: var(--font-serif); font-size: 17px; color: var(--pure-white); line-height: 1.3;">
+                Loom Warping &amp; Threading</p>
+            </div>
+          </div>
+
+          <div
+            style="position: relative; border-radius: 16px; overflow: hidden; aspect-ratio: 3/4; box-shadow: 0 16px 40px rgba(0,0,0,0.35);">
+            <video class="facility-video" autoplay muted loop playsinline preload="metadata"
+              poster="Images/videos/fabric_weaving.jpg" aria-label="Worker tending fabric on a weaving machine"
+              style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; display: block;">
+              <source src="Images/videos/fabric_weaving.mp4" type="video/mp4">
+            </video>
+            <div
+              style="position: absolute; bottom: 0; left: 0; right: 0; padding: 20px 24px; background: linear-gradient(to top, rgba(10,20,35,0.92) 0%, rgba(10,20,35,0.65) 55%, transparent 100%);">
+              <p
+                style="font-family: var(--font-label); font-size: 12px; letter-spacing: 0.1em; color: var(--heritage-gold); text-transform: uppercase; margin-bottom: 4px;">
+                Weaving</p>
+              <p style="font-family: var(--font-serif); font-size: 17px; color: var(--pure-white); line-height: 1.3;">
+                Fabric Weaving on Industrial Looms</p>
+            </div>
+          </div>
+
+        </div>
+
+        <style>
+          section [style*="aspect-ratio: 3/4"]:hover img,
+          section [style*="aspect-ratio: 3/4"]:hover video {
+            transform: scale(1.06);
+          }
+
+          /* Phones: swipeable row of cards, with the next card peeking in */
+          @media (max-width: 768px) {
+            .facility-grid {
+              display: flex !important;
+              gap: 14px !important;
+              overflow-x: auto;
+              scroll-snap-type: x mandatory;
+              -webkit-overflow-scrolling: touch;
+              scrollbar-width: none;
+              margin: 0 calc(-1 * var(--margin-desktop));
+              padding: 8px var(--margin-desktop) 24px;
+              scroll-padding: 0 var(--margin-desktop);
+            }
+
+            .facility-grid::-webkit-scrollbar {
+              display: none;
+            }
+
+            .facility-grid > div {
+              flex: 0 0 74%;
+              max-width: 300px;
+              margin-top: 0 !important;
+              scroll-snap-align: start;
+              box-shadow: 0 10px 24px rgba(0, 0, 0, 0.35) !important;
+            }
+
+            .facility-grid > div > div {
+              padding: 16px 18px !important;
+            }
+
+            .facility-grid > div > div p:last-child {
+              font-size: 16px !important;
+            }
+
+            .facility-header {
+              margin-bottom: 32px !important;
+            }
+
+            .facility-header .headline-lg {
+              font-size: 30px;
+            }
+          }
+        </style>
+
+      </div>
+    </section>
+
+    <!-- Production Capabilities -->
+    <section class="capabilities canvas-bg section-padding">
+      <div class="container">
+        <div class="section-header text-center mb-64">
+          <span class="label-lg text-heritage-gold">PRODUCTION CAPABILITIES</span>
+          <h2 class="headline-lg mt-16">From Yarn to Finished Fabric</h2>
+          <p class="body-md text-charcoal mt-16 max-w-700 mx-auto">
+            Knitting, digital printing and embroidery run side by side on our floor, so every stage of your order is
+            handled in-house by our own team.
+          </p>
+        </div>
+
+        <div class="capabilities-grid">
+          <figure class="capability-tile capability-tile--wide">
+            <img src="Images/machinery_circular_knitting.jpg"
+              alt="Rows of circular knitting machines with yarn creels on the factory floor" loading="lazy">
+            <figcaption class="capability-caption">
+              <span class="capability-label">Knitting</span>
+              <h3 class="capability-title">Circular Knitting Floor</h3>
+              <p class="capability-text">Rows of high-speed circular knitting machines producing consistent,
+                even-textured fabric.</p>
+            </figcaption>
+          </figure>
+
+          <figure class="capability-tile">
+            <img src="Images/machinery_knitting_operators.jpg"
+              alt="Operators threading yarn and monitoring a circular knitting machine" loading="lazy">
+            <figcaption class="capability-caption">
+              <span class="capability-label">Operations</span>
+              <h3 class="capability-title">Skilled Machine Operators</h3>
+              <p class="capability-text">Experienced operators set up yarn feeds and check every roll as it comes off
+                the machine.</p>
+            </figcaption>
+          </figure>
+
+          <figure class="capability-tile">
+            <img src="Images/machinery_embroidery.jpg"
+              alt="Operator programming a row of computerised multi-head embroidery machines" loading="lazy">
+            <figcaption class="capability-caption">
+              <span class="capability-label">Embroidery</span>
+              <h3 class="capability-title">Multi-Head Embroidery</h3>
+              <p class="capability-text">Computerised multi-head machines embroider intricate designs at production
+                scale.</p>
+            </figcaption>
+          </figure>
+
+          <figure class="capability-tile capability-tile--wide">
+            <img src="Images/machinery_digital_printing.jpg"
+              alt="Operator running a digital textile printer printing a floral fabric" loading="lazy">
+            <figcaption class="capability-caption">
+              <span class="capability-label">Printing</span>
+              <h3 class="capability-title">Digital Textile Printing</h3>
+              <p class="capability-text">Vivid, detailed prints straight from digital artwork, with precise colour
+                matching across every run.</p>
+            </figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
     <section class="why-partner surface-bg section-padding">
       <div class="container">
         <div class="section-header text-center">
           <span class="label-lg highlight">WHY PARTNER WITH US</span>
           <h2 class="headline-lg mt-16">Why Choose Grin Living</h2>
           <p class="body-md text-charcoal mt-16 max-w-700 mx-auto">
-            Built for serious B2B growth—reliable, efficient, and profitable.
+            Built for serious growth—reliable, efficient, and consistently profitable.
           </p>
         </div>
-        
+
         <div class="icon-cards-grid mt-64">
           <div class="icon-card">
             <div class="icon-wrapper">
-              <svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+              <svg viewBox="0 0 24 24">
+                <path
+                  d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z">
+                </path>
+                <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+                <line x1="12" y1="22.08" x2="12" y2="12"></line>
+              </svg>
             </div>
             <h4 class="headline-sm">Low MOQs & High Volume</h4>
             <p class="body-sm text-charcoal mt-8">Supporting both scaling businesses and established distributors.</p>
           </div>
           <div class="icon-card">
             <div class="icon-wrapper">
-              <svg viewBox="0 0 24 24"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg>
+              <svg viewBox="0 0 24 24">
+                <path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path>
+              </svg>
             </div>
             <h4 class="headline-sm">Quick Design Adaptation</h4>
             <p class="body-sm text-charcoal mt-8">Fast private labeling to create your own market identity.</p>
           </div>
           <div class="icon-card">
             <div class="icon-wrapper">
-              <svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="7 12 10 15 17 8"></polyline></svg>
+              <svg viewBox="0 0 24 24">
+                <path
+                  d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z">
+                </path>
+                <polyline points="7 12 10 15 17 8"></polyline>
+              </svg>
             </div>
             <h4 class="headline-sm">Ready Stock Available</h4>
             <p class="body-sm text-charcoal mt-8">Fast-moving designs always in stock to reduce your lead time.</p>
           </div>
           <div class="icon-card">
             <div class="icon-wrapper">
-              <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+              <svg viewBox="0 0 24 24">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+              </svg>
             </div>
             <h4 class="headline-sm">Secure Packaging</h4>
             <p class="body-sm text-charcoal mt-8">Structured quality checks minimizing returns and transit issues.</p>
           </div>
           <div class="icon-card">
             <div class="icon-wrapper">
-              <svg viewBox="0 0 24 24"><path d="M3 18v-6a9 9 0 0 1 18 0v6"></path><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"></path></svg>
+              <svg viewBox="0 0 24 24">
+                <path d="M3 18v-6a9 9 0 0 1 18 0v6"></path>
+                <path
+                  d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z">
+                </path>
+              </svg>
             </div>
             <h4 class="headline-sm">Dependable Service</h4>
             <p class="body-sm text-charcoal mt-8">Clear communication making sourcing smooth and predictable.</p>
@@ -212,21 +449,28 @@
           <span class="label-lg highlight">OUR PROCESS</span>
           <h2 class="headline-lg mt-16">A Fully Integrated Manufacturing Experience</h2>
           <p class="body-md text-charcoal mt-16 max-w-700 mx-auto">
-            From concept to delivery, we control every step of the supply chain to ensure precision, consistency, and scale.
+            From concept to delivery, we control every step of the supply chain to ensure precision, consistency, and
+            scale.
           </p>
         </div>
-        
+
         <div class="timeline mt-64">
           <!-- Step 1 -->
           <div class="timeline-item right">
             <div class="timeline-center">01</div>
             <div class="timeline-content">
               <div class="timeline-icon">
-                <svg viewBox="0 0 24 24"><path d="M12 19l7-7 3 3-7 7-3-3z"></path><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"></path><path d="M2 2l7.586 7.586"></path></svg>
+                <svg viewBox="0 0 24 24">
+                  <path d="M12 19l7-7 3 3-7 7-3-3z"></path>
+                  <path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"></path>
+                  <path d="M2 2l7.586 7.586"></path>
+                </svg>
               </div>
               <div class="timeline-text">
                 <h4 class="headline-sm">Design & Development</h4>
-                <p class="body-sm text-charcoal mt-8">Collaborating with you to create market-ready patterns, exact thread counts, and fabric blends tailored to your audience.</p>
+                <p class="body-sm text-charcoal mt-8">Collaborating with you to create market-ready patterns, exact
+                  thread
+                  counts, and fabric blends tailored to your audience.</p>
               </div>
             </div>
           </div>
@@ -235,11 +479,17 @@
             <div class="timeline-center">02</div>
             <div class="timeline-content">
               <div class="timeline-icon">
-                <svg viewBox="0 0 24 24"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 12 12 17 22 12"></polyline><polyline points="2 17 12 22 22 17"></polyline></svg>
+                <svg viewBox="0 0 24 24">
+                  <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+                  <polyline points="2 12 12 17 22 12"></polyline>
+                  <polyline points="2 17 12 22 22 17"></polyline>
+                </svg>
               </div>
               <div class="timeline-text">
                 <h4 class="headline-sm">Sourcing & Weaving</h4>
-                <p class="body-sm text-charcoal mt-8">Using premium yarns and advanced looms to weave fabrics that balance durability with an exceptionally soft hand-feel.</p>
+                <p class="body-sm text-charcoal mt-8">Using premium yarns and advanced looms to weave fabrics that
+                  balance
+                  durability with an exceptionally soft hand-feel.</p>
               </div>
             </div>
           </div>
@@ -248,11 +498,14 @@
             <div class="timeline-center">03</div>
             <div class="timeline-content">
               <div class="timeline-icon">
-                <svg viewBox="0 0 24 24"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path></svg>
+                <svg viewBox="0 0 24 24">
+                  <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path>
+                </svg>
               </div>
               <div class="timeline-text">
                 <h4 class="headline-sm">Dyeing & Printing</h4>
-                <p class="body-sm text-charcoal mt-8">Industrial-grade, color-fast dyeing processes that ensure your bedsheets won't fade, even after repeated commercial washes.</p>
+                <p class="body-sm text-charcoal mt-8">Industrial-grade, color-fast dyeing processes that ensure your
+                  bedsheets won't fade, even after repeated commercial washes.</p>
               </div>
             </div>
           </div>
@@ -261,11 +514,17 @@
             <div class="timeline-center">04</div>
             <div class="timeline-content">
               <div class="timeline-icon">
-                <svg viewBox="0 0 24 24"><circle cx="6" cy="6" r="3"></circle><circle cx="6" cy="18" r="3"></circle><line x1="20" y1="4" x2="8.12" y2="15.88"></line><line x1="14.47" y1="14.48" x2="20" y2="20"></line><line x1="8.12" y1="8.12" x2="12" y2="12"></line></svg>
+                <svg viewBox="0 0 24 24">
+                  <path d="M12 3l1.9 5.8L20 11l-6.1 2.2L12 19l-1.9-5.8L4 11l6.1-2.2z"></path>
+                  <path d="M19 3v4"></path>
+                  <path d="M21 5h-4"></path>
+                </svg>
               </div>
               <div class="timeline-text">
-                <h4 class="headline-sm">Stitching & Finishing</h4>
-                <p class="body-sm text-charcoal mt-8">Precision stitching by experienced operators, followed by specialized finishing treatments for extra softness and luster.</p>
+                <h4 class="headline-sm">Finishing</h4>
+                <p class="body-sm text-charcoal mt-8">Precision hemming by experienced operators, followed
+                  by
+                  specialized finishing treatments for extra softness and luster.</p>
               </div>
             </div>
           </div>
@@ -274,11 +533,15 @@
             <div class="timeline-center">05</div>
             <div class="timeline-content">
               <div class="timeline-icon">
-                <svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                <svg viewBox="0 0 24 24">
+                  <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                  <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                </svg>
               </div>
               <div class="timeline-text">
                 <h4 class="headline-sm">Quality Inspection</h4>
-                <p class="body-sm text-charcoal mt-8">Rigorous multi-point checks to eliminate defects. Only flawless sheets make it past our inspection tables.</p>
+                <p class="body-sm text-charcoal mt-8">Rigorous multi-point checks to eliminate defects. Only flawless
+                  sheets make it past our inspection tables.</p>
               </div>
             </div>
           </div>
@@ -287,11 +550,18 @@
             <div class="timeline-center">06</div>
             <div class="timeline-content">
               <div class="timeline-icon">
-                <svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+                <svg viewBox="0 0 24 24">
+                  <path
+                    d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z">
+                  </path>
+                  <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+                  <line x1="12" y1="22.08" x2="12" y2="12"></line>
+                </svg>
               </div>
               <div class="timeline-text">
                 <h4 class="headline-sm">Packaging & Dispatch</h4>
-                <p class="body-sm text-charcoal mt-8">Retail-ready packaging, securely boxed and dispatched through reliable logistics networks to meet your deadlines.</p>
+                <p class="body-sm text-charcoal mt-8">Retail-ready packaging, securely boxed and dispatched through
+                  reliable logistics networks to meet your deadlines.</p>
               </div>
             </div>
           </div>
@@ -306,105 +576,74 @@
           <span class="label-lg highlight">TESTIMONIALS</span>
           <h2 class="headline-lg mt-16">What Our Customers Have to Say</h2>
         </div>
-        
+
         <div class="testimonials-grid mt-64">
           <!-- Testimonial 1 -->
           <div class="testimonial-card card bg-surface">
             <div>
               <div class="testimonial-stars">★★★★★</div>
-              <p class="body-sm text-charcoal italic mt-16">"Top-tier fabric that handles industrial washing without losing its crisp feel. For our hotel, durability is everything—and these linens deliver every time."</p>
+              <p class="body-sm text-charcoal italic mt-16">"Top-tier fabric that handles industrial washing without
+                losing its crisp feel. For our hotel, durability is everything—and these linens deliver every time."</p>
             </div>
           </div>
-          
+
           <!-- Testimonial 2 -->
           <div class="testimonial-card card bg-surface">
             <div>
               <div class="testimonial-stars">★★★★★</div>
-              <p class="body-sm text-charcoal italic mt-16">"Consistency is rare in bulk textiles, but this team hits the mark on every shipment. Zero defects, perfect stitching, and exactly the thread count promised."</p>
+              <p class="body-sm text-charcoal italic mt-16">"Consistency is rare in bulk textiles, but this team hits
+                the
+                mark on every shipment. Zero defects, impeccable finish quality, and exactly the thread count promised."
+              </p>
             </div>
           </div>
-          
+
           <!-- Testimonial 3 -->
           <div class="testimonial-card card bg-surface">
             <div>
               <div class="testimonial-stars">★★★★★</div>
-              <p class="body-sm text-charcoal italic mt-16">"Fastest turnaround in the industry. When we need a bulk restock for a sudden project, they handle the logistics seamlessly. High-speed service meets high-end quality."</p>
+              <p class="body-sm text-charcoal italic mt-16">"Fastest turnaround in the industry. When we need a bulk
+                restock for a sudden project, they handle the logistics seamlessly. High-speed service meets high-end
+                quality."</p>
             </div>
           </div>
-          
+
           <!-- Testimonial 4 -->
           <div class="testimonial-card card bg-surface">
             <div>
               <div class="testimonial-stars">★★★★★</div>
-              <p class="body-sm text-charcoal italic mt-16">"Unbeatable wholesale pricing for this level of premium cotton. They've streamlined our supply chain and significantly improved our margins. Highly recommended."</p>
+              <p class="body-sm text-charcoal italic mt-16">"Unbeatable wholesale pricing for this level of premium
+                polyester. They've streamlined our supply chain and significantly improved our margins. Highly
+                recommended."
+              </p>
             </div>
           </div>
         </div>
       </div>
     </section>
-
-    <!-- Contact Form Section -->
-    <section class="contact canvas-bg section-padding">
-      <div class="container contact-container">
-        <div class="contact-info">
-          <span class="label-lg highlight">GET IN TOUCH</span>
-          <h2 class="headline-lg mt-16">Enquire Now</h2>
-          <p class="body-md text-charcoal mt-16">
-            Submit your requirement and our team will get back within 24 hours.
-          </p>
-          
-          <div class="contact-details mt-40">
-            <p class="body-md font-bold text-deep-teal">+91 97238 19360</p>
-            <p class="body-md font-bold text-deep-teal mt-8">sales@grinliving.com</p>
-            <p class="body-md font-bold text-deep-teal mt-8">Surat, Gujarat</p>
-          </div>
-        </div>
-        
-        <div class="contact-form card">
-          <form>
-            <div class="form-group">
-              <label class="label-md">City</label>
-              <input type="text" class="form-control" placeholder="Enter City">
-            </div>
-            <div class="form-group mt-16">
-              <label class="label-md">Business Type</label>
-              <select class="form-control">
-                <option>Select</option>
-                <option>Retailer</option>
-                <option>Wholesaler</option>
-                <option>Distributor</option>
-                <option>Exporter</option>
-              </select>
-            </div>
-            <button type="button" class="btn btn-primary w-full mt-24">Submit Inquiry</button>
-          </form>
-        </div>
-      </div>
-    </section>
-
-  
-    
 
   </main>
 
   <footer class="site-footer">
     <div class="container footer-container">
       <div class="footer-brand">
-        <div class="logo">
+        <a href="index.html" class="logo" style="text-decoration: none; color: inherit;">
           <img src="Images/logo.png" alt="Grin Living Logo" class="logo-img">
           <span class="logo-text">Grin Living</span>
-        </div>
+        </a>
         <p class="body-sm text-charcoal footer-desc mt-24">
           Industrial Luxury and Precision Manufacturing for the sophisticated textile landscape
         </p>
       </div>
-      
+
       <div class="footer-links">
         <div class="link-column">
           <h4 class="label-lg">COMPANY</h4>
           <a href="index.html" class="body-sm">Home</a>
+          <a href="about-us.html" class="body-sm">About us</a>
           <a href="products.html" class="body-sm">Products</a>
-          <a href="about-us.html" class="body-sm">About US</a>
+          <a href="faqs.html" class="body-sm">FAQs</a>
+          <a href="contact-us.html" class="body-sm">Contact Us</a>
         </div>
         <div class="link-column">
           <h4 class="label-lg">HEADQUARTERS</h4>
@@ -413,7 +652,7 @@
             Sachin GIDC, Suarat, Gujarat 394230
           </p>
           <a href="mailto:info@grinliving.com" class="body-sm block mt-8">info@grinliving.com</a>
-          <a href="tel:+91262458800" class="body-sm block mt-8">+91 262458800</a>
+          <a href="tel:+919327559457" class="body-sm block mt-8">+91 93275 59457</a>
         </div>
       </div>
     </div>
@@ -427,7 +666,9 @@
   </footer>
 
 
-    <script src="animations.js"></script>
+  <script src="animations.js"></script>
+  <script src="home-video.js"></script>
+  <script src="nav.js"></script>
 </body>
-</html>
 
+</html>

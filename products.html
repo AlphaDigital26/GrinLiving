@@ -54,13 +54,41 @@
 
     @media (max-width: 1024px) {
       .product-grid-3 {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
       }
     }
 
     @media (max-width: 768px) {
       .product-grid-3 {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+      }
+
+      .product-img {
+        border-radius: 12px !important;
+      }
+
+      .product-title {
+        font-size: 13px;
+      }
+
+      .filter-chips {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        justify-content: flex-start !important;
+        -webkit-overflow-scrolling: touch;
+        padding-bottom: 8px;
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+      }
+
+      .filter-chips::-webkit-scrollbar {
+        display: none;
+      }
+
+      .filter-chip {
+        white-space: nowrap;
       }
     }
   
@@ -96,28 +124,77 @@
       text-transform: capitalize;
     }
 
+    /* Pagination Styles */
+    .pagination-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      margin-top: 48px;
+    }
+
+    .pagination-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 40px;
+      height: 40px;
+      padding: 0 12px;
+      background-color: var(--pure-white);
+      color: var(--charcoal-textile);
+      font-family: var(--font-label);
+      font-size: 14px;
+      font-weight: 600;
+      border-radius: 4px;
+      border: 1px solid var(--outline-light);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .pagination-btn:hover:not(:disabled) {
+      background-color: var(--deep-teal);
+      color: var(--pure-white);
+      border-color: var(--deep-teal);
+    }
+
+    .pagination-btn.active {
+      background-color: var(--deep-teal);
+      color: var(--pure-white);
+      border-color: var(--deep-teal);
+      cursor: default;
+    }
+
+    .pagination-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
   </style>
 </head>
 <body>
 
     <!-- Navbar -->
-  <header class="navbar container">
-    <div class="logo">
-      <img src="Images/logo.png" alt="Grin Living Logo" class="logo-img">
-      <span class="logo-text">Grin Living</span>
-    </div>
-    <nav class="nav-links">
-      <a href="index.html">Home</a>
-      <a href="about-us.html">About us</a>
-      <a href="products.html" class="active">Products</a>
-      <a href="blog.html">BLOG</a>
-      <a href="faqs.html">FAQs</a>
-      <a href="contact-us.html">Contact Us</a>
-    </nav>
-  </header>
+  <div class="navbar-wrapper">
+    <header class="navbar container">
+      <a href="index.html" class="logo" style="text-decoration: none; color: inherit;">
+        <img src="Images/logo.png" alt="Grin Living Logo" class="logo-img">
+        <span class="logo-text">Grin Living</span>
+      </a>
+      <button class="mobile-menu-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+      </button>
+      <nav class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="about-us.html">About us</a>
+        <a href="products.html" class="active">Products</a>
+        <a href="faqs.html">FAQs</a>
+        <a href="contact-us.html">Contact Us</a>
+      </nav>
+    </header>
+  </div>
 
   <!-- Page Header -->
-  <section class="hero-image-bg" style="background-image: url('Images/hero_products.jpg');">
+  <section class="hero-image-bg" style="background-image: url('Images/hero_products.webp');">
     <div class="container inner-hero">
       <div class="text-center">
         <span class="label-md text-heritage-gold">OUR FABRICS</span>
@@ -133,26 +210,21 @@
     <!-- Products Grid -->
     <section class="section-padding">
       <div class="container">
+        <!-- Category chips are appended by products.js -->
         <div class="filter-chips mb-24" style="justify-content: center;">
           <span class="filter-chip active" data-filter="All">All</span>
-          <span class="filter-chip" data-filter="Cotton Fabrics">Cotton Fabrics</span>
-          <span class="filter-chip" data-filter="Polyester Fabrics">Polyester Fabrics</span>
-          <span class="filter-chip" data-filter="Poly Spandex Fabrics">Poly Spandex Fabrics</span>
-          <span class="filter-chip" data-filter="Rayon Fabrics">Rayon Fabrics</span>
-          <span class="filter-chip" data-filter="Viscose Fabrics">Viscose Fabrics</span>
-          <span class="filter-chip" data-filter="Mesh Fabrics">Mesh Fabrics</span>
-          <span class="filter-chip" data-filter="Knit Fabrics">Knit Fabrics</span>
-          <span class="filter-chip" data-filter="Velvet Fabrics">Velvet Fabrics</span>
-          <span class="filter-chip" data-filter="Embroidered Fabrics">Embroidered Fabrics</span>
-          <span class="filter-chip" data-filter="Fancy / Fashion Fabrics">Fancy / Fashion Fabrics</span>
         </div>
-        
+
         <div id="category-header" class="category-header text-center" style="display: none;">
           <h2 id="category-title" class="headline-lg text-deep-teal">Category Name</h2>
           <p id="category-desc" class="body-md text-charcoal mt-16 max-w-700 mx-auto">Category description goes here.</p>
         </div>
 
         <div class="product-grid-3">
+        </div>
+
+        <div id="pagination" class="pagination-container" style="display: none;">
+          <!-- Pagination buttons are rendered by products.js -->
         </div>
       </div>
     </section>
@@ -161,29 +233,31 @@
   <footer class="site-footer">
     <div class="container footer-container">
       <div class="footer-brand">
-        <div class="logo">
+        <a href="index.html" class="logo" style="text-decoration: none; color: inherit;">
           <img src="Images/logo.png" alt="Grin Living Logo" class="logo-img">
           <span class="logo-text">Grin Living</span>
-        </div>
+        </a>
         <p class="body-sm text-charcoal footer-desc mt-24">
           Industrial Luxury and Precision Manufacturing for the sophisticated textile landscape
         </p>
       </div>
       <div class="footer-links">
         <div class="link-column">
-          <h4 class="label-lg">COMPANY</h4>
+          <h3 class="label-lg">COMPANY</h3>
           <a href="index.html" class="body-sm">Home</a>
+          <a href="about-us.html" class="body-sm">About us</a>
           <a href="products.html" class="body-sm">Products</a>
-          <a href="about-us.html" class="body-sm">About US</a>
+          <a href="faqs.html" class="body-sm">FAQs</a>
+          <a href="contact-us.html" class="body-sm">Contact Us</a>
         </div>
         <div class="link-column">
-          <h4 class="label-lg">HEADQUARTERS</h4>
+          <h3 class="label-lg">HEADQUARTERS</h3>
           <p class="body-sm text-charcoal">
             Plot No. 12-15, Textile Industrial Estate<br>
             Sachin GIDC, Suarat, Gujarat 394230
           </p>
-          <a href="mailto:info@grinliving.com" class="body-sm block mt-8">info@grinliving.com</a>
-          <a href="tel:+91262458800" class="body-sm block mt-8">+91 262458800</a>
+          <a href="mailto:info@grinliving.in" class="body-sm block mt-8">info@grinliving.in</a>
+          <a href="tel:+919327559457" class="body-sm block mt-8">+91 93275 59457</a>
         </div>
       </div>
     </div>
@@ -197,32 +271,10 @@
   </footer>
 
 
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const chips = document.querySelectorAll('.filter-chip');
-      const cards = document.querySelectorAll('.product-card');
 
-      chips.forEach(chip => {
-        chip.addEventListener('click', () => {
-          chips.forEach(c => c.classList.remove('active'));
-          chip.classList.add('active');
-
-          const selectedCategory = chip.getAttribute('data-filter');
-
-          cards.forEach(card => {
-            if (selectedCategory === 'All' || card.getAttribute('data-category') === selectedCategory) {
-              card.style.display = 'flex';
-            } else {
-              card.style.display = 'none';
-            }
-          });
-        });
-      });
-    });
-  </script>
+  <script src="products-data.js"></script>
   <script src="products.js"></script>
-
-    <script src="animations.js"></script>
+  <script src="nav.js"></script>
 </body>
 </html>
 

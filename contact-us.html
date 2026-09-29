@@ -1,36 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Contact Us - Grin Living</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap"
+    rel="stylesheet">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
   <!-- Navbar -->
-    <!-- Navbar -->
-  <header class="navbar container">
-    <div class="logo">
-      <img src="Images/logo.png" alt="Grin Living Logo" class="logo-img">
-      <span class="logo-text">Grin Living</span>
-    </div>
-    <nav class="nav-links">
-      <a href="index.html">Home</a>
-      <a href="about-us.html">About us</a>
-      <a href="products.html">Products</a>
-      <a href="blog.html">BLOG</a>
-      <a href="faqs.html">FAQs</a>
-      <a href="contact-us.html" class="active">Contact Us</a>
-    </nav>
-  </header>
+  <!-- Navbar -->
+  <div class="navbar-wrapper">
+    <header class="navbar container">
+      <a href="index.html" class="logo" style="text-decoration: none; color: inherit;">
+        <img src="Images/logo.png" alt="Grin Living Logo" class="logo-img">
+        <span class="logo-text">Grin Living</span>
+      </a>
+      <button class="mobile-menu-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+      </button>
+      <nav class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="about-us.html">About us</a>
+        <a href="products.html">Products</a>
+        <a href="faqs.html">FAQs</a>
+        <a href="contact-us.html" class="active">Contact Us</a>
+      </nav>
+    </header>
+  </div>
 
   <!-- Page Header -->
-  <section class="hero-image-bg" style="background-image: url('Images/hero_contact_us.jpg');">
+  <section class="hero-image-bg" style="background-image: url('Images/hero_contact_us.jpeg');">
     <div class="container inner-hero">
       <div class="text-center">
         <span class="label-md text-heritage-gold">GET IN TOUCH</span>
@@ -50,11 +58,12 @@
         <!-- Left Column - Contact Info -->
         <div class="contact-info" style="display: flex; flex-direction: column; height: 100%;">
           <h2 class="headline-md">Let's Start a Conversation</h2>
-          <p class="body-md text-charcoal mt-24">We'd love to hear from you. Reach out to us through any of the channels below.</p>
+          <p class="body-md text-charcoal mt-24">We'd love to hear from you. Reach out to us through any of the channels
+            below.</p>
 
           <div class="contact-detail mt-24">
             <p class="label-lg text-deep-teal">Phone</p>
-            <a href="tel:+919723819360" class="body-md">+91 97238 19360</a>
+            <a href="tel:+919327559457" class="body-md">+91 93275 59457</a>
           </div>
 
           <div class="contact-detail mt-24">
@@ -69,12 +78,14 @@
 
           <div class="contact-detail mt-24">
             <p class="label-lg text-deep-teal">Address</p>
-            <p class="body-md text-charcoal">Plot No. 12-15, Textile Industrial Estate,<br>Sachin GIDC, Surat, Gujarat 394230</p>
+            <p class="body-md text-charcoal">Plot No. 12-15, Textile Industrial Estate,<br>Sachin GIDC, Surat, Gujarat
+              394230</p>
           </div>
 
           <div class="contact-detail mt-24" style="flex-grow: 1; display: flex; flex-direction: column;">
             <p class="label-lg text-deep-teal">Location Map</p>
-            <div class="map-container mt-8" style="flex-grow: 1; min-height: 280px; border-radius: 12px; overflow: hidden; box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08); border: 1px solid var(--outline-light);">
+            <div class="map-container mt-8"
+              style="flex-grow: 1; min-height: 280px; border-radius: 12px; overflow: hidden; box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08); border: 1px solid var(--outline-light);">
               <div id="contact-map" style="width: 100%; height: 100%; min-height: 280px; z-index: 1;"></div>
             </div>
           </div>
@@ -117,7 +128,8 @@
 
             <div class="form-group">
               <label class="label-md" for="message">Message</label>
-              <textarea id="message" class="form-control" rows="5" placeholder="Tell us about your requirement"></textarea>
+              <textarea id="message" class="form-control" rows="5"
+                placeholder="Tell us about your requirement"></textarea>
             </div>
 
             <button type="submit" class="btn btn-primary w-full">Submit Inquiry</button>
@@ -132,10 +144,10 @@
   <footer class="site-footer">
     <div class="container footer-container">
       <div class="footer-brand">
-        <div class="logo">
+        <a href="index.html" class="logo" style="text-decoration: none; color: inherit;">
           <img src="Images/logo.png" alt="Grin Living Logo" class="logo-img">
           <span class="logo-text">Grin Living</span>
-        </div>
+        </a>
         <p class="body-sm text-charcoal footer-desc mt-24">
           Industrial Luxury and Precision Manufacturing for the sophisticated textile landscape
         </p>
@@ -144,8 +156,10 @@
         <div class="link-column">
           <h4 class="label-lg">COMPANY</h4>
           <a href="index.html" class="body-sm">Home</a>
+          <a href="about-us.html" class="body-sm">About us</a>
           <a href="products.html" class="body-sm">Products</a>
-          <a href="about-us.html" class="body-sm">About US</a>
+          <a href="faqs.html" class="body-sm">FAQs</a>
+          <a href="contact-us.html" class="body-sm">Contact Us</a>
         </div>
         <div class="link-column">
           <h4 class="label-lg">HEADQUARTERS</h4>
@@ -154,7 +168,7 @@
             Sachin GIDC, Suarat, Gujarat 394230
           </p>
           <a href="mailto:info@grinliving.com" class="body-sm block mt-8">info@grinliving.com</a>
-          <a href="tel:+91262458800" class="body-sm block mt-8">+91 262458800</a>
+          <a href="tel:+919327559457" class="body-sm block mt-8">+91 93275 59457</a>
         </div>
       </div>
     </div>
@@ -168,24 +182,24 @@
   </footer>
 
 
-    <script src="animations.js"></script>
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-    <script>
-      document.addEventListener('DOMContentLoaded', function() {
-        // Initialize map centered on Sachin GIDC and hide attribution control
-        var map = L.map('contact-map', {
-          attributionControl: false
-        }).setView([21.088640, 72.842710], 14);
-        
-        // Add OpenStreetMap tiles
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-          maxZoom: 19
-        }).addTo(map);
+  <script src="animations.js"></script>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      // Initialize map centered on Sachin GIDC and hide attribution control
+      var map = L.map('contact-map', {
+        attributionControl: false
+      }).setView([21.088640, 72.842710], 14);
 
-        var gmapsUrl = 'https://www.google.com/maps/search/?api=1&query=Textile+Industrial+Estate,+Sachin+GIDC,+Surat,+Gujarat+394230';
+      // Add OpenStreetMap tiles
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19
+      }).addTo(map);
 
-        // Add custom popup styling inside the map content
-        var popupContent = `
+      var gmapsUrl = 'https://www.google.com/maps/search/?api=1&query=Textile+Industrial+Estate,+Sachin+GIDC,+Surat,+Gujarat+394230';
+
+      // Add custom popup styling inside the map content
+      var popupContent = `
           <a href="${gmapsUrl}" target="_blank" style="text-decoration: none; display: block; font-family: var(--font-sans); color: var(--deep-teal);">
             <strong style="display: block; font-size: 16px; margin-bottom: 4px;">Grin Living HQ</strong>
             <span style="font-size: 13px; color: var(--on-surface);">Textile Industrial Estate, Sachin GIDC, Surat, Gujarat 394230</span>
@@ -193,24 +207,25 @@
           </a>
         `;
 
-        // Add marker and open popup immediately
-        var marker = L.marker([21.088640, 72.842710]).addTo(map);
-        marker.bindPopup(popupContent, {
-          closeButton: true,
-          minWidth: 200,
-          autoClose: false,
-          closeOnClick: false
-        }).openPopup();
+      // Add marker and open popup immediately
+      var marker = L.marker([21.088640, 72.842710]).addTo(map);
+      marker.bindPopup(popupContent, {
+        closeButton: true,
+        minWidth: 200,
+        autoClose: false,
+        closeOnClick: false
+      }).openPopup();
 
-        // Redirect to Google Maps when the blue location icon is clicked
-        marker.on('click', function() {
-          window.open(gmapsUrl, '_blank');
-          setTimeout(function() {
-            marker.openPopup();
-          }, 10);
-        });
+      // Redirect to Google Maps when the blue location icon is clicked
+      marker.on('click', function () {
+        window.open(gmapsUrl, '_blank');
+        setTimeout(function () {
+          marker.openPopup();
+        }, 10);
       });
-    </script>
+    });
+  </script>
+  <script src="nav.js"></script>
 </body>
-</html>
 
+</html>

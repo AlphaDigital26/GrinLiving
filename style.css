@@ -36,6 +36,21 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Same as live: stop off-screen elements (e.g. the closed mobile menu panel)
+   from making the page scroll sideways. `clip` keeps the sticky navbar working. */
+html, body {
+  max-width: 100%;
+  overflow-x: clip;
+}
+
+/* Scale the whole layout to 90% on desktop so it doesn't feel zoomed in.
+   Covers inline styles too. Phones and tablets keep their full size. */
+@media (min-width: 1025px) {
+  html {
+    zoom: 0.9;
+  }
+}
+
 img {
   max-width: 100%;
   display: block;
@@ -183,8 +198,8 @@ a {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-top: 20px;
-  padding-bottom: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 
 .logo {
@@ -212,6 +227,21 @@ a {
   display: flex;
   gap: 32px;
   align-items: center;
+}
+
+.mobile-menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--deep-teal);
+  cursor: pointer;
+  padding: 8px;
+  z-index: 1001;
+}
+
+.mobile-menu-toggle svg {
+  width: 28px;
+  height: 28px;
 }
 
 .nav-links a {
@@ -288,7 +318,6 @@ a {
     linear-gradient(to bottom, rgba(15, 23, 42, 0.06) 1px, transparent 1px);
   background-size: 64px 64px;
   border-bottom: 1px solid var(--outline-light);
-  padding-bottom: 120px;
 }
 
 /* Hero Section */
@@ -354,6 +383,318 @@ a {
   object-fit: cover;
   border-radius: 16px;
   box-shadow: 0 20px 40px rgba(15, 23, 42, 0.1);
+}
+
+/* Video Hero (home page) */
+.video-hero {
+  position: relative;
+  min-height: 78vh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  background-color: var(--deep-teal);
+}
+
+.video-hero-media {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 40% center;
+  z-index: 0;
+}
+
+.video-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(15, 23, 42, 0.85) 0%, rgba(15, 23, 42, 0.55) 60%, rgba(15, 23, 42, 0.35) 100%);
+  z-index: 1;
+}
+
+.video-hero-inner {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  padding-top: 96px;
+  padding-bottom: 96px;
+}
+
+.video-hero .display-lg {
+  color: var(--pure-white);
+}
+
+.video-hero .hero-text {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.video-hero .chip {
+  background-color: rgba(255, 255, 255, 0.12);
+  color: var(--pure-white);
+  border-color: rgba(255, 255, 255, 0.25);
+}
+
+.video-hero .btn-primary {
+  background-color: var(--heritage-gold);
+  color: var(--deep-teal);
+}
+
+.video-hero .btn-primary:hover {
+  background-color: var(--pure-white);
+}
+
+.video-toggle {
+  position: absolute;
+  right: 24px;
+  bottom: 24px;
+  z-index: 3;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  background-color: rgba(255, 255, 255, 0.15);
+  color: var(--pure-white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  backdrop-filter: blur(6px);
+  transition: background-color 0.2s ease;
+}
+
+.video-toggle:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+.video-toggle:focus-visible {
+  outline: 2px solid var(--heritage-gold);
+  outline-offset: 3px;
+}
+
+.video-toggle .icon-play,
+.video-toggle.is-paused .icon-pause {
+  display: none;
+}
+
+.video-toggle.is-paused .icon-play {
+  display: block;
+}
+
+@media (max-width: 768px) {
+  .video-hero {
+    min-height: 72vh;
+    min-height: 72svh;
+    align-items: flex-end;
+  }
+
+  /* Text spans the full width on phones, so darken evenly and more towards the bottom */
+  .video-hero::before {
+    background: linear-gradient(180deg, rgba(15, 23, 42, 0.45) 0%, rgba(15, 23, 42, 0.7) 45%, rgba(15, 23, 42, 0.9) 100%);
+  }
+
+  .video-hero-media {
+    object-position: 35% center;
+  }
+
+  .video-hero-inner {
+    padding-top: 96px;
+    padding-bottom: 72px;
+  }
+
+  .video-hero .display-lg {
+    font-size: 36px;
+    line-height: 1.15;
+  }
+
+  .video-hero .hero-text {
+    font-size: 16px;
+    line-height: 1.6;
+    margin-top: 16px;
+    margin-bottom: 28px;
+  }
+
+  /* Keep the button its natural width instead of stretching edge to edge */
+  .video-hero .hero-actions {
+    align-items: flex-start;
+  }
+
+  .video-hero .btn-primary {
+    padding: 14px 32px;
+  }
+
+  .video-toggle {
+    width: 40px;
+    height: 40px;
+    right: 16px;
+    bottom: 16px;
+  }
+}
+
+@media (max-width: 400px) {
+  .video-hero .display-lg {
+    font-size: 32px;
+  }
+}
+
+/* Production Capabilities (home page) */
+.capabilities-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 24px;
+}
+
+.capability-tile {
+  position: relative;
+  grid-column: span 5;
+  height: 440px;
+  border-radius: 16px;
+  overflow: hidden;
+  background-color: var(--deep-teal);
+  box-shadow: 0 16px 40px rgba(15, 23, 42, 0.12);
+}
+
+.capability-tile--wide {
+  grid-column: span 7;
+}
+
+.capability-tile img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.7s ease;
+}
+
+.capability-tile:hover img {
+  transform: scale(1.05);
+}
+
+.capability-caption {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 72px 28px 26px;
+  background: linear-gradient(to top, rgba(15, 23, 42, 0.92) 0%, rgba(15, 23, 42, 0.6) 55%, transparent 100%);
+  color: var(--pure-white);
+}
+
+.capability-label {
+  display: inline-block;
+  font-family: var(--font-label);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--heritage-gold);
+  margin-bottom: 6px;
+}
+
+.capability-title {
+  font-family: var(--font-serif);
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 1.25;
+  color: var(--pure-white);
+}
+
+.capability-text {
+  font-family: var(--font-sans);
+  font-size: 15px;
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.8);
+  max-width: 460px;
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease, opacity 0.4s ease, margin-top 0.4s ease;
+}
+
+.capability-tile:hover .capability-text,
+.capability-tile:focus-within .capability-text {
+  max-height: 100px;
+  opacity: 1;
+  margin-top: 8px;
+}
+
+/* Touch screens have no hover, so always show the description */
+@media (hover: none) {
+  .capability-text {
+    max-height: none;
+    opacity: 1;
+    margin-top: 8px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .capability-tile,
+  .capability-tile--wide {
+    grid-column: span 6;
+    height: 380px;
+  }
+}
+
+/* Phones: mosaic collage — wide tile, two half tiles, wide tile */
+@media (max-width: 768px) {
+  .capabilities .section-header {
+    margin-bottom: 32px;
+  }
+
+  .capabilities .headline-lg {
+    font-size: 30px;
+  }
+
+  .capabilities-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  .capability-tile,
+  .capability-tile--wide {
+    border-radius: 14px;
+    box-shadow: 0 8px 20px rgba(15, 23, 42, 0.12);
+  }
+
+  .capability-tile--wide {
+    grid-column: span 2;
+    height: 260px;
+  }
+
+  .capability-tile:not(.capability-tile--wide) {
+    grid-column: span 1;
+    height: 230px;
+  }
+
+  .capability-caption {
+    padding: 48px 18px 16px;
+  }
+
+  .capability-title {
+    font-size: 19px;
+  }
+
+  .capability-text {
+    font-size: 13px;
+  }
+
+  /* Half-width tiles: compact caption, title only */
+  .capability-tile:not(.capability-tile--wide) .capability-caption {
+    padding: 40px 12px 12px;
+  }
+
+  .capability-tile:not(.capability-tile--wide) .capability-label {
+    font-size: 10px;
+    margin-bottom: 2px;
+  }
+
+  .capability-tile:not(.capability-tile--wide) .capability-title {
+    font-size: 15px;
+  }
+
+  .capability-tile:not(.capability-tile--wide) .capability-text {
+    display: none;
+  }
 }
 
 /* Cards & Grids */
@@ -474,7 +815,7 @@ a {
   background-color: #1E293B; /* One shade lighter than deep-teal */
   color: var(--pure-white);
   padding-top: 80px;
-  padding-bottom: 40px;
+  padding-bottom: 24px;
 }
 
 .site-footer .text-charcoal {
@@ -517,7 +858,7 @@ a {
 
 .footer-bottom {
   border-top: 1px solid rgba(255, 255, 255, 0.1);
-  padding-top: 32px;
+  padding-top: 16px;
 }
 
 /* FAQ Accordion */
@@ -586,6 +927,43 @@ a {
   .footer-container {
     flex-direction: column;
   }
+
+  /* Mobile menu: hamburger button opens a slide-in panel (see nav.js) */
+  .mobile-menu-toggle {
+    display: block;
+    margin-left: auto;
+    position: relative;
+    z-index: 1001;
+  }
+
+  .navbar {
+    position: relative;
+    flex-wrap: nowrap;
+  }
+
+  .nav-links {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 280px;
+    max-width: 80vw;
+    height: 100vh;
+    background-color: var(--pure-white);
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 80px 32px 32px;
+    box-shadow: -4px 0 15px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    transform: translateX(100%);
+    visibility: hidden;
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.3s ease;
+    display: flex;
+  }
+
+  .nav-links.active {
+    transform: translateX(0);
+    visibility: visible;
+  }
 }
 
 @media (max-width: 768px) {
@@ -602,11 +980,6 @@ a {
     font-size: 40px;
     line-height: 1.2;
   }
-  
-  .nav-links {
-    display: none; 
-  }
-  
   .features-grid-3, .product-grid, .testimonials-grid {
     grid-template-columns: 1fr;
   }
@@ -796,6 +1169,61 @@ html, body, * {
   stroke-width: 1.2;
   stroke-linecap: round;
   stroke-linejoin: round;
+}
+
+/* Phones: compact list rows — icon badge on the left, text on the right */
+@media (max-width: 768px) {
+  .why-partner .icon-cards-grid {
+    margin-top: 32px;
+    gap: 12px;
+  }
+
+  .icon-card {
+    max-width: none;
+    display: grid;
+    grid-template-columns: 48px 1fr;
+    column-gap: 16px;
+    align-items: start;
+    text-align: left;
+    padding: 18px 18px 18px 16px;
+    border-top: none;
+    border-left: 3px solid var(--heritage-gold);
+    border-radius: 12px;
+  }
+
+  .icon-card:hover {
+    transform: none;
+  }
+
+  .icon-card .icon-wrapper {
+    grid-row: span 2;
+    width: 48px;
+    height: 48px;
+    margin: 0;
+    border-radius: 50%;
+    background-color: rgba(114, 130, 113, 0.12);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .icon-card svg {
+    width: 24px;
+    height: 24px;
+    stroke-width: 1.6;
+  }
+
+  .icon-card .headline-sm {
+    font-size: 17px;
+    line-height: 1.3;
+    margin-top: 2px;
+  }
+
+  .icon-card .body-sm {
+    margin-top: 4px;
+    font-size: 13.5px;
+    line-height: 1.5;
+  }
 }
 
 /* Timeline Styles */
